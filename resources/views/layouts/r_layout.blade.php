@@ -20,8 +20,8 @@
         </div>
     </div>
     <nav>
-        <a href="#">about</a>
-        <a href="#">blog</a>
+        <a href="/">about</a>
+        <a href="/blog">blog</a>
     </nav>
 </div>
 @yield('content')

@@ -31,9 +31,9 @@
             <div class="skill">
                 <div class="col-md-3"><img src="{{URL::asset('img/css.png')}}" alt=""></div>
                 <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
+                    CSS helps my web applications to have user-friendly interface.
+                    My frontend is comfortable for most devices. To make flexible
+                    layouts I use css flexbox and bootstrap grid.
                 </article>
             </div>
             <div class="skill">
@@ -47,9 +47,9 @@
             <div class="skill">
                 <div class="col-md-3"><img src="{{URL::asset('img/js.png')}}" alt=""></div>
                 <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
+                    Javascript is very important part of any modern site, cause makes pages more
+                    interactive and adds needed behaviour. Besides, I use it for asynchronous
+                    requests to server. I can write with or without jquery on es6.
                 </article>
             </div>
         </div>
@@ -58,17 +58,16 @@
             <div class="skill">
                 <div class="col-md-3"><img src="{{URL::asset('img/c-sharp.png')}}" alt=""></div>
                 <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
+                    This amazing strict technology was first in my education and helped me to
+                    learn some basic, but very important stuff of object-oriented programming.
+                    I wrote some desktop apps, including machine learning, patterns recognition
+                    and other.
                 </article>
             </div>
             <div class="skill">
                 <div class="col-md-3"><img src="{{URL::asset('img/php.png')}}" alt=""></div>
                 <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
+                    My first site was wrote with this
                 </article>
             </div>
             <div class="skill">
