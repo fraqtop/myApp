@@ -4,6 +4,7 @@ body{
     flex-direction: column;
     justify-content: flex-start;
     text-align: center;
+    word-wrap: break-word;
 }
 .top{
     height: 60%;
@@ -175,4 +176,18 @@ h2{
 .carousel-img>img{
     height: 50%;
     width: auto;
+}
+
+.content
+{
+    display: block;
+    width: 100%;
+}
+
+.post{
+    border-radius: 5Px;
+    background: grey;
+    color: whitesmoke;
+    padding: 2%;
+    margin: 1%;
 }

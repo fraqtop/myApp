@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('represent.index');
-});
+Route::get('/', 'RepresentController@indexAction');
+
+Route::get('/blog', 'RepresentController@blogAction');
