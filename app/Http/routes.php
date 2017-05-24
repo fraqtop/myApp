@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', 'RepresentController@indexAction');
+Route::get('/', 'HomeController@index');
 
-Route::get('/blog', 'RepresentController@blogAction');
+Route::get('/blog', 'HomeController@blog');
+
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

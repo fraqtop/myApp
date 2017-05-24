@@ -29,6 +29,11 @@
     <div class="copyright">
         &#169 Designed and made by Vanya Pralov, 2017.
     </div>
+    @if(Auth::check())
+        <a href="/logout" id="sign_link">sign out {{Auth::user()->name}}</a>
+    @else
+        <a href="/login" id="sign_link">sign in</a>
+    @endif
     <div class="contacts">
         <a href="#"> <img src="{{URL::asset('img/icon-gmail.png')}}" alt=""> </a>
         <a href="#"><img src="{{URL::asset('img/icon-google.png')}}" alt=""></a>
