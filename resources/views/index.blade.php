@@ -1,4 +1,4 @@
-@extends('layouts.r_layout')
+@extends('layouts.basicLayout')
 
 @section('content')
     <section id="intro">

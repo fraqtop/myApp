@@ -21,7 +21,7 @@
     </div>
     <nav>
         <a href="/">about</a>
-        <a href="/blog">blog</a>
+        <a href="/posts">blog</a>
     </nav>
 </div>
 @yield('content')

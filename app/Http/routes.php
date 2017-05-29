@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function(){
+    return view('index');
+});
 
-Route::get('/blog', 'HomeController@blog');
+Route::get('/posts', 'BlogController@posts');
 
+Route::get('/posts/create/', 'BlogController@createPost')->middleware('auth');
+
+Route::post('/posts/create/', 'BlogController@storePost')->middleware('auth');
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
