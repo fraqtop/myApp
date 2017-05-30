@@ -23,13 +23,12 @@ class BlogController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'content' => 'required'
+            'postContent' => 'required'
         ]);
         $request->user()->posts()->create([
            'title' => $request->title,
             'content' => $request->postContent
         ]);
-        redirect('/posts');
+        return redirect('/posts');
     }
-
 }

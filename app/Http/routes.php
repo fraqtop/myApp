@@ -17,8 +17,8 @@ Route::get('/', function(){
 
 Route::get('/posts', 'BlogController@posts');
 
-Route::get('/posts/create/', 'BlogController@createPost')->middleware('auth');
+Route::get('/posts/create', 'BlogController@createPost')->middleware('auth');
 
-Route::post('/posts/create/', 'BlogController@storePost')->middleware('auth');
+Route::post('/posts/create', 'BlogController@storePost')->middleware('auth');
 
 Route::auth();
