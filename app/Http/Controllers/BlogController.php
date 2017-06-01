@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Post;
+use phpDocumentor\Reflection\Types\Integer;
+
 class BlogController extends Controller
 {
     function posts()
     {
-        return view('blog.posts', ['posts' => Post::all()]);
+        return view('blog.posts', ['posts' => Post::with('user')->get()]);
     }
 
     function createPost(Request $request)
@@ -30,5 +32,15 @@ class BlogController extends Controller
             'content' => $request->postContent
         ]);
         return redirect('/posts');
+    }
+
+    function getPost(Request $request, $postId)
+    {
+        return view('blog.post', ['post' => Post::find($postId)]);
+    }
+
+    function storeComment(Request $request)
+    {
+
     }
 }

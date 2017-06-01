@@ -9,4 +9,8 @@ class Post extends \Eloquent
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
