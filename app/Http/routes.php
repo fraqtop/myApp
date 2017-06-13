@@ -23,4 +23,6 @@ Route::post('/posts/create', 'BlogController@storePost')->middleware('auth');
 
 Route::get('/posts/{postId}/', 'BlogController@getPost');
 
+Route::post('/posts/{postId}/addcomment', 'BlogController@storeComment')->middleware('auth');
+
 Route::auth();

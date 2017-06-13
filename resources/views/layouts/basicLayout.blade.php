@@ -2,12 +2,10 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="{{URL::asset('favicon.ico')}}">
-    <link rel="stylesheet" href="{{URL::asset('style/main.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('style/bootstrap/dist/css/bootstrap.min.css')}}">
-    <script src="{{URL::asset('js/jquery/dist/jquery.min.js')}}"></script>
+    <link rel="stylesheet" href="{{URL::asset('css/all.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="{{URL::asset('style/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{URL::asset('js/main.js')}}"></script>
+    <script src="{{URL::asset('js/all.js')}}"></script>
     <title>fraqtop's</title>
 </head>
 <body>
