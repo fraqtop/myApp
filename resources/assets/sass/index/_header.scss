@@ -1,0 +1,52 @@
+@import "../var";
+header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-area: header;
+  background: $particlesBack;
+  #particles-js{
+    position: absolute;
+    height: 60%;
+    width: 100%;
+    z-index: 1;
+  }
+  .jumbotron{
+    background: inherit;
+    align-self: center;
+    h1, p{
+      text-align: center;
+    }
+  }
+  nav {
+    z-index: 3;
+    width: 100%;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3%;
+    h1{
+      z-index: 3;
+      a{
+        z-index: 3;
+        padding: 5px 30px 5px 30px;
+        border-radius: 4px;
+        color: $fontColor;
+        &:hover{
+          font-size: 26px;
+          color: $particlesBack;
+          background: $secondColor;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px){
+h1{
+  a{
+    font-size: 20px;
+  }
+}
+}

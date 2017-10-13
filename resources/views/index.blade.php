@@ -1,11 +1,11 @@
 @extends('layouts.basicLayout')
 
 @section('content')
-    <section id="intro">
-        <div class="title_img">
-            <img src="{{URL::asset('img/example.jpg')}}" alt="">
-        </div>
-        <div class="profile">
+    <main>
+        <section class="info">
+            <div>
+                <img src="{{URL::asset('img/example.jpg')}}">
+            </div>
             <table class="table">
                 <tbody>
                 <tr><th>Name</th><th>Vanya Pralov</th></tr>
@@ -14,70 +14,47 @@
                 <tr><th>Location</th><th>Yaroslavl, Russia, Earth</th></tr>
                 </tbody>
             </table>
-        </div>
-        <div class="message">
             <article>
-                I like making good and helpful things using new technologies. Coding
-                is my favorite hobby and it helps me be happy even waking up at 6:00
-                on Monday. I perform not only working tasks but my own projects too. I try
-                my code to be efficient, laconic and self-documenting. I love structure and order and I
-                also stand for quality.
+                I like making good and helpful things using new technologies.
+                Coding is my favorite hobby and it helps me be happy even waking up at 6:00 on Monday.
+                I perform not only working tasks but my own projects too.
+                I try my code to be efficient, laconic and self-documenting.
+                I love structure and order and I also stand for quality.
             </article>
-        </div>
-    </section>
-    <section id="extra">
-        <div>
-            <h2>Frontend</h2>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/css.png')}}" alt=""></div>
-                <article>
-                    CSS helps my web applications to have user-friendly interface.
-                    My frontend is comfortable for most devices. To make flexible
-                    layouts I use css flexbox and bootstrap grid.
-                </article>
+        </section>
+
+        <section class="skills">
+            <div><h2>my stack</h2></div>
+            <div class="stack">
+                <div id="html"><h3>HTML5</h3></div>
+                <div id="css"><h3>CSS3</h3></div>
+                <div id="sass"><h3>Sass</h3></div>
+                <div id="grid"><h3>Grid Layout</h3></div>
+                <div id="flex"><h3>Flex box</h3></div>
+                <div id="bootstrap"><h3>Bootstrap</h3></div>
+                <div id="js"><h3>Javascript(ES6+)</h3></div>
+                <div id="jquery"><h3>Jquery</h3></div>
+                <div id="ajax"><h3>Ajax</h3></div>
+                <div id="gulp"><h3>Gulp</h3></div>
+                <div id="python"><h3>Python</h3></div>
+                <div id="opencv"><h3>OpenCV</h3></div>
+                <div id="django"><h3>Django</h3></div>
+                <div id="suds"><h3>Suds</h3></div>
+                <div id="php"><h3>PHP</h3></div>
+                <div id="guzzle"><h3>Guzzle</h3></div>
+                <div id="laravel"><h3>Laravel</h3></div>
+                <div id="composer"><h3>Composer</h3></div>
+                <div id="pdo"><h3>PDO</h3></div>
+                <div id="c"><h3>C#</h3></div>
+                <div id="mysql"><h3>MySQL</h3></div>
+                <div id="oop"><h3>OOP</h3></div>
+                <div id="git"><h3>Git</h3></div>
             </div>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/bootstrap.png')}}" alt=""></div>
-                <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
-                </article>
-            </div>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/js.png')}}" alt=""></div>
-                <article>
-                    Javascript is very important part of any modern site, cause makes pages more
-                    interactive and adds needed behaviour. Besides, I use it for asynchronous
-                    requests to server. I can write with or without jquery on es6.
-                </article>
-            </div>
-        </div>
-        <div>
-            <h2>Backend</h2>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/c-sharp.png')}}" alt=""></div>
-                <article>
-                    This amazing strict technology was first in my education and helped me to
-                    learn some basic, but very important stuff of object-oriented programming.
-                    I wrote some desktop apps, including machine learning, patterns recognition
-                    and other.
-                </article>
-            </div>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/php.png')}}" alt=""></div>
-                <article>
-                    My first site was wrote with this
-                </article>
-            </div>
-            <div class="skill">
-                <div class="col-md-3"><img src="{{URL::asset('img/python.png')}}" alt=""></div>
-                <article>
-                    I like making good and helpful things using new technologies. Coding
-                    is my favorite hobby and it helps me be happy even waking up at 6:00
-                    on Monday.
-                </article>
-            </div>
-        </div>
-    </section>
+        </section>
+        <section class ="posts">
+            <div class="post"></div>
+            <div class="post"></div>
+            <div class="post"></div>
+        </section>
+    </main>
 @endsection

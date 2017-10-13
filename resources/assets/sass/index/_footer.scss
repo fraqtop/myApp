@@ -1,0 +1,25 @@
+@import "../var";
+footer{
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-area: footer;
+  background: url('../img/footer_lodyas.png');
+  .copyright{
+    font-size: 16px;
+    margin-right: auto;
+  }
+  a{
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+    &:hover
+    {
+      opacity: 0.5;
+    }
+  }
+  img{
+
+  }
+}

@@ -1,6 +1,4 @@
 var elixir = require('laravel-elixir');
-var gulp = require('gulp');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,19 +11,14 @@ var gulp = require('gulp');
  */
 
 elixir(function(mix){
-    mix.sass('main.scss');
+    mix.sass('style.scss');
 });
-
-
-elixir(function(mix) {
-    mix.browserSync();
-});
-
 
 elixir(function(mix){
   mix.scripts([
-     'jquery.js',
-      'main.js',
-      'bootstrap.js'
+        'a_particles.js',
+        'jquery.js',
+        'main.js',
+        'bootstrap.js'
   ]);
 });
