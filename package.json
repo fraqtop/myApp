@@ -1,14 +1,21 @@
 {
-  "private": true,
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "bootstrap": "*",
-    "bootstrap-sass": "^3.0.0",
-    "browser-sync": "^2.18.13",
+    "bootstrap-sass": "^3.3.7",
+    "browser-sync": "^2.18.12",
     "gulp": "^3.9.1",
-    "laravel-elixir": "^5.0.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "pump": "^2.0.0"
   }
 }

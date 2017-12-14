@@ -4,8 +4,6 @@ footer{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  grid-area: footer;
-  background: url('../img/footer_lodyas.png');
   .copyright{
     font-size: 16px;
     margin-right: auto;
@@ -18,8 +16,5 @@ footer{
     {
       opacity: 0.5;
     }
-  }
-  img{
-
   }
 }

@@ -4,24 +4,22 @@
 @import "index/info";
 @import "index/footer";
 @import "index/skills";
-@import "index/posts";
+@import "index/graphic";
+//@import "index/posts";
 
 body{
- height: 300%;
- display: grid;
- text-align: center;
- background: $mainColor;
- grid-template: 21% 1fr / 100%;
- grid-template-areas: "header" "info" "main" "footer";
- color: $fontColor;
+  height: 300%;
+  display: grid;
+  text-align: center;
+  background: url('../img/footer_lodyas.png');;
+  grid-template: 21% 1fr 5% / 100%;
+  color: $fontColor;
 }
 
 main{
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: stretch;
- background: inherit;
+  height: 1px;
+  min-height: 100%;
+  background: $mainColor;
 }
 
 a, a:hover, a:active, a:visited, a:focus{
@@ -34,21 +32,7 @@ img{
  max-width: 100%;
  width: auto;
 }
-
-@media screen and (max-width: 1050px) {
- h1{
-  font-size: 50px;
- }
- body{
-  min-height: 500%;
-  grid-template: 20% 1fr / 100%;
- }
- .info{
-  article{
-   max-width: 500Px;
-   margin: auto;
-  }
-  grid-template-columns: auto;
-  grid-template-rows: 2fr 1fr min-content;
- }
+.img-wrapper{
+  height: 100%;
+  width: 100%;
 }

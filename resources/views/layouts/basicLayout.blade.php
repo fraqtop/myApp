@@ -17,24 +17,17 @@
         </div>
     </div>
     <nav>
-        <h1><a href="/">about</a></h1>
-        <h1><a href="/posts">blog</a></h1>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
     </nav>
 </header>
 @yield('content')
 <footer>
-    <div class="copyright">
-        &#169 Designed and made by Vanya Pralov, 2017.
-    </div>
-    @if(Auth::check())
-        <a href="/logout" id="sign_link">sign out {{Auth::user()->name}}</a>
-    @else
-        <a href="/login" id="sign_link">sign in</a>
-    @endif
-    <a href="#"> <img src="{{URL::asset('img/icon-gmail.png')}}" alt=""> </a>
-    <a href="#"><img src="{{URL::asset('img/icon-google.png')}}" alt=""></a>
-    <a href="#"><img src="{{URL::asset('img/icon-instagram.png')}}" alt=""></a>
-    <a href="#"><img src="{{URL::asset('img/icon-vk.png')}}" alt=""></a>
+    <div class="copyright"><h5>Copyright &copy; 2017, designed and made by Vanya Pralov</h5></div>
+    <a href="#"><img src="{{Url::asset('img/icon-gmail.png')}}"></a>
+    <a href="#"><img src="{{Url::asset('img/icon-google.png')}}"></a>
+    <a href="#"><img src="{{Url::asset('img/icon-instagram.png')}}"></a>
+    <a href="#"><img src="{{Url::asset('img/icon-vk.png')}}"></a>
 </footer>
 </body>
 </html>
