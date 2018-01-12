@@ -5815,22 +5815,17 @@ button.close {
     display: none !important; } }
 
 header {
+  background: url("../img/back.jpg") fixed;
+  color: #FFF;
+  position: fixed;
+  z-index: -1;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
-  header #particles-js {
-    position: absolute;
-    height: 60%;
-    width: 100%;
-    z-index: 1; }
-  header .jumbotron {
-    z-index: 3;
-    background: inherit;
-    align-self: center; }
-    header .jumbotron h1, header .jumbotron p {
-      text-align: center; }
+  justify-content: center;
+  height: 100%;
+  width: 100%; }
   header nav {
-    z-index: 3;
+    z-index: 2;
     width: 100%;
     background: none;
     display: flex;
@@ -5843,41 +5838,41 @@ header {
       z-index: 3;
       padding: 5px 30px 5px 30px;
       border-radius: 4px;
-      color: #AFAFAF; }
+      color: #FFF; }
       header nav a:hover {
         font-size: 26px;
         color: #282828;
-        background: #456857; }
+        background: #4D4D8F; }
+  header #particles-js {
+    position: absolute;
+    width: 100%; }
+  header .jumbotron {
+    z-index: -1;
+    background: inherit;
+    align-self: center; }
+    header .jumbotron h1, header .jumbotron p {
+      text-align: center; }
+
+.header_pillow {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: indianred;
+  z-index: -10; }
 
 @media screen and (max-width: 360px) {
   h1 a {
     font-size: 20px; } }
 
-.info {
-  display: grid;
-  grid-template-columns: 20% 30% 1fr;
-  height: 17%;
-  width: 100%;
-  padding: 5px;
-  color: #626561; }
-  .info .about {
-    color: inherit;
-    height: 100%; }
-    .info .about table {
-      height: inherit;
-      color: inherit; }
-  .info article {
-    font-size: 20px;
-    align-self: center; }
-  .info img {
-    border-radius: 100%;
-    box-shadow: grey 0 0 10px 3px; }
-
 footer {
+  height: 10%;
+  width: 100%;
+  background: url("../img/footer_lodyas.png");
   padding: 10px;
   display: flex;
   justify-content: flex-end;
-  align-items: center; }
+  align-items: center;
+  color: #FFF; }
   footer .copyright {
     font-size: 16px;
     margin-right: auto; }
@@ -5888,72 +5883,24 @@ footer {
     footer a:hover {
       opacity: 0.5; }
 
-.skills {
-  display: grid;
-  grid-template-columns: 50% 50%; }
-
-.graphic {
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  height: 1px;
-  min-height: 30%;
-  color: #626561; }
-
-.gradation {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; }
-
-.diagram {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-column-gap: 1%;
-  align-items: flex-end; }
-  .diagram div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 5px;
-    border-radius: 2px; }
-
-#php {
-  height: 80%;
-  background: linear-gradient(to top, #6c8ef0 0%, #eeeae5 180%); }
-
-#sass {
-  height: 75%;
-  background: linear-gradient(to top, #ffba78 0%, #eeeae5 180%); }
-
-#sharp {
-  height: 40%;
-  background: linear-gradient(to top, #7ec4ff 0%, #eeeae5 180%); }
-
-#python {
-  height: 60%;
-  background: linear-gradient(to top, #ddff9d 0%, #eeeae5 180%); }
-
-#js {
-  height: 65%;
-  background: linear-gradient(to top, #fcff58 0%, #eeeae5 180%); }
-
-#t-sql {
-  height: 50%;
-  background: linear-gradient(to top, #ff9799 0%, #eeeae5 180%); }
-
-body {
-  height: 300%;
-  display: grid;
-  text-align: center;
-  background: url("../img/footer_lodyas.png");
-  grid-template: 21% 1fr 5% / 100%;
-  color: #AFAFAF; }
-
-main {
+body, html {
+  position: relative;
   height: 1px;
   min-height: 100%;
-  background: #eeeae5; }
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: -10; }
+
+.grid_container {
+  display: grid;
+  background: #eeeae5;
+  height: 300%;
+  width: 100%;
+  grid-template-rows: repeat(3, 33.33%);
+  z-index: 2; }
+  .grid_container section {
+    border: 1px solid lightslategrey; }
 
 a, a:hover, a:active, a:visited, a:focus {
   text-decoration: none;

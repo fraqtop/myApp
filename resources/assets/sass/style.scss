@@ -1,27 +1,32 @@
 @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import "var";
 @import "index/header";
-@import "index/info";
+//@import "index/info";
 @import "index/footer";
-@import "index/skills";
-@import "index/graphic";
+//@import "index/skills";
+//@import "index/graphic";
 //@import "index/posts";
 
-body{
-  height: 300%;
-  display: grid;
-  text-align: center;
-  background: url('../img/footer_lodyas.png');;
-  grid-template: 21% 1fr 5% / 100%;
-  color: $fontColor;
-}
-
-main{
-  height: 1px;
+body,html{
+  position:relative;
+  height:1px;
   min-height: 100%;
-  background: $mainColor;
+  width:100%;
+  margin:0;
+  padding:0;
+  z-index: -10;
 }
-
+.grid_container{
+  display: grid;
+  background: $mainColor;
+  height: 300%;
+  width: 100%;
+  grid-template-rows: repeat(3, 33.33%);
+  z-index: 2;
+  section{
+    border: 1px solid lightslategrey;
+  }
+}
 a, a:hover, a:active, a:visited, a:focus{
  text-decoration: none;
  transition: all 0.4s;

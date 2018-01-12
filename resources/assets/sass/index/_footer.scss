@@ -1,9 +1,13 @@
 @import "../var";
 footer{
+  height: 10%;
+  width: 100%;
+  background: url('../img/footer_lodyas.png');
   padding: 10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  color: $fontColor;
   .copyright{
     font-size: 16px;
     margin-right: auto;

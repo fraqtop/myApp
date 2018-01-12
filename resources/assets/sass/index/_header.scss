@@ -1,24 +1,16 @@
 @import "../var";
 header{
+  background: url('../img/back.jpg') fixed;
+  color: $fontColor;
+  position:fixed;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  #particles-js{
-    position: absolute;
-    height: 60%;
-    width: 100%;
-    z-index: 1;
-  }
-  .jumbotron{
-    z-index: 3;
-    background: inherit;
-    align-self: center;
-    h1, p{
-      text-align: center;
-    }
-  }
+  height: 100%;
+  width: 100%;
   nav {
-    z-index: 3;
+    z-index: 2;
     width: 100%;
     background: none;
     display: flex;
@@ -39,12 +31,32 @@ header{
       }
     }
   }
+  #particles-js{
+    position: absolute;
+    width: 100%;
+  }
+  .jumbotron{
+    z-index: -1;
+    background: inherit;
+    align-self: center;
+    h1, p{
+      text-align: center;
+    }
+  }
+}
+
+.header_pillow{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: indianred;
+  z-index: -10;
 }
 
 @media screen and (max-width: 360px){
 h1{
-  a{
-    font-size: 20px;
+    a{
+      font-size: 20px;
+    }
   }
-}
 }

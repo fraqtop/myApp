@@ -19,8 +19,10 @@
     <nav>
         <a href="/">home</a>
         <a href="/blog/">blog</a>
+        <a href="/contact/">contact</a>
     </nav>
 </header>
+<div class="header_pillow"></div>
 @yield('content')
 <footer>
     <div class="copyright"><h5>Copyright &copy; 2017, designed and made by Vanya Pralov</h5></div>
