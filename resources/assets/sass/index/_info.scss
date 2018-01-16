@@ -1,25 +1,35 @@
 @import "../var";
 .info{
   display: grid;
-  grid-template-columns: 20% 30% 1fr;
-  height: 17%;
+  grid-template-rows: 10% 90%;
+  grid-template-columns: 1fr 2fr;
   width: 100%;
-  padding: 5px;
+  padding: 2%;
   color: $darkFont;
+  grid-template-areas: "h h" "a b";
+  align-items: center;
+  justify-items: center;
   .about{
+    grid-area: a;
     color: inherit;
-    height: 100%;
     table{
       height: inherit;
       color: inherit;
     }
   }
   article{
-    font-size: 20px;
-    align-self: center;
+    grid-area: b;
+    font-size: 4vmin;
+    font-weight: 400;
+    margin-left: 10vmin;
   }
     img{
+      grid-area: a;
+      justify-self: center;
       border-radius: 100%;
-      box-shadow: grey 0 0 10px 3px;
+      box-shadow: grey 0 0 15px 3px;
     }
+  h1{
+    grid-area: h;
+  }
 }

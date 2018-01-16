@@ -1,10 +1,10 @@
 @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import "var";
 @import "index/header";
-//@import "index/info";
+@import "index/info";
 @import "index/footer";
-//@import "index/skills";
-//@import "index/graphic";
+@import "index/skills";
+@import "index/graphic";
 //@import "index/posts";
 
 body,html{
@@ -16,12 +16,15 @@ body,html{
   padding:0;
   z-index: -10;
 }
+section{
+  padding: 2vmin;
+}
 .grid_container{
   display: grid;
   background: $mainColor;
   height: 300%;
   width: 100%;
-  grid-template-rows: repeat(3, 33.33%);
+  grid-template-rows: repeat(3, minmax(33.33%, min-content));
   z-index: 2;
   section{
     border: 1px solid lightslategrey;

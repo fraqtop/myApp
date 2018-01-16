@@ -12,8 +12,8 @@
     <div id="particles-js"></div>
     <div class="jumbotron">
         <div class="container">
-            <h1>Hello, I'm Vanya Pralov.</h1>
-            <p>nice to meet you here.</p>
+            <h1>Vanya Pralov</h1>
+            <p>web developer</p>
         </div>
     </div>
     <nav>

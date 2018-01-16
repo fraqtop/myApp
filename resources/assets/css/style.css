@@ -5816,7 +5816,7 @@ button.close {
 
 header {
   background: url("../img/back.jpg") fixed;
-  color: #FFF;
+  color: #e3e3e3;
   position: fixed;
   z-index: -1;
   display: flex;
@@ -5838,7 +5838,7 @@ header {
       z-index: 3;
       padding: 5px 30px 5px 30px;
       border-radius: 4px;
-      color: #FFF; }
+      color: #e3e3e3; }
       header nav a:hover {
         font-size: 26px;
         color: #282828;
@@ -5857,12 +5857,41 @@ header {
   position: relative;
   height: 100%;
   width: 100%;
-  background: indianred;
+  background: black;
   z-index: -10; }
 
 @media screen and (max-width: 360px) {
   h1 a {
     font-size: 20px; } }
+
+.info {
+  display: grid;
+  grid-template-rows: 10% 90%;
+  grid-template-columns: 1fr 2fr;
+  width: 100%;
+  padding: 2%;
+  color: #434343;
+  grid-template-areas: "h h" "a b";
+  align-items: center;
+  justify-items: center; }
+  .info .about {
+    grid-area: a;
+    color: inherit; }
+    .info .about table {
+      height: inherit;
+      color: inherit; }
+  .info article {
+    grid-area: b;
+    font-size: 4vmin;
+    font-weight: 400;
+    margin-left: 10vmin; }
+  .info img {
+    grid-area: a;
+    justify-self: center;
+    border-radius: 100%;
+    box-shadow: grey 0 0 15px 3px; }
+  .info h1 {
+    grid-area: h; }
 
 footer {
   height: 10%;
@@ -5872,7 +5901,7 @@ footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  color: #FFF; }
+  color: #e3e3e3; }
   footer .copyright {
     font-size: 16px;
     margin-right: auto; }
@@ -5883,6 +5912,68 @@ footer {
     footer a:hover {
       opacity: 0.5; }
 
+.skills {
+  display: grid;
+  grid-template-columns: 50% 50%; }
+
+.graphics {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap; }
+  .graphics * {
+    flex: 1; }
+  .graphics .pie {
+    display: grid;
+    justify-content: center;
+    align-items: center; }
+
+.graphic {
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  color: #434343; }
+
+.gradation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.diagram {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 1%;
+  align-items: flex-end; }
+  .diagram div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 5px;
+    border-radius: 2px; }
+
+#php {
+  width: 80%;
+  background: linear-gradient(to top, #6c8ef0 0%, #e3e3e3 180%); }
+
+#sass {
+  width: 75%;
+  background: linear-gradient(to top, #ffba78 0%, #e3e3e3 180%); }
+
+#sharp {
+  width: 40%;
+  background: linear-gradient(to top, #7ec4ff 0%, #e3e3e3 180%); }
+
+#python {
+  width: 60%;
+  background: linear-gradient(to top, #ddff9d 0%, #e3e3e3 180%); }
+
+#js {
+  width: 65%;
+  background: linear-gradient(to top, #fcff58 0%, #e3e3e3 180%); }
+
+#t-sql {
+  background: linear-gradient(to top, #ff9799 0%, #e3e3e3 180%); }
+
 body, html {
   position: relative;
   height: 1px;
@@ -5892,12 +5983,15 @@ body, html {
   padding: 0;
   z-index: -10; }
 
+section {
+  padding: 2vmin; }
+
 .grid_container {
   display: grid;
-  background: #eeeae5;
+  background: #e3e3e3;
   height: 300%;
   width: 100%;
-  grid-template-rows: repeat(3, 33.33%);
+  grid-template-rows: repeat(3, minmax(33.33%, min-content));
   z-index: 2; }
   .grid_container section {
     border: 1px solid lightslategrey; }

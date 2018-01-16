@@ -1,28 +1,39 @@
 @import "../var";
+.graphics{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  *{
+    flex: 1;
+  }
+  .pie{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .graphic{
   display: grid;
-  grid-template-columns:  1fr 6fr;
-  height: 1px;
-  min-height: 30%;
+  grid-template-rows:  1fr 6fr;
   color: $darkFont;
 }
 
 .gradation{
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
 .diagram{
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 1%;
   align-items: flex-end;
   div{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-end;
     padding: 5px;
     border-radius: 2px;
@@ -30,31 +41,30 @@
 }
 
 #php{
-  height: 80%;
+  width: 80%;
   background: linear-gradient(to top, #6c8ef0 0%, $mainColor 180%);
 }
 
 #sass{
-  height: 75%;
+  width: 75%;
   background: linear-gradient(to top, #ffba78 0%, $mainColor 180%);
 }
 
 #sharp{
-  height: 40%;
+  width: 40%;
   background: linear-gradient(to top, #7ec4ff 0%, $mainColor 180%);
 }
 
 #python{
-  height: 60%;
+  width: 60%;
   background: linear-gradient(to top, #ddff9d 0%, $mainColor 180%);
 }
 
 #js{
-  height: 65%;
+  width: 65%;
   background: linear-gradient(to top, #fcff58 0%, $mainColor 180%);
 }
 
 #t-sql{
-  height: 50%;
   background: linear-gradient(to top, #ff9799 0%, $mainColor 180%);
 }
