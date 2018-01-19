@@ -3,9 +3,8 @@
 @import "index/header";
 @import "index/info";
 @import "index/footer";
-@import "index/skills";
-@import "index/graphic";
-//@import "index/posts";
+@import "index/timing";
+@import "index/posts";
 
 body,html{
   position:relative;
@@ -28,6 +27,7 @@ section{
   z-index: 2;
   section{
     border: 1px solid lightslategrey;
+    padding: 10px;
   }
 }
 a, a:hover, a:active, a:visited, a:focus{

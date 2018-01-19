@@ -19,7 +19,8 @@
             snowboarding and swimming.
         </article>
     </section>
-    <section class="graphics">
+    <section class="timing">
+        <h1>Working time</h1>
         <div class="graphic">
             <div class="gradation">
                 <h3>Rarely</h3>
@@ -29,19 +30,21 @@
             </div>
             <div class="diagram">
                 <div id="sass"><h3>SASS</h3></div>
-                <div id="php"><h3>PHP</h3></div>
                 <div id="t-sql"><h3>T-SQL</h3></div>
-                <div id="python"><h3>Python</h3></div>
                 <div id="sharp"><h3>C#</h3></div>
+                <div id="php"><h3>PHP</h3></div>
+                <div id="python"><h3>Python</h3></div>
                 <div id="js"><h3>Javascript</h3></div>
             </div>
         </div>
         <div class="pie">
-            <img src="{{URL::asset('img/work-type.png')}}">
+            <img src="{{URL::asset('img/vectorpaint.svg')}}">
         </div>
     </section>
-    <section>
-
+    <section class="posts">
+        <div class="post"></div>
+        <div class="post"></div>
+        <div class="post"></div>
     </section>
 </main>
 @endsection
