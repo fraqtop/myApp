@@ -1,13 +1,11 @@
 @import "../var";
-.posts {
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.post{
-  flex: 1;
-  background: $particlesBack;
-  margin: 3%;
-  border-radius: 2px;
-  min-width: 250px;
+#posts{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  .post{
+    margin: 5vmin;
+    background: $particlesBack;
+    min-height: 50vmin;
+  }
 }

@@ -1,9 +1,8 @@
 @extends('layouts.basicLayout')
 
 @section('content')
-<main class="grid_container">
-    <section class="info">
-        <h1>About</h1>
+<div class="grid-container">
+    <section id="info">
         <img src="{{URL::asset('img/example_space.jpg')}}">
         <article>
             Hi, my name is Vanya, nice to meet you here. I'm full stack web
@@ -19,10 +18,9 @@
             snowboarding and swimming.
         </article>
     </section>
-    <section class="timing">
-        <h1>Working time</h1>
+    <section id="timing">
         <div class="graphic">
-            <div class="gradation">
+            <div class="legend">
                 <h3>Rarely</h3>
                 <h3>Sometimes</h3>
                 <h3>Often</h3>
@@ -37,14 +35,14 @@
                 <div id="js"><h3>Javascript</h3></div>
             </div>
         </div>
-        <div class="pie">
-            <img src="{{URL::asset('img/vectorpaint.svg')}}">
+        <div class="img-responsive">
+            <img src="{{URL::asset('img/pie.png')}}">
         </div>
     </section>
-    <section class="posts">
+    <section id="posts">
         <div class="post"></div>
         <div class="post"></div>
         <div class="post"></div>
     </section>
-</main>
+</div>
 @endsection

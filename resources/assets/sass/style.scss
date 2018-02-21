@@ -2,45 +2,75 @@
 @import "var";
 @import "index/header";
 @import "index/info";
-@import "index/footer";
 @import "index/timing";
 @import "index/posts";
 
-body,html{
-  position:relative;
-  height:1px;
-  min-height: 100%;
-  width:100%;
-  margin:0;
-  padding:0;
-  z-index: -10;
-}
-section{
-  padding: 2vmin;
-}
-.grid_container{
-  display: grid;
-  background: $mainColor;
-  height: 300%;
+html, body{
+  position: relative;
+  z-index: -1;
+  height: 100vh;
   width: 100%;
-  grid-template-rows: repeat(3, minmax(33.33%, min-content));
+  padding: 0;
+  margin: 0;
+}
+
+
+a, a:hover, a:active, a:visited, a:focus{
+  text-decoration: none;
+  transition: all 0.4s;
+}
+
+.grid-container{
+  position: relative;
   z-index: 2;
+  display: grid;
+  height: 1px;
+  min-height: 300vh;
+  width: 100%;
+  grid-template-rows: repeat(3, 1fr);
+  background: $mainColor;
   section{
-    border: 1px solid lightslategrey;
-    padding: 10px;
+    border: 1px solid dimgrey;
   }
 }
-a, a:hover, a:active, a:visited, a:focus{
- text-decoration: none;
- transition: all 0.4s;
+
+footer{
+  position: relative;
+  display: flex;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
+  background: url("/img/footer_lodyas.png");
+  padding: 10px;
+  .copyright{
+    font-size: 2.5vmin;
+    color: $brightFont;
+    margin-right: auto;
+    padding: auto;
+  }
+  a{
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+    &:hover
+    {
+      opacity: 0.5;
+    }
+  }
 }
 
 img{
- max-height: 100%;
- max-width: 100%;
- width: auto;
+  max-height: 100vh;
+  width: auto;
+  max-width: 100%;
 }
-.img-wrapper{
-  height: 100%;
-  width: 100%;
+
+@media all and (max-width: 1000px)
+{
+  header{
+    background: black;
+  }
+  .grid-container{
+    height: auto;
+  }
 }

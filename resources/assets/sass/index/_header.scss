@@ -1,62 +1,61 @@
 @import "../var";
+
 header{
-  background: url('../img/back.jpg') fixed;
-  color: $mainColor;
-  position:fixed;
-  z-index: -1;
+  position: fixed;
+  z-index: -5;
   display: flex;
+  background: url("/img/back.jpg") fixed;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.pillow{
+  position: relative;
+  z-index: -1;
+  height: 100vh;
+}
+
+#particles-js{
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+}
+
+.hello-alert{
+  display:flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  nav {
-    z-index: 2;
-    width: 100%;
-    background: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 35%;
-    align-self: flex-end;
-    a{
-      font-size: 30px;
-      z-index: 3;
-      padding: 5px 30px 5px 30px;
-      border-radius: 4px;
-      color: $mainColor;
-      &:hover{
-        font-size: 26px;
-        color: $particlesBack;
-        background: $secondColor;
-      }
-    }
+  align-items: center;
+  flex: 1;
+  color: $brightFont;
+  h1{
+    font-size: 7vmin;
   }
-  #particles-js{
-    position: absolute;
-    width: 100%;
-  }
-  .jumbotron{
-    z-index: -1;
-    background: inherit;
-    align-self: center;
-    h1, p{
-      text-align: center;
-    }
+  h4{
+    font-size: 4vmin;
   }
 }
 
-.header_pillow{
+nav{
   position: relative;
-  height: 100%;
-  width: 100%;
-  background: black;
-  z-index: -10;
-}
-
-@media screen and (max-width: 360px){
-h1{
-    a{
-      font-size: 20px;
+  z-index: 0;
+  display: flex;
+  width: 40%;
+  margin-bottom: 10vh;
+  align-items: center;
+  justify-content: space-around;
+  a{
+    color: $mainColor;
+    padding: 0 5%;
+    font-size: 5vmin;
+    border-radius: 4px;
+    &:hover{
+      color: $particlesBack;
+      background: $secondColor;
     }
   }
 }
