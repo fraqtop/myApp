@@ -20,3 +20,5 @@ Route::get('/posts', 'BlogController@posts');
 Route::get('/post/{post_id}', 'BlogController@getPost');
 
 Route::auth();
+
+Route::get('/home', 'HomeController@index')->name('home');
