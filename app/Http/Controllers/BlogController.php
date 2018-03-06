@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Post;
-use phpDocumentor\Reflection\Types\Integer;
 
 class BlogController extends Controller
 {
@@ -28,7 +24,7 @@ class BlogController extends Controller
             'postContent' => 'required'
         ]);
         $request->user()->posts()->create([
-           'title' => $request->title,
+            'title' => $request->title,
             'content' => $request->postContent
         ]);
         return redirect('/posts');

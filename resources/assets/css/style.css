@@ -5939,13 +5939,15 @@ nav {
   width: 60%;
   background: linear-gradient(to right, #ff9799 0%, #e3e3e3 180%); }
 
-#posts {
+.posts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  #posts .post {
+  .posts .post {
     margin: 5vmin;
     background: #282828;
     min-height: 50vmin; }
+    .posts .post * {
+      color: #6d6d6d; }
 
 html, body {
   position: relative;
@@ -5953,21 +5955,24 @@ html, body {
   height: 100vh;
   width: 100%;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  word-wrap: break-word; }
 
 a, a:hover, a:active, a:visited, a:focus {
   text-decoration: none;
   transition: all 0.4s; }
 
-.grid-container {
+.my-container, .grid-container {
   position: relative;
   z-index: 2;
+  background: #e3e3e3; }
+
+.grid-container {
   display: grid;
   height: 1px;
   min-height: 300vh;
   width: 100%;
-  grid-template-rows: repeat(3, 1fr);
-  background: #e3e3e3; }
+  grid-template-rows: repeat(3, 1fr); }
   .grid-container section {
     border: 1px solid dimgrey; }
 

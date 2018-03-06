@@ -16,8 +16,8 @@
         <h4>full stack web developer</h4>
     </div>
     <nav>
-        <a href="#">home</a>
-        <a href="#">blog</a>
+        <a href="/">home</a>
+        <a href="/posts">blog</a>
         <a href="#">contact</a>
     </nav>
 </header>

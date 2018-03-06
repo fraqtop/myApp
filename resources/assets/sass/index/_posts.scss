@@ -1,11 +1,14 @@
 @import "../var";
 
-#posts{
+.posts{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   .post{
     margin: 5vmin;
     background: $particlesBack;
     min-height: 50vmin;
+    *{
+      color: $mediumFont;
+    }
   }
 }

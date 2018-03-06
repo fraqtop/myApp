@@ -39,7 +39,7 @@
             <img src="{{URL::asset('img/pie.png')}}">
         </div>
     </section>
-    <section id="posts">
+    <section class="posts">
         <div class="post"></div>
         <div class="post"></div>
         <div class="post"></div>

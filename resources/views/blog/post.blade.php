@@ -1,5 +1,6 @@
 @extends('layouts.basicLayout')
 @section('content')
+    <div class="my-container">
     <div class="post">
         <h1>{{ $post->title }}</h1>
         <h3>{{$post->content}}</h3>
@@ -21,4 +22,5 @@
         </div>
     </div>
     @endif
+    </div>
 @endsection
