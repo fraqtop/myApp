@@ -1,6 +1,7 @@
-@import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
 @import "var";
-@import "index/header";
+@import "navs/index-nav";
+@import "navs/min-dark-nav";
 @import "index/info";
 @import "index/timing";
 @import "index/posts";
@@ -12,14 +13,6 @@ html, body{
   width: 100%;
   padding: 0;
   margin: 0;
-  word-wrap: break-word;
-}
-
-nav.navbar{
-  width: 100%;
-  *{
-    font-size: 16px;
-  }
 }
 
 a, a:hover, a:active, a:visited, a:focus{

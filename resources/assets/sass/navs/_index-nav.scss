@@ -40,16 +40,16 @@ header{
   }
 }
 
-nav{
+nav.index-nav{
+  width: 50%;
   position: relative;
   z-index: 0;
   display: flex;
-  width: 40%;
   margin-bottom: 10vh;
   align-items: center;
   justify-content: space-around;
   a{
-    color: $mainColor;
+    color: $brightFont;
     padding: 0 5%;
     font-size: 5vmin;
     border-radius: 4px;

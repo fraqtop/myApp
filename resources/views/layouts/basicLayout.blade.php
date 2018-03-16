@@ -8,20 +8,6 @@
     <title>fraqtop's</title>
 </head>
 <body>
-<div class="pillow">
-<header>
-    <div id="particles-js"></div>
-    <div class="hello-alert">
-        <h1>Vanya Pralov</h1>
-        <h4>full stack web developer</h4>
-    </div>
-    <nav>
-        <a href="/">home</a>
-        <a href="/posts">blog</a>
-        <a href="#">contact</a>
-    </nav>
-</header>
-</div>
 @yield('content')
 <footer>
     <div class="copyright"><h5>Copyright &copy; 2018, designed and made by Vanya Pralov</h5></div>

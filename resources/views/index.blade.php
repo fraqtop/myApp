@@ -1,6 +1,20 @@
 @extends('layouts.basicLayout')
 
 @section('content')
+<div class="pillow">
+    <header>
+        <div id="particles-js"></div>
+        <div class="hello-alert">
+            <h1>Vanya Pralov</h1>
+            <h4>full stack web developer</h4>
+        </div>
+        <nav class="index-nav">
+            <a href="/">home</a>
+            <a href="/posts">blog</a>
+            <a href="#">contact</a>
+        </nav>
+    </header>
+</div>
 <div class="grid-container">
     <section id="info">
         <img src="{{URL::asset('img/example_space.jpg')}}">
@@ -27,12 +41,12 @@
                 <h3>Usually</h3>
             </div>
             <div class="diagram">
-                <div id="sass"><h3>SASS</h3></div>
-                <div id="t-sql"><h3>T-SQL</h3></div>
-                <div id="sharp"><h3>C#</h3></div>
-                <div id="php"><h3>PHP</h3></div>
-                <div id="python"><h3>Python</h3></div>
-                <div id="js"><h3>Javascript</h3></div>
+                <div id="sass"><h3>sass</h3></div>
+                <div id="t-sql"><h3>t-sql</h3></div>
+                <div id="sharp"><h3>c#</h3></div>
+                <div id="php"><h3>php</h3></div>
+                <div id="python"><h3>python</h3></div>
+                <div id="js"><h3>javascript</h3></div>
             </div>
         </div>
         <div class="img-responsive">

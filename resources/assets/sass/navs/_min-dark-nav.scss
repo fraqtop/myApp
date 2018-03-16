@@ -1,0 +1,15 @@
+nav.min-dark-nav{
+  display: flex;
+  background: $particlesBack;
+  height: 10vh;
+  padding: 0 10px;
+  align-items: center;
+  justify-content: flex-end;
+  .brand{
+    margin-right: auto;
+  }
+  a{
+    font-size: 4vmin;
+    margin: 0 5px;
+  }
+}
