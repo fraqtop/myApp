@@ -1,41 +1,32 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{URL::asset('favicon.ico')}}">
 </head>
 <body>
-    <div id="app">
+    <div class="soft-container">
         <nav class="min-dark-nav">
-            <a class="brand" href="/">{{config('app.name')}}</a>
+            <a href="/">home</a>
+            <a href="/posts">blog</a>
+            <a href="/contact">contact</a>
+            <div class="nav-right">
             @guest
                 <a href="/register">register</a>
                 <a href="/login">login</a>
             @else
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        signed as {{Auth::user()->name}}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Logout</a>
-                        <a class="dropdown-item" href="#">Delete account</a>
-                    </div>
-                </div>
+                <form action="/logout" method="post">
+                    {{csrf_field()}}
+                    <input type="submit" value="logout">
+                </form>
             @endguest
+            </div>
         </nav>
         @yield('content')
+        @include('footer')
     </div>
-
-    <!-- Scripts -->
     <script src="{{ asset('js/all.js') }}"></script>
 </body>
 </html>

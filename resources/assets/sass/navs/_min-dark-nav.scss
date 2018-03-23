@@ -1,15 +1,45 @@
 nav.min-dark-nav{
   display: flex;
-  background: $particlesBack;
-  height: 10vh;
+  background: url('../img/back.jpg');
+  overflow:hidden;
   padding: 0 10px;
-  align-items: center;
-  justify-content: flex-end;
-  .brand{
-    margin-right: auto;
+  align-items: stretch;
+  justify-content: flex-start;
+  .nav-right{
+    display: flex;
+    width: 40%;
+    margin-left: auto;
+    align-items: stretch;
+    justify-content: flex-end;
+    &:hover{
+      background: none;
+    }
   }
-  a{
+  *{
+    display: grid;
+    align-items: center;
+    justify-content: center;
     font-size: 4vmin;
-    margin: 0 5px;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 0 5px;
+    color: $secondColor;
+    &:hover{
+      background: $secondColor;
+      color: $brightFont;
+    }
+  }
+  form{
+    padding: 0;
+    input{
+      transition: all 0.4s;
+      cursor: pointer;
+      height: 100%;
+      margin: 0;
+      width: 100%;
+      background: inherit;
+      border: none;
+      color: $secondColor;
+    }
   }
 }

@@ -1,5 +1,5 @@
 @import "../var";
-#timing{
+.timing{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 5vmin;
@@ -31,6 +31,9 @@
   min-height: 50px;
   justify-content: space-between;
   align-items: center;
+  h3{
+    font-size: 4vmin;
+  }
   *{
     flex: 1;
   }

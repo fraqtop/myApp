@@ -20,6 +20,10 @@ Route::get('/posts', 'BlogController@posts');
 
 Route::get('/post/{post_id}', 'BlogController@getPost');
 
+Route::get('/postcreate', 'BlogController@storePost');
+
+Route::post('postcreate', 'BlogController@storePost');
+
 //----------------Profile
 
 Route::get('/profile', 'HomeController@profile');

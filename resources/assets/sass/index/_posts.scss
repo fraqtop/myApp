@@ -1,14 +1,48 @@
 @import "../var";
 
 .posts{
+  word-break: normal;
+  text-align: justify;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  .post{
-    margin: 5vmin;
-    background: $particlesBack;
-    min-height: 50vmin;
+  grid-gap: 5%;
+  padding: 2%;
+  a{
+    max-width: 600px;
+    &:hover{
     *{
-      color: $mediumFont;
+      background: $secondColor;
+      transition: all 0.4s;
     }
   }
+  }
+}
+.post{
+  position: relative;
+  background: $particlesBack;
+  height: 100%;
+  img{
+    height: auto;
+    flex: 1;
+  }
+  .card-body{
+    overflow: hidden;
+    h5{
+      font-size: 26px;
+    }
+    p{
+      font-size: 20px;
+    }
+  }
+  *{
+    color: $brightFont;
+  }
+}
+
+.posts-all{
+  @extend .posts;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-row-gap: 10vh;
+  justify-content: center;
 }

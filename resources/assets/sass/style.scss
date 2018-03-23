@@ -5,6 +5,7 @@
 @import "index/info";
 @import "index/timing";
 @import "index/posts";
+@import "containers/soft-container";
 
 html, body{
   position: relative;
@@ -20,16 +21,9 @@ a, a:hover, a:active, a:visited, a:focus{
   transition: all 0.4s;
 }
 
-.my-container{
-  position: relative;
-  z-index: 2;
-  background: $mainColor;
-}
-
 .grid-container{
   @extend .my-container;
   display: grid;
-  height: 1px;
   min-height: 300vh;
   width: 100%;
   grid-template-rows: repeat(3, 1fr);
@@ -41,7 +35,6 @@ a, a:hover, a:active, a:visited, a:focus{
 footer{
   position: relative;
   display: flex;
-  height: 10vh;
   justify-content: center;
   align-items: center;
   background: url("/img/footer_lodyas.png");
@@ -49,6 +42,7 @@ footer{
   color: $brightFont;
   .copyright{
     font-size: 2.5vmin;
+    font-weight: 500;
     margin-right: auto;
     padding: auto;
   }

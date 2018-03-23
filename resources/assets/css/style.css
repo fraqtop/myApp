@@ -6091,41 +6091,67 @@ nav.index-nav {
 
 nav.min-dark-nav {
   display: flex;
-  background: #212529;
-  height: 10vh;
+  background: url("../img/back.jpg");
+  overflow: hidden;
   padding: 0 10px;
-  align-items: center;
-  justify-content: flex-end; }
-  nav.min-dark-nav .brand {
-    margin-right: auto; }
-  nav.min-dark-nav a {
+  align-items: stretch;
+  justify-content: flex-start; }
+  nav.min-dark-nav .nav-right {
+    display: flex;
+    width: 40%;
+    margin-left: auto;
+    align-items: stretch;
+    justify-content: flex-end; }
+    nav.min-dark-nav .nav-right:hover {
+      background: none; }
+  nav.min-dark-nav * {
+    display: grid;
+    align-items: center;
+    justify-content: center;
     font-size: 4vmin;
-    margin: 0 5px; }
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 0 5px;
+    color: #4D4D8F; }
+    nav.min-dark-nav *:hover {
+      background: #4D4D8F;
+      color: #babdc2; }
+  nav.min-dark-nav form {
+    padding: 0; }
+    nav.min-dark-nav form input {
+      transition: all 0.4s;
+      cursor: pointer;
+      height: 100%;
+      margin: 0;
+      width: 100%;
+      background: inherit;
+      border: none;
+      color: #4D4D8F; }
 
-#info {
+.info {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%; }
-  #info article {
+  .info article {
     flex: 4;
     margin: 7vmin;
     font-size: 4vmin;
     text-align: justify;
     min-width: 400px; }
-  #info img {
+  .info img {
     min-width: 220px;
     flex: 2;
     width: 1px;
     margin: 3vmin;
     border-radius: 100%; }
 
-#timing {
+.timing {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 5vmin; }
-  #timing .img-responsive {
+  .timing .img-responsive {
     display: grid;
     justify-content: center;
     align-items: center; }
@@ -6149,6 +6175,8 @@ nav.min-dark-nav {
   min-height: 50px;
   justify-content: space-between;
   align-items: center; }
+  .legend h3 {
+    font-size: 4vmin; }
   .legend * {
     flex: 1; }
 
@@ -6176,15 +6204,51 @@ nav.min-dark-nav {
   width: 60%;
   background: linear-gradient(to right, #ff9799 0%, #e3e3e3 180%); }
 
-.posts {
+.posts, .posts-all {
+  word-break: normal;
+  text-align: justify;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  .posts .post {
-    margin: 5vmin;
-    background: #212529;
-    min-height: 50vmin; }
-    .posts .post * {
-      color: #6d6d6d; }
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 5%;
+  padding: 2%; }
+  .posts a, .posts-all a {
+    max-width: 600px; }
+    .posts a:hover *, .posts-all a:hover * {
+      background: #4D4D8F;
+      transition: all 0.4s; }
+
+.post {
+  position: relative;
+  background: #212529;
+  height: 100%; }
+  .post img {
+    height: auto;
+    flex: 1; }
+  .post .card-body {
+    overflow: hidden; }
+    .post .card-body h5 {
+      font-size: 26px; }
+    .post .card-body p {
+      font-size: 20px; }
+  .post * {
+    color: #babdc2; }
+
+.posts-all {
+  grid-template-columns: auto;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-row-gap: 10vh;
+  justify-content: center; }
+
+.my-container, .soft-container, .grid-container {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  background: #e3e3e3; }
+
+.soft-container {
+  display: grid;
+  grid-template-rows: 10vh 1fr 10vh;
+  min-height: 100vh; }
 
 html, body {
   position: relative;
@@ -6198,14 +6262,8 @@ a, a:hover, a:active, a:visited, a:focus {
   text-decoration: none;
   transition: all 0.4s; }
 
-.my-container, .grid-container {
-  position: relative;
-  z-index: 2;
-  background: #e3e3e3; }
-
 .grid-container {
   display: grid;
-  height: 1px;
   min-height: 300vh;
   width: 100%;
   grid-template-rows: repeat(3, 1fr); }
@@ -6215,7 +6273,6 @@ a, a:hover, a:active, a:visited, a:focus {
 footer {
   position: relative;
   display: flex;
-  height: 10vh;
   justify-content: center;
   align-items: center;
   background: url("/img/footer_lodyas.png");
@@ -6223,6 +6280,7 @@ footer {
   color: #babdc2; }
   footer .copyright {
     font-size: 2.5vmin;
+    font-weight: 500;
     margin-right: auto;
     padding: auto; }
   footer a {

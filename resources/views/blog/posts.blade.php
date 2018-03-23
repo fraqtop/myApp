@@ -1,20 +1,16 @@
-@extends('layouts.basicLayout')
+@extends('layouts.app')
 @section('content')
-<div class="pillow">
-    <header>
-        <div class="posts">
-            @for($i=0; $i<3; $i++)
-                <a href="/post/{{$posts[$i]->id}}/">
-                    <div class="post">
-                        <h1>{{$posts[$i]->title}}</h1>
-                        <p>{{$posts[$i]->content}}</p> </br>
-                        <p>Author: {{$posts[$i]->user->name}}</p>
-                    </div>
-                </a>
-            @endfor
-        </div>
-    </header>
-</div>
-<div class="my-container">
-</div>
+    <div class="posts-all">
+    @foreach($posts as $post)
+        <a href="/post/{{$post->id}}/">
+            <div class="card post">
+                <img class="card-img-top" src="{{asset($post->picture)}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{$post->title}}</h5>
+                    <p class="card-text">{{$post->content}}</p>
+                </div>
+            </div>
+        </a>
+    @endforeach
+    </div>
 @endsection
