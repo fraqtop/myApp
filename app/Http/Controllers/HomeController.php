@@ -21,7 +21,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index', ['posts' => Post::all()]);
+        $lastPosts = Post::take(3)
+            ->orderBy('created_at', 'desc')
+            ->with('category')
+            ->get();
+        return view('index', ['posts' => $lastPosts]);
     }
     public function profile()
     {

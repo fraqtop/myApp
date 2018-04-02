@@ -2,41 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Post;
-use Illuminate\Http\UploadedFile;
 use Storage;
 
 class BlogController extends Controller
 {
     function posts()
     {
-        return view('blog.posts', ['posts' => Post::with('user')->get()]);
+        $posts = Post::with('category')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('blog.posts', ['posts' => $posts]);
     }
 
-    function createPost()
-    {
-        return view('blog.createPost');
-    }
-
-    function storePost(Request $request)
+    function createPost(Request $request)
     {
         if ($request->isMethod('post'))
         {
-            $this->validate($request, [
-                'title' => 'required',
-                'postContent' => 'required'
-            ]);
-            $path = Storage::disk('public')->putFile('postpics', new File($request->file('postPicture')));
+            $path = null;
+            if($request->hasFile('postPicture'))
+            {
+                $path = Storage::disk('public')
+                    ->putFile('postPics', new File($request->file('postPicture')));
+                $path = Storage::url($path);
+            }
             $request->user()->posts()->create([
-                'title' => $request->title,
+                'title' => $request->postTitle,
                 'content' => $request->postContent,
-                'picture' => Storage::url($path)
+                'category_id' => $request->postCategory,
+                'picture' => $path
             ]);
             return redirect('/posts');
         }
-        return view('blog.createPost');
+        return view('blog.createPost', ['categories' => Category::all()]);
     }
 
     function getPost($postId)
@@ -52,5 +53,24 @@ class BlogController extends Controller
             'user_id' => $request->user()->id
         ]);
         return redirect()->back();
+    }
+
+    function createCategory(Request $request)
+    {
+        if ($request->isMethod('post'))
+        {
+            $this->validate($request, [
+                'categoryTitle' => 'required',
+                'categoryPicture' => 'required'
+            ]);
+            $path = Storage::disk('public')
+                ->putFile('categoryPics', new File($request->file('categoryPicture')));
+            Category::create([
+               'title' => $request->categoryTitle,
+                'picture' => Storage::url($path)
+            ]);
+            return redirect()->back();
+        }
+        return view('blog.createCategory');
     }
 }

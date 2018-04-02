@@ -61,17 +61,21 @@
             </div>
         </section>
         <section class="posts">
-            @for($i=0; $i<3; $i++)
-                <a href="/post/{{$posts[$i]->id}}/">
+            @foreach($posts as $post)
+                <a href="/post/{{$post->id}}/">
                     <div class="card post">
-                        <img class="card-img-top" src="img/code_conv.jpg">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$posts[$i]->title}}</h5>
-                            <p class="card-text">{{$posts[$i]->content}}</p>
+                        @if($post->picture)
+                        <img class="card-img-top" src="{{$post->picture}}">
+                        @else
+                        <img class="card-img-top" src="{{$post->category->picture}}">
+                        @endif
+                            <div class="card-body">
+                            <h5 class="card-title">{{$post->title}}</h5>
+                            <p class="card-text">{{$post->content}}</p>
                         </div>
                     </div>
                 </a>
-            @endfor
+            @endforeach
         </section>
     </div>
 </body>

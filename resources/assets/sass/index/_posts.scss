@@ -13,6 +13,8 @@
     *{
       background: $secondColor;
       transition: all 0.4s;
+      color: $particlesBack;
+      box-shadow: none;
     }
   }
   }
@@ -20,11 +22,10 @@
 .post{
   position: relative;
   background: $particlesBack;
-  height: 100%;
-  img{
-    height: auto;
-    flex: 1;
-  }
+  height: 1px;
+  min-height: 97vh;
+  box-shadow: 3px 3px 3px 3px $mediumFont;
+
   .card-body{
     overflow: hidden;
     h5{

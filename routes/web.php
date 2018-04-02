@@ -20,9 +20,9 @@ Route::get('/posts', 'BlogController@posts');
 
 Route::get('/post/{post_id}', 'BlogController@getPost');
 
-Route::get('/postcreate', 'BlogController@storePost');
+Route::match(['get', 'post'], '/createpost', 'BlogController@createPost');
 
-Route::post('postcreate', 'BlogController@storePost');
+Route::match(['get', 'post'], '/createcategory', 'BlogController@createCategory');
 
 //----------------Profile
 
