@@ -73,6 +73,7 @@
                             <h5 class="card-title">{{$post->title}}</h5>
                             <p class="card-text">{{$post->content}}</p>
                         </div>
+                        <div class="post-overflow"></div>
                     </div>
                 </a>
             @endforeach
