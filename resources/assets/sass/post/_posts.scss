@@ -1,6 +1,7 @@
 @import "../var";
 
 .posts{
+  background: inherit;
   word-break: normal;
   text-align: justify;
   display: grid;
@@ -25,11 +26,12 @@
   min-height: 97vh;
   box-shadow: 3px 3px 3px 3px $mediumFont;
   margin-top: 10px;
+  overflow: hidden;
   .card-img-top{
     background: inherit;
   }
   .card-body{
-    overflow: hidden;
+    overflow: inherit;
     h5{
       font-size: 26px;
     }
@@ -44,13 +46,23 @@
 
 .post-overflow{
   position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
   height: 20%;
   top: 80%;
   left: 0;
   background:linear-gradient(to bottom, rgba(33, 37, 41, 0.2),
           rgba(33, 37, 41, 0.6) 30%,
-          rgba(33, 37, 41, 1) 100%)
+          rgba(33, 37, 41, 1) 100%);
+  a{
+    margin: 5px;
+    color: $mediumFont;
+    &:hover{
+      color: $secondColor;
+    }
+  }
 }
 
 .posts-all{

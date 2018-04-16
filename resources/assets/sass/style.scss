@@ -4,8 +4,11 @@
 @import "navs/min-dark-nav";
 @import "index/info";
 @import "index/timing";
-@import "index/posts";
+@import "post/posts";
+@import "containers/basic-container";
 @import "containers/soft-container";
+@import "containers/text-container";
+@import "pictures/viewport-pic";
 
 html, body{
   position: relative;
@@ -22,7 +25,7 @@ a, a:hover, a:active, a:visited, a:focus{
 }
 
 .grid-container{
-  @extend .my-container;
+  @extend .basic-container;
   display: grid;
   min-height: 300vh;
   width: 100%;

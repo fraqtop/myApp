@@ -15,7 +15,8 @@ header{
 .pillow{
   position: relative;
   z-index: -1;
-  height: 100vh;
+  height: 1px;
+  min-height: 100vh;
 }
 
 #particles-js{

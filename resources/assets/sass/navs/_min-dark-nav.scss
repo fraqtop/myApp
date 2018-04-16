@@ -1,10 +1,13 @@
 nav.min-dark-nav{
+  position: fixed;
+  width: 100%;
+  height: 10vh;
   display: flex;
   background: url('../img/back.jpg');
-  overflow:hidden;
   padding: 0 10px;
   align-items: stretch;
   justify-content: flex-start;
+  z-index: 5;
   .nav-right{
     display: flex;
     width: 40%;
@@ -42,4 +45,8 @@ nav.min-dark-nav{
       color: $brightFont;
     }
   }
+}
+.nav-pillow{
+  width: 100%;
+  z-index: -1;
 }

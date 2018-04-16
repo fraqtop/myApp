@@ -1,0 +1,16 @@
+.viewport-pic{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -5;
+  height: 100vh;
+  width: 100%;
+  background: $particlesBack;
+  min-width: 800px;
+  overflow: hidden;
+  img{
+    height: 100%;
+    width: auto;
+  }
+}

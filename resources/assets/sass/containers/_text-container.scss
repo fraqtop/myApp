@@ -1,0 +1,8 @@
+.text-container{
+  @extend .basic-container;
+  padding: 5vh 15%;
+  text-align: justify;
+  h1{
+    margin: 10vh 0;
+  }
+}

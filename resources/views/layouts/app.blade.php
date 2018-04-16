@@ -24,6 +24,7 @@
             @endguest
             </div>
         </nav>
+        <div class="nav-pillow"></div>
         @yield('content')
         @include('footer')
     </div>

@@ -16,13 +16,13 @@ Route::auth();
 
 //----------------Blog
 
-Route::get('/posts', 'BlogController@posts');
+Route::get('/posts', 'blog\PostController@getAllPosts');
 
-Route::get('/post/{post_id}', 'BlogController@getPost');
+Route::get('/post/{post_id}', 'blog\PostController@getPost');
 
-Route::match(['get', 'post'], '/createpost', 'BlogController@createPost');
+Route::match(['get', 'post'], '/createpost', 'blog\PostController@createPost');
 
-Route::match(['get', 'post'], '/createcategory', 'BlogController@createCategory');
+Route::match(['get', 'post'], '/createcategory', 'blog\CategoryController@createCategory');
 
 //----------------Profile
 
