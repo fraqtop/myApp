@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\blog;
 
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
@@ -43,6 +44,11 @@ class PostController extends Controller
 
     function getPost($postId)
     {
-        return view('blog.post', ['post' => Post::find($postId)]);
+        $post = Post::find($postId);
+        $comments = Comment::with('user')
+            ->where('post_id', '=', $postId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('blog.post', ['post' => $post, 'comments' => $comments]);
     }
 }

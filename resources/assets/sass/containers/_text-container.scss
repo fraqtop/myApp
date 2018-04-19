@@ -2,7 +2,20 @@
   @extend .basic-container;
   padding: 5vh 15%;
   text-align: justify;
-  h1{
+  .post-title{
     margin: 10vh 0;
+  }
+  .post-content{
+    margin-bottom: 10vh;
+  }
+  form{
+    .btn{
+      border: none;
+      background: $particlesBack;
+      &:hover{
+        background: $secondColor;
+        color: $particlesBack;
+    }
+    }
   }
 }

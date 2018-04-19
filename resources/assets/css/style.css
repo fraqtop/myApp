@@ -6442,6 +6442,47 @@ nav.min-dark-nav {
   width: 60%;
   background: linear-gradient(to right, #ff9799 0%, #e3e3e3 180%); }
 
+.basic-container, .soft-container, .text-container, .grid-container {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  background: #e3e3e3; }
+
+.soft-container {
+  height: 1px;
+  display: grid;
+  grid-template-rows: 10vh 1fr 1fr 10vh;
+  min-height: 100vh; }
+
+.text-container {
+  padding: 5vh 15%;
+  text-align: justify; }
+  .text-container .post-title {
+    margin: 10vh 0; }
+  .text-container .post-content {
+    margin-bottom: 10vh; }
+  .text-container form .btn {
+    border: none;
+    background: #212529; }
+    .text-container form .btn:hover {
+      background: #4D4D8F;
+      color: #212529; }
+
+.viewport-pic {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -5;
+  height: 100vh;
+  width: 100%;
+  background: #212529;
+  min-width: 800px;
+  overflow: hidden; }
+  .viewport-pic img {
+    height: 100%;
+    width: auto; }
+
 .posts, .posts-all {
   background: inherit;
   word-break: normal;
@@ -6498,38 +6539,25 @@ nav.min-dark-nav {
   grid-row-gap: 10vh;
   justify-content: center; }
 
-.basic-container, .soft-container, .text-container, .grid-container {
-  width: 100%;
-  position: relative;
-  z-index: 2;
-  background: #e3e3e3; }
+.comment {
+  margin-top: 3vh;
+  border-top: 1px solid #434343;
+  color: #434343; }
 
-.soft-container {
-  height: 1px;
-  display: grid;
-  grid-template-rows: 10vh 1fr 1fr 10vh;
-  min-height: 100vh; }
+.comment-author {
+  margin-top: 5px;
+  color: #4D4D8F;
+  font-size: 18px;
+  font-weight: 600; }
 
-.text-container {
-  padding: 5vh 15%;
-  text-align: justify; }
-  .text-container h1 {
-    margin: 10vh 0; }
+.comment-content {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 2% 0; }
 
-.viewport-pic {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: -5;
-  height: 100vh;
-  width: 100%;
-  background: #212529;
-  min-width: 800px;
-  overflow: hidden; }
-  .viewport-pic img {
-    height: 100%;
-    width: auto; }
+.comment-time {
+  color: #6d6d6d;
+  font-size: 11px; }
 
 html, body {
   position: relative;

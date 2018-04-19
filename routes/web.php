@@ -24,6 +24,8 @@ Route::match(['get', 'post'], '/createpost', 'blog\PostController@createPost');
 
 Route::match(['get', 'post'], '/createcategory', 'blog\CategoryController@createCategory');
 
+Route::post('/post/{post_id}/storecomment', 'blog\CommentController@storeComment');
+
 //----------------Profile
 
 Route::get('/profile', 'HomeController@profile');

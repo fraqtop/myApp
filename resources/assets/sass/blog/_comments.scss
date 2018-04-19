@@ -1,0 +1,23 @@
+.comment{
+  margin-top: 3vh;
+  border-top: 1px solid $darkFont;
+  color: $darkFont;
+}
+
+.comment-author{
+  margin-top: 5px;
+  color: $secondColor;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.comment-content{
+  font-size: 14px;
+  font-weight: 500;
+  margin: 2% 0;
+}
+
+.comment-time{
+  color: $mediumFont;
+  font-size: 11px;
+}

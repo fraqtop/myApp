@@ -4,11 +4,12 @@
 @import "navs/min-dark-nav";
 @import "index/info";
 @import "index/timing";
-@import "post/posts";
 @import "containers/basic-container";
 @import "containers/soft-container";
 @import "containers/text-container";
 @import "pictures/viewport-pic";
+@import "blog/posts";
+@import "blog/comments";
 
 html, body{
   position: relative;
