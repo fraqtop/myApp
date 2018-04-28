@@ -29,3 +29,5 @@ Route::post('/post/{post_id}/storecomment', 'blog\CommentController@storeComment
 //----------------Profile
 
 Route::get('/profile', 'HomeController@profile');
+
+Route::get('/contact', 'HomeController@contact');

@@ -1,0 +1,26 @@
+.auth-form
+{
+  display: grid;
+  flex-direction: column;
+  background: $particlesBack;
+  justify-items: center;
+  align-items: center;
+  height: 50vh;
+  width: 300px;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 1px 1px $secondColor;
+  font-weight: 600;
+  .btn{
+    background: $secondColor;
+    color: $brightFont;
+    font-weight: 600;
+    &:hover{
+      color: $particlesBack;
+    }
+  }
+  .form-label{
+    color: $brightFont;
+    justify-self: center;
+  }
+}

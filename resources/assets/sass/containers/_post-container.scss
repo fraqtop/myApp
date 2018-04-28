@@ -1,0 +1,8 @@
+.post-container{
+  background: inherit;
+  position: relative;
+  display: grid;
+  height: 1px;
+  min-height: 100%;
+  grid-template-rows: 1fr 1fr;
+}

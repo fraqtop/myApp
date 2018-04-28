@@ -6451,8 +6451,10 @@ nav.min-dark-nav {
 .soft-container {
   height: 1px;
   display: grid;
-  grid-template-rows: 10vh 1fr 1fr 10vh;
-  min-height: 100vh; }
+  grid-template-rows: 10vh 1fr 10vh;
+  min-height: 100vh;
+  justify-items: center;
+  align-items: center; }
 
 .text-container {
   padding: 5vh 15%;
@@ -6467,6 +6469,14 @@ nav.min-dark-nav {
     .text-container form .btn:hover {
       background: #4D4D8F;
       color: #212529; }
+
+.post-container {
+  background: inherit;
+  position: relative;
+  display: grid;
+  height: 1px;
+  min-height: 100%;
+  grid-template-rows: 1fr 1fr; }
 
 .viewport-pic {
   position: fixed;
@@ -6559,6 +6569,28 @@ nav.min-dark-nav {
   color: #6d6d6d;
   font-size: 11px; }
 
+.auth-form {
+  display: grid;
+  flex-direction: column;
+  background: #212529;
+  justify-items: center;
+  align-items: center;
+  height: 50vh;
+  width: 300px;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 1px 1px #4D4D8F;
+  font-weight: 600; }
+  .auth-form .btn {
+    background: #4D4D8F;
+    color: #babdc2;
+    font-weight: 600; }
+    .auth-form .btn:hover {
+      color: #212529; }
+  .auth-form .form-label {
+    color: #babdc2;
+    justify-self: center; }
+
 html, body {
   position: relative;
   z-index: -1;
@@ -6582,11 +6614,13 @@ a, a:hover, a:active, a:visited, a:focus {
 footer {
   position: relative;
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   background: url("/img/footer_lodyas.png");
-  padding: 10px;
-  color: #babdc2; }
+  color: #babdc2;
+  height: 10vh;
+  padding: 10px; }
   footer .copyright {
     font-size: 2.5vmin;
     font-weight: 500;

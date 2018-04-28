@@ -2,6 +2,8 @@
   @extend .basic-container;
   height: 1px;
   display: grid;
-  grid-template-rows: 10vh 1fr 1fr 10vh;
+  grid-template-rows: 10vh 1fr 10vh;
   min-height: 100vh;
+  justify-items: center;
+  align-items: center;
 }

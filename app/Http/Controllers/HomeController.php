@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Post;
+use App\User;
+use Mail;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,7 +13,6 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {}
@@ -27,8 +29,14 @@ class HomeController extends Controller
             ->get();
         return view('index', ['posts' => $lastPosts]);
     }
+
     public function profile()
     {
         return view('home');
+    }
+
+    public function contact()
+    {
+        Mail::to(User::find(1))->send(new ContactMail());
     }
 }

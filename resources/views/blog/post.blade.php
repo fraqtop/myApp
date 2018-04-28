@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <div class="post-container">
     <div class="viewport-pic">
         <img src="{{$post->getPicture()}}">
     </div>
@@ -35,5 +36,6 @@
                 </div>
             @endforeach
         </div>
+    </div>
     </div>
 @endsection
