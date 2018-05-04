@@ -1,4 +1,7 @@
-vendor/
-.idea/
+vendor
+.idea
 .env
 node_modules/
+public/storage
+public/PHP_errors.log
+cgi-bin
