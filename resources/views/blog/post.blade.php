@@ -10,7 +10,7 @@
             <h1>{{$post->title}}</h1>
         </div>
         <div class="post-content">
-            <h3>{{$post->content}}</h3>
+            <p>{{$post->content}}</p>
         </div>
         @if(Auth::check())
             <form action="storecomment/" method="post">

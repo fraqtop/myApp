@@ -1,5 +1,6 @@
 @import "../var";
 .timing{
+  height: 100vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 5vmin;
@@ -18,11 +19,16 @@
 
 .diagram{
   display: flex;
-  min-height: 500px;
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+  *{
+    display: grid;
+    align-items: center;
+    flex: 1;
+    padding: 0 5px;
+  }
 }
 
 .legend{
@@ -44,7 +50,7 @@
   background: linear-gradient(to right, #6c8ef0 0%, $mainColor 180%);
 }
 
-#sass{
+#scss{
   width: 75%;
   background: linear-gradient(to right, #ffba78 0%, $mainColor 180%);
 }

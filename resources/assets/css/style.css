@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v4.1.0 (https://getbootstrap.com/)
+ * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -50,7 +50,7 @@ html {
 @-ms-viewport {
   width: device-width; }
 
-article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
 body {
@@ -158,7 +158,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1em; }
 
 pre {
@@ -412,12 +412,6 @@ mark,
 .figure-caption {
   font-size: 90%;
   color: #6c757d; }
-
-code,
-kbd,
-pre,
-samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 code {
   font-size: 87.5%;
@@ -1455,6 +1449,11 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   .custom-select.is-valid ~ .valid-tooltip {
     display: block; }
 
+.was-validated .form-control-file:valid ~ .valid-feedback,
+.was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,
+.form-control-file.is-valid ~ .valid-tooltip {
+  display: block; }
+
 .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
   color: #28a745; }
 
@@ -1531,6 +1530,11 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   .custom-select.is-invalid ~ .invalid-feedback,
   .custom-select.is-invalid ~ .invalid-tooltip {
     display: block; }
+
+.was-validated .form-control-file:invalid ~ .invalid-feedback,
+.was-validated .form-control-file:invalid ~ .invalid-tooltip, .form-control-file.is-invalid ~ .invalid-feedback,
+.form-control-file.is-invalid ~ .invalid-tooltip {
+  display: block; }
 
 .was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
   color: #dc3545; }
@@ -2387,8 +2391,7 @@ input[type="button"].btn-block {
     .input-group > .custom-file:not(:last-child) .custom-file-label::after {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0; }
-    .input-group > .custom-file:not(:first-child) .custom-file-label,
-    .input-group > .custom-file:not(:first-child) .custom-file-label::after {
+    .input-group > .custom-file:not(:first-child) .custom-file-label {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0; }
 
@@ -2479,11 +2482,12 @@ input[type="button"].btn-block {
       background-color: #e9ecef; }
 
 .custom-control-label {
+  position: relative;
   margin-bottom: 0; }
   .custom-control-label::before {
     position: absolute;
     top: 0.25rem;
-    left: 0;
+    left: -1.5rem;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -2494,7 +2498,7 @@ input[type="button"].btn-block {
   .custom-control-label::after {
     position: absolute;
     top: 0.25rem;
-    left: 0;
+    left: -1.5rem;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -2620,7 +2624,7 @@ input[type="button"].btn-block {
     bottom: 0;
     z-index: 3;
     display: block;
-    height: calc(calc(2.25rem + 2px) - 1px * 2);
+    height: 2.25rem;
     padding: 0.375rem 0.75rem;
     line-height: 1.5;
     color: #495057;
@@ -4193,6 +4197,7 @@ button.close {
     margin-right: 3px;
     margin-left: 3px;
     text-indent: -999px;
+    cursor: pointer;
     background-color: rgba(255, 255, 255, 0.5); }
     .carousel-indicators li::before {
       position: absolute;
@@ -6265,7 +6270,17 @@ a.text-dark:hover, a.text-dark:focus {
       background-color: #fff !important; }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #dee2e6 !important; } }
+    border: 1px solid #dee2e6 !important; }
+  .table-dark {
+    color: inherit; }
+    .table-dark th,
+    .table-dark td,
+    .table-dark thead th,
+    .table-dark tbody + tbody {
+      border-color: #dee2e6; }
+  .table .thead-dark th {
+    color: inherit;
+    border-color: #dee2e6; } }
 
 header {
   position: fixed;
@@ -6366,26 +6381,26 @@ nav.min-dark-nav {
   z-index: -1; }
 
 .info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 100vh;
+  display: grid;
+  justify-items: center;
   align-items: center;
-  width: 100%; }
+  width: 100%;
+  grid-template-columns: 1fr 2fr; }
   .info article {
-    flex: 4;
     margin: 7vmin;
     font-size: 4vmin;
-    text-align: justify;
-    min-width: 400px; }
+    text-align: justify; }
   .info img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
     box-shadow: 0 0 3px 3px #babdc2;
-    min-width: 220px;
-    flex: 2;
-    width: 1px;
     margin: 3vmin;
     border-radius: 100%; }
 
 .timing {
+  height: 100vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 5vmin; }
@@ -6401,11 +6416,15 @@ nav.min-dark-nav {
 
 .diagram {
   display: flex;
-  min-height: 500px;
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around; }
+  .diagram * {
+    display: grid;
+    align-items: center;
+    flex: 1;
+    padding: 0 5px; }
 
 .legend {
   display: flex;
@@ -6422,7 +6441,7 @@ nav.min-dark-nav {
   width: 80%;
   background: linear-gradient(to right, #6c8ef0 0%, #e3e3e3 180%); }
 
-#sass {
+#scss {
   width: 75%;
   background: linear-gradient(to right, #ffba78 0%, #e3e3e3 180%); }
 
@@ -6449,7 +6468,6 @@ nav.min-dark-nav {
   background: #e3e3e3; }
 
 .soft-container {
-  height: 1px;
   display: grid;
   grid-template-rows: 10vh 1fr 10vh;
   min-height: 100vh;
@@ -6457,12 +6475,16 @@ nav.min-dark-nav {
   align-items: center; }
 
 .text-container {
+  position: relative;
+  z-index: 5;
   padding: 5vh 15%;
   text-align: justify; }
   .text-container .post-title {
     margin: 10vh 0; }
   .text-container .post-content {
     margin-bottom: 10vh; }
+    .text-container .post-content p {
+      font-size: 4.5vmin; }
   .text-container form .btn {
     border: none;
     background: #212529; }
@@ -6474,8 +6496,7 @@ nav.min-dark-nav {
   background: inherit;
   position: relative;
   display: grid;
-  height: 1px;
-  min-height: 100%;
+  min-height: 200vh;
   grid-template-rows: 1fr 1fr; }
 
 .viewport-pic {
@@ -6483,7 +6504,6 @@ nav.min-dark-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -5;
   height: 100vh;
   width: 100%;
   background: #212529;
@@ -6498,9 +6518,7 @@ nav.min-dark-nav {
   word-break: normal;
   text-align: justify;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 5%;
-  padding: 2%; }
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
   .posts a, .posts-all a {
     max-width: 600px; }
     .posts a:hover *, .posts-all a:hover * {
@@ -6514,8 +6532,8 @@ nav.min-dark-nav {
   height: 1px;
   min-height: 97vh;
   box-shadow: 3px 3px 3px 3px #6d6d6d;
-  margin-top: 10px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 10px; }
   .post .card-img-top {
     background: inherit; }
   .post .card-body {
@@ -6575,9 +6593,10 @@ nav.min-dark-nav {
   background: #212529;
   justify-items: center;
   align-items: center;
-  height: 50vh;
-  width: 300px;
-  padding: 5px;
+  height: 60vh;
+  width: 20%;
+  min-width: 200px;
+  padding: 20px;
   border-radius: 3px;
   box-shadow: 3px 3px 1px 1px #4D4D8F;
   font-weight: 600; }
@@ -6605,11 +6624,13 @@ a, a:hover, a:active, a:visited, a:focus {
 
 .grid-container {
   display: grid;
-  min-height: 300vh;
+  height: 1px;
+  min-height: 330vh;
   width: 100%;
-  grid-template-rows: repeat(3, 1fr); }
+  padding: 0 10px;
+  grid-gap: 10vh; }
   .grid-container section {
-    border: 1px solid dimgrey; }
+    border-top: 1px solid #434343; }
 
 footer {
   position: relative;
@@ -6619,8 +6640,8 @@ footer {
   align-items: center;
   background: url("/img/footer_lodyas.png");
   color: #babdc2;
-  height: 10vh;
-  padding: 10px; }
+  min-height: 10vh;
+  padding: 0 5px; }
   footer .copyright {
     font-size: 2.5vmin;
     font-weight: 500;
@@ -6642,4 +6663,11 @@ img {
   header {
     background: black; }
   .grid-container {
-    height: auto; } }
+    height: auto;
+    grid-template-rows: repeat(3, auto); }
+    .grid-container .timing {
+      height: auto; }
+    .grid-container .info {
+      height: auto;
+      grid-template-columns: auto;
+      grid-template-rows: repeat(2, min-content); } }

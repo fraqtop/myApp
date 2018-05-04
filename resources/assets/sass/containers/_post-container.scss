@@ -2,7 +2,6 @@
   background: inherit;
   position: relative;
   display: grid;
-  height: 1px;
-  min-height: 100%;
+  min-height: 200vh;
   grid-template-rows: 1fr 1fr;
 }

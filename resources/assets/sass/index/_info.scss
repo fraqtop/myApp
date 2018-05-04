@@ -1,21 +1,20 @@
 .info{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 100vh;
+  display: grid;
+  justify-items: center;
   align-items: center;
   width: 100%;
+  grid-template-columns: 1fr 2fr;
   article{
-    flex: 4;
     margin: 7vmin;
     font-size: 4vmin;
     text-align: justify;
-    min-width: 400px;
   }
   img{
+    width: auto;
+    max-width: 100%;
+    height: auto;
     box-shadow: 0 0 3px 3px $brightFont;
-    min-width: 220px;
-    flex: 2;
-    width: 1px;
     margin: 3vmin;
     border-radius: 100%;
   }

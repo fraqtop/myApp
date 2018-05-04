@@ -1,6 +1,5 @@
 .soft-container{
   @extend .basic-container;
-  height: 1px;
   display: grid;
   grid-template-rows: 10vh 1fr 10vh;
   min-height: 100vh;

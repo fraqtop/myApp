@@ -1,5 +1,7 @@
 .text-container{
   @extend .basic-container;
+  position: relative;
+  z-index: 5;
   padding: 5vh 15%;
   text-align: justify;
   .post-title{
@@ -7,6 +9,9 @@
   }
   .post-content{
     margin-bottom: 10vh;
+    p{
+      font-size: 4.5vmin;
+    }
   }
   form{
     .btn{

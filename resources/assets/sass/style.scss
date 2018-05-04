@@ -30,11 +30,13 @@ a, a:hover, a:active, a:visited, a:focus{
 .grid-container{
   @extend .basic-container;
   display: grid;
-  min-height: 300vh;
+  height: 1px;
+  min-height: 330vh;
   width: 100%;
-  grid-template-rows: repeat(3, 1fr);
+  padding: 0 10px;
+  grid-gap:10vh;
   section{
-    border: 1px solid dimgrey;
+    border-top: 1px solid $darkFont;
   }
 }
 
@@ -46,8 +48,8 @@ footer{
   align-items: center;
   background: url("/img/footer_lodyas.png");
   color: $brightFont;
-  height: 10vh;
-  padding: 10px;
+  min-height: 10vh;
+  padding: 0 5px;
   .copyright{
     font-size: 2.5vmin;
     font-weight: 500;
@@ -78,5 +80,14 @@ img{
   }
   .grid-container{
     height: auto;
+    grid-template-rows: repeat(3, auto);
+    .timing{
+      height: auto;
+    }
+    .info{
+      height: auto;
+      grid-template-columns: auto;
+      grid-template-rows: repeat(2, min-content);
+    }
   }
 }

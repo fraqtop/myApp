@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <script src="{{asset('js/all.js')}}"></script>
     <title>fraqtop's</title>
 </head>
 <body>
@@ -48,7 +47,7 @@
                     <h3>Usually</h3>
                 </div>
                 <div class="diagram">
-                    <div id="sass"><h3>sass</h3></div>
+                    <div id="scss"><h3>scss</h3></div>
                     <div id="t-sql"><h3>t-sql</h3></div>
                     <div id="sharp"><h3>c#</h3></div>
                     <div id="php"><h3>php</h3></div>
@@ -75,6 +74,7 @@
             @endforeach
         </section>
     </div>
+    @include('footer')
 </body>
-@include('footer')
+<script src="{{asset('js/all.js')}}"></script>
 </html>
