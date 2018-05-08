@@ -30,4 +30,4 @@ Route::post('/post/{post_id}/storecomment', 'blog\CommentController@storeComment
 
 Route::get('/profile', 'HomeController@profile');
 
-Route::get('/contact', 'HomeController@contact');
+Route::match(['get', 'post'],'/contact', 'HomeController@contact');

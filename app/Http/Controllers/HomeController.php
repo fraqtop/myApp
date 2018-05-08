@@ -35,8 +35,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
-        Mail::to(User::find(1))->send(new ContactMail());
+        if ($request->isMethod('post'))
+        {
+            Mail::to(User::find(1))->send(new ContactMail($request->post('contactAuthor'),
+                $request->post('contactMessage')));
+            return redirect('/');
+        }
+        return view('contact');
+
     }
 }
