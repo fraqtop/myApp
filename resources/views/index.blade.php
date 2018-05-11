@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{asset('favicon.ico')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>fraqtop's</title>
 </head>

@@ -4,4 +4,7 @@ vendor
 node_modules/
 public/storage
 public/PHP_errors.log
-cgi-bin
+cgi-bin./public/storage
+./vendor/bin/doctrine-dbal
+./vendor/bin/php-parse
+./vendor/bin/psysh

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{URL::asset('favicon.ico')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
 </head>
 <body>
     <div class="soft-container">
