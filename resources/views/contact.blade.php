@@ -11,6 +11,12 @@
                 <textarea class="form-control" placeholder="what do you want" name="contactMessage" required></textarea>
             </div>
             <div class="form-group">
+                <input class="form-control" type="email" placeholder="feedback" name="contactFeedback">
+            </div>
+            <div class="form-group">
+                <input placeholder="advanced" class="form-control advanced" type="text" name="contactAdvanced">
+            </div>
+            <div class="form-group">
                 <input class="form-control btn" type="submit" value="send message">
             </div>
         </form>

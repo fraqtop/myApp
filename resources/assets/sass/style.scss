@@ -31,12 +31,13 @@ a, a:hover, a:active, a:visited, a:focus{
   @extend .basic-container;
   display: grid;
   height: 1px;
-  min-height: 330vh;
+  min-height: 315vh;
   width: 100%;
-  padding: 0 10px;
-  grid-gap:10vh;
+  max-width: 100%;
+  grid-gap: 5vh;
   section{
-    border-top: 1px solid $darkFont;
+    border-top: 2px solid $brightFont;
+    padding: 0 10px;
   }
 }
 
@@ -44,17 +45,17 @@ footer{
   position: relative;
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   background: url("/img/footer_lodyas.png");
   color: $brightFont;
   min-height: 10vh;
   padding: 0 5px;
+  font-size: 2.5vmin;
+  font-weight: 500;
   .copyright{
-    font-size: 2.5vmin;
-    font-weight: 500;
     margin-right: auto;
-    padding: auto;
+    padding-right: 15px;
   }
   a{
     height: 50px;
@@ -75,19 +76,29 @@ img{
 
 @media all and (max-width: 1000px)
 {
-  header{
-    background: black;
-  }
   .grid-container{
     height: auto;
     grid-template-rows: repeat(3, auto);
     .timing{
       height: auto;
+      grid-template-columns: auto;
+      grid-template-rows: repeat(2, auto);
+      .graphic{
+        min-height: 100vh;
+      }
     }
     .info{
       height: auto;
       grid-template-columns: auto;
       grid-template-rows: repeat(2, min-content);
     }
+  }
+}
+
+@media all and (max-width: 600px)
+{
+  .posts{
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto-fill, 1fr);
   }
 }

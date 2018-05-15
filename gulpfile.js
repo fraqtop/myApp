@@ -5,6 +5,7 @@ const browserSync = require('browser-sync');
 const pump = require('pump');
 const uglify = require('gulp-uglify');
 const concat = require ('gulp-concat');
+const imagemin = require('gulp-imagemin');
 
 gulp.task('scss', function () {
    return gulp.src('resources/assets/sass/style.scss')
@@ -42,6 +43,12 @@ gulp.task('concat', function () {
    return gulp.src('resources/assets/js/*.js')
        .pipe(concat('all.js'))
        .pipe(gulp.dest('resources/assets/js/linked'));
+});
+
+gulp.task('img', function () {
+   return gulp.src('resources/assets/img/*')
+       .pipe(imagemin())
+       .pipe(gulp.dest('public/img'));
 });
 
 gulp.task('watcher', function () {
