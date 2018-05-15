@@ -12,12 +12,12 @@
             <div id="particles-js"></div>
             <div class="hello-alert">
                 <h1>Vanya Pralov</h1>
-                <h4>full stack web developer</h4>
+                <h4>Full Stack Web Developer</h4>
             </div>
             <nav class="index-nav">
-                <a href="/">home</a>
-                <a href="/posts">blog</a>
-                <a href="/contact">contact</a>
+                <a href="/">Home</a>
+                <a href="/posts">Blog</a>
+                <a href="/contact">Contact</a>
             </nav>
         </header>
     </div>

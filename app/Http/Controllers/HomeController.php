@@ -39,8 +39,13 @@ class HomeController extends Controller
     {
         if ($request->isMethod('post'))
         {
+            if($request->post('contactAdvanced') != '')
+            {
+                Mail::to(User::find(1))->send(new ContactMail('anti spam system',
+                    'spam message was caught', ''));
+            }
             Mail::to(User::find(1))->send(new ContactMail($request->post('contactAuthor'),
-                $request->post('contactMessage')));
+                $request->post('contactMessage'), $request->post('contactFeedback')));
             return redirect('/');
         }
         return view('contact');

@@ -13,11 +13,13 @@ class ContactMail extends Mailable
 
     public $contactAuthor;
     public $contactMessage;
+    public $contactFeedback;
 
-    public function __construct($newAuthor, $newMessage)
+    public function __construct($newAuthor, $newMessage, $newFeedback)
     {
         $this->contactAuthor = $newAuthor;
         $this->contactMessage = $newMessage;
+        $this->contactFeedback = $newFeedback;
     }
 
     /**
