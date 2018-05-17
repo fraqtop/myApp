@@ -2,8 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const csso = require('gulp-csso');
 const browserSync = require('browser-sync');
-const pump = require('pump');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const concat = require ('gulp-concat');
 const imagemin = require('gulp-imagemin');
 
@@ -28,15 +27,10 @@ gulp.task('sync', ['minify', 'convert'], function () {
    });
 });
 
-gulp.task('convert', ['concat'], function (cb) {
-    pump(
-        [
-            gulp.src('resources/assets/js/linked/all.js'),
-            uglify(),
-            gulp.dest('public/js')
-        ],
-        cb
-    );
+gulp.task('convert', ['concat'], function () {
+           return gulp.src('resources/assets/js/linked/all.js')
+               .pipe(uglify())
+               .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('concat', function () {
