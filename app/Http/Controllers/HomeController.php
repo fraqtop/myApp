@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Post;
 use App\User;
-use Faker\Provider\DateTime;
 use Mail;
 use Illuminate\Http\Request;
 
@@ -48,19 +47,29 @@ class HomeController extends Controller
         return false;
     }
 
+    private function registerSpamMessage(string $spamName)
+    {
+        $log = fopen("SpamLog.txt", 'a+');
+        $time = new \DateTime();
+        fwrite($log, $spamName." - ".$time->format('d M Y H:i')."\n");
+        fclose($log);
+    }
+
     public function contact(Request $request)
     {
         if ($request->isMethod('post'))
         {
             if($this->isSpam($request))
             {
-                Mail::to(User::find(1))->send(new ContactMail('anti spam system',
-                    'spam message was caught', ''));
+                $this->registerSpamMessage($request->post('contactAuthor'));
+                return view('reports.spam');
             }
             else
+            {
                 Mail::to(User::find(1))->send(new ContactMail($request->post('contactAuthor'),
                     $request->post('contactMessage'), $request->post('contactFeedback')));
-            return redirect('/');
+                return redirect('/');
+            }
         }
         return view('contact');
 
