@@ -8,3 +8,4 @@ cgi-bin./public/storage
 ./vendor/bin/doctrine-dbal
 ./vendor/bin/php-parse
 ./vendor/bin/psysh
+public/*.txt
