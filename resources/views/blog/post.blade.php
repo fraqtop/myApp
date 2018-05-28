@@ -13,7 +13,7 @@
             <p>{{$post->content}}</p>
         </div>
         @if(Auth::check())
-            <form action="storecomment/" method="post">
+            <form action="comment/" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <textarea name="commContent" class="form-control" placeholder="what do you think about it?"></textarea>

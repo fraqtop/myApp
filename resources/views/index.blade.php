@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <title>fraqtop's</title>
 </head>
 <body>
@@ -11,8 +13,8 @@
         <header>
             <div id="particles-js"></div>
             <div class="hello-alert">
-                <h1>Vanya Pralov</h1>
-                <h4>Full Stack Web Developer</h4>
+                <h1>Roman Bukhantsov</h1>
+                <h4>Web Developer</h4>
             </div>
             <nav class="index-nav">
                 <a href="/">Home</a>
@@ -25,8 +27,8 @@
         <section class="info">
             <img src="{{asset('img/example_space.jpg')}}">
             <article>
-                Hi, my name is Vanya, nice to meet you here. I'm full stack web
-                developer based in Yaroslavl. I like creating awesome and helpful things
+                Hi, my name is Roman, nice to meet you here. I'm full stack web
+                developer based in Ukhta city. I like creating awesome and helpful things
                 using new technologies. Coding is one of my hobbies, which helps me
                 be happy even waking up at 6:00 on Monday.
                 I perform not only working tasks but my own projects too. It helps me

@@ -22,24 +22,27 @@ class PostController extends Controller
 
     function createPost(Request $request)
     {
-        if ($request->isMethod('post'))
+        if ($this->authorize('create', Post::class))
         {
-            $path = null;
-            if($request->hasFile('postPicture'))
+            if ($request->isMethod('post'))
             {
-                $path = Storage::disk('public')
-                    ->putFile('postPics', new File($request->file('postPicture')));
-                $path = Storage::url($path);
+                $path = null;
+                if($request->hasFile('postPicture'))
+                {
+                    $path = Storage::disk('public')
+                        ->putFile('postPics', new File($request->file('postPicture')));
+                    $path = Storage::url($path);
+                }
+                $request->user()->posts()->create([
+                    'title' => $request->post('postTitle'),
+                    'content' => $request->post('postContent'),
+                    'category_id' => $request->post('postCategory'),
+                    'picture' => $path
+                ]);
+                return redirect('/posts');
             }
-            $request->user()->posts()->create([
-                'title' => $request->post('postTitle'),
-                'content' => $request->post('postContent'),
-                'category_id' => $request->post('postCategory'),
-                'picture' => $path
-            ]);
-            return redirect('/posts');
+            return view('blog.createPost', ['categories' => Category::all()]);
         }
-        return view('blog.createPost', ['categories' => Category::all()]);
     }
 
     function getPost($postId)

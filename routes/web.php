@@ -12,6 +12,8 @@
 */
 Route::get('/', 'HomeController@index');
 
+Route::match(['get', 'post'],'/contact', 'HomeController@contact');
+
 Route::auth();
 
 //----------------Blog
@@ -20,14 +22,12 @@ Route::get('/posts', 'blog\PostController@getAllPosts');
 
 Route::get('/post/{post_id}', 'blog\PostController@getPost');
 
-Route::match(['get', 'post'], '/createpost', 'blog\PostController@createPost');
+Route::match(['get', 'post'], '/posts/create', 'blog\PostController@createPost')->middleware('auth');
 
-Route::match(['get', 'post'], '/createcategory', 'blog\CategoryController@createCategory');
+Route::match(['get', 'post'], '/category/create', 'blog\CategoryController@createCategory')->middleware('auth');
 
-Route::post('/post/{post_id}/storecomment', 'blog\CommentController@storeComment');
+Route::post('/post/{post_id}/comment', 'blog\CommentController@storeComment')->middleware('auth');
 
 //----------------Profile
 
-Route::get('/profile', 'HomeController@profile');
-
-Route::match(['get', 'post'],'/contact', 'HomeController@contact');
+Route::get('/profile', 'HomeController@profile')->middleware('auth');
