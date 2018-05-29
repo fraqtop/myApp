@@ -2,7 +2,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
+    <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
+    <title>fraqtop</title>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
 </head>

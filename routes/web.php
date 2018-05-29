@@ -20,9 +20,9 @@ Route::auth();
 
 Route::get('/posts', 'blog\PostController@getAllPosts');
 
-Route::get('/post/{post_id}', 'blog\PostController@getPost');
+Route::get('/post/{post_id}', 'blog\PostController@getPost')->where('post_id', '[0-9]+');
 
-Route::match(['get', 'post'], '/posts/create', 'blog\PostController@createPost')->middleware('auth');
+Route::match(['get', 'post'], '/post/create', 'blog\PostController@createPost')->middleware('auth');
 
 Route::match(['get', 'post'], '/category/create', 'blog\CategoryController@createCategory')->middleware('auth');
 

@@ -45,7 +45,7 @@ class PostController extends Controller
         }
     }
 
-    function getPost($postId)
+    function getPost(int $postId)
     {
         $post = Post::find($postId);
         $comments = Comment::with('user')

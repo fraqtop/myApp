@@ -2,11 +2,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
+    <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <title>fraqtop's</title>
+    <title>fraqtop</title>
 </head>
 <body>
     <div class="pillow">

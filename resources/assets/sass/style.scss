@@ -1,17 +1,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import "var";
-@import "navs/index-nav";
-@import "navs/min-dark-nav";
-@import "index/info";
-@import "index/timing";
-@import "containers/basic-container";
-@import "containers/soft-container";
-@import "containers/text-container";
-@import "containers/post-container";
-@import "pictures/viewport-pic";
-@import "blog/posts";
-@import "blog/comments";
-@import "forms/auth-form";
+@import "navs/navs";
+@import "forms/forms";
+@import "containers/containers";
+@import "pictures/pictures";
+@import "index/index";
+@import "blog/blog";
 
 html, body{
   position: relative;

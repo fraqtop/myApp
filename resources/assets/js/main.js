@@ -2,26 +2,32 @@ particlesJS.load('particles-js', 'js/particles.json', function() {
 });
 
 $(document).ready(function () {
-    $.scrollSpeed(100, 1300);
-    $(".info").css("visibility", "hidden");
-    $(".timing").css("visibility", "hidden");
-    $(".posts").css("visibility", "hidden");
-    let checkPoint = 200;
-    window.onscroll = function () {
-        if($(".info").offset().top - window.pageYOffset < checkPoint)
-        {
-            $(".info").addClass("animated bounceInUp");
-            $(".info").css("visibility", "visible");
-        }
-        if($(".timing").offset().top - window.pageYOffset < checkPoint)
-        {
-            $(".timing").addClass("animated bounceInLeft");
-            $(".timing").css("visibility", "visible");
-        }
-        if($(".posts").offset().top - window.pageYOffset < checkPoint)
-        {
-            $(".posts").addClass("animated bounceInRight");
-            $(".posts").css("visibility", "visible");
+    $.scrollSpeed(80, 500);
+    if(window.location.pathname === '/')
+    {
+        let infoSection = $(".info");
+        let timingSection = $(".timing");
+        let postsSection = $(".posts");
+        infoSection.css("visibility", "hidden");
+        timingSection.css("visibility", "hidden");
+        postsSection.css("visibility", "hidden");
+        let checkPoint = 200;
+        window.onscroll = function (event) {
+            if(infoSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                infoSection.addClass("animated bounceInUp");
+                infoSection.css("visibility", "visible");
+            }
+            if(timingSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                timingSection.addClass("animated bounceInLeft");
+                timingSection.css("visibility", "visible");
+            }
+            if(postsSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                postsSection.addClass("animated bounceInRight");
+                postsSection.css("visibility", "visible");
+            }
         }
     }
 });
