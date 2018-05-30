@@ -42,16 +42,25 @@ class HomeController extends Controller
         $keyPressDiff = (int)$request->post('contactCounter') - strlen($request->post('contactMessage'));
         if($fakeField != null || $postingPeriod < 5 || $keyPressDiff < 0)
         {
+            $traps = [$fakeField, $postingPeriod, $keyPressDiff];
+            $this->registerSpamMessage($request->post('contactAuthor'), $traps);
             return true;
         }
         return false;
     }
 
-    private function registerSpamMessage(string $spamName)
+    private function registerSpamMessage(string $spamName, array $trapsValues)
     {
-        $log = fopen("SpamLog.txt", 'a+');
+        $log = fopen("spamlog.txt", 'a+');
         $time = new \DateTime();
-        fwrite($log, $spamName." - ".$time->format('d M Y H:i')."\n");
+        fwrite($log, $spamName." - ".$time->format('d M Y H:i'));
+        if (strlen($trapsValues[0])>10)
+            $trapsValues[0] = 'garbage';
+        foreach ($trapsValues as $trap)
+        {
+            fwrite($log, " ".$trap." ");
+        }
+        fwrite($log, '\n');
         fclose($log);
     }
 
@@ -61,7 +70,6 @@ class HomeController extends Controller
         {
             if($this->isSpam($request))
             {
-                $this->registerSpamMessage($request->post('contactAuthor'));
                 return view('reports.spam');
             }
             else

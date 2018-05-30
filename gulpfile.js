@@ -48,7 +48,11 @@ gulp.task('img', function () {
 gulp.task('watcher', function () {
     gulp.watch('resources/assets/sass/**/*.*', ['minify']);
     gulp.watch('resources/views/**/*.*', browserSync.reload);
-    gulp.watch('public/**/*.*', browserSync.reload);
+    gulp.watch([
+        'public/js/**/*.*',
+        'public/css/**/*.*',
+        'public/img/**/*.*'
+    ], browserSync.reload);
     gulp.watch('resources/assets/js/*.js', ['convert'])
 });
 
