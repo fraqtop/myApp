@@ -22122,7 +22122,7 @@ $(document).ready(function () {
         infoSection.css("visibility", "hidden");
         timingSection.css("visibility", "hidden");
         postsSection.css("visibility", "hidden");
-        let checkPoint = 250;
+        let checkPoint = 350;
         window.onscroll = function () {
             if(infoSection.offset().top - window.pageYOffset < checkPoint)
             {

@@ -51,9 +51,20 @@
   background:linear-gradient(to bottom, rgba(33, 37, 41, 0.2),
           rgba(33, 37, 41, 0.6) 30%,
           rgba(33, 37, 41, 1) 100%);
-  a{
+  a, form{
     margin: 5px;
+    padding: 0;
+    border: none;
     color: $mediumFont;
+    background: none;
+    *{
+      background: none;
+      padding: 0;
+      margin: 0;
+      border: none;
+      color: $mediumFont;
+      cursor: pointer;
+    }
     &:hover{
       color: $secondColor;
     }

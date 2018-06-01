@@ -6,9 +6,7 @@
     <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
     <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}?{{ File::lastModified('css/style.css') }}">
     <title>fraqtop</title>
 </head>
 <body>
@@ -66,7 +64,7 @@
         </section>
         <section class="posts">
             @foreach($posts as $post)
-                <a href="/post/{{$post->id}}/">
+                <a href="/posts/{{$post->id}}/">
                     <div class="card post">
                         <img class="card-img-top" src="{{$post->getPicture()}}">
                             <div class="card-body">
@@ -81,5 +79,7 @@
     </div>
     @include('footer')
 </body>
-<script src="{{asset('js/all.js')}}"></script>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<script src="{{asset('js/all.js')}}?{{ File::lastModified('js/all.js') }}"></script>
 </html>

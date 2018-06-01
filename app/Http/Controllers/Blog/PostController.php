@@ -43,6 +43,7 @@ class PostController extends Controller
             }
             return view('blog.createPost', ['categories' => Category::all()]);
         }
+        return view('errors.403');
     }
 
     function getPost(int $postId)
@@ -53,5 +54,36 @@ class PostController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
         return view('blog.post', ['post' => $post, 'comments' => $comments]);
+    }
+
+    function editPost(Request $request, $postId)
+    {
+        if($request->isMethod('patch'))
+        {
+            $post = Post::find($postId);
+            $post->title = $request->post('postTitle');
+            $post->content = $request->post('postContent');
+            $post->category_id = $request->post('postCategory');
+            if($request->hasFile('postPicture'))
+            {
+                $path = Storage::disk('public')
+                    ->putFile('postPics', new File($request->file('postPicture')));
+                $post->picture = Storage::url($path);
+            }
+            $post->save();
+            $comments = Comment::with('user')
+                ->where('post_id', '=', $postId)
+                ->orderBy('created_at', 'desc')
+                ->get();
+            return view('blog.post', ['post' => $post, 'comments' => $comments]);
+        }
+        return view('blog.createPost', ['post' => Post::find($postId), 'categories' => Category::all()]);
+    }
+
+    function deletePost(int $postId)
+    {
+       $post = Post::find($postId);
+       $post->delete();
+       return redirect('/posts');
     }
 }

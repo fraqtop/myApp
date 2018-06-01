@@ -6605,10 +6605,20 @@ nav.min-dark-nav {
   top: 80%;
   left: 0;
   background: linear-gradient(to bottom, rgba(33, 37, 41, 0.2), rgba(33, 37, 41, 0.6) 30%, #212529 100%); }
-  .post-overflow a {
+  .post-overflow a, .post-overflow form {
     margin: 5px;
-    color: #6d6d6d; }
-    .post-overflow a:hover {
+    padding: 0;
+    border: none;
+    color: #6d6d6d;
+    background: none; }
+    .post-overflow a *, .post-overflow form * {
+      background: none;
+      padding: 0;
+      margin: 0;
+      border: none;
+      color: #6d6d6d;
+      cursor: pointer; }
+    .post-overflow a:hover, .post-overflow form:hover {
       color: #4D4D8F; }
 
 .posts-all {

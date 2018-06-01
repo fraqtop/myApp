@@ -60,7 +60,7 @@ class HomeController extends Controller
         {
             fwrite($log, " ".$trap." ");
         }
-        fwrite($log, '\n');
+        fwrite($log, PHP_EOL);
         fclose($log);
     }
 
