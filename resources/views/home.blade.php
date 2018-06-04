@@ -1,18 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="panel panel-primary">
-    <div class="panel-heading">Dashboard</div>
-    <div class="panel-body">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-        You are logged in as {{Auth::user()->name}}
-        @if (Gate::allows('view-admin-panel'))
-            <h1>Congrats, you are admin</h1>
-        @endif
-    </div>
-</div>
+    @if (Gate::allows('view-admin-panel'))
+        <div class="dashboard-container">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th>
+                        functions available
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#">Posts managing</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#">Users managing</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#">Spam log watching</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    @endif
 @endsection

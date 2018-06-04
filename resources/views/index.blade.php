@@ -71,7 +71,7 @@
                             <h5 class="card-title">{{$post->title}}</h5>
                             <p class="card-text">{{$post->content}}</p>
                         </div>
-                        <div class="post-overflow"></div>
+                        <div class="post-overflow">{{ date('d M Y H:i', strtotime($post->updated_at)) }}</div>
                     </div>
                 </a>
             @endforeach

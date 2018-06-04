@@ -1,0 +1,16 @@
+.dashboard-container{
+  table{
+    tr{
+      &:hover{
+        background: $secondColor;
+
+      }
+    }
+      a{
+        color: $brightFont;
+        &:hover{
+          color:  $mediumFont;
+        }
+      }
+  }
+}

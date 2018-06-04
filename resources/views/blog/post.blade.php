@@ -12,6 +12,9 @@
         <div class="post-content">
             <p>{{$post->content}}</p>
         </div>
+        <div class="post-date">
+            Posted {{ date('d M Y H:i', strtotime($post->updated_at)) }}
+        </div>
         @if(Auth::check())
             <form action="comment/" method="post">
                 {{csrf_field()}}

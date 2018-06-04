@@ -12,6 +12,7 @@
                 </div>
                 <div class="post-overflow">
                     @can('handle', $post)
+                        {{date('d M Y H:i', strtotime($post->updated_at))}}
                         <a href="{{$current.'/'.$post->id}}/edit">edit</a>
                         <form action="{{$current.'/'.$post->id}}" method="post">
                             {{csrf_field()}}
