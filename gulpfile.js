@@ -6,6 +6,16 @@ const uglify = require('gulp-uglify-es').default;
 const concat = require ('gulp-concat');
 const imagemin = require('gulp-imagemin');
 
+const basePath = 'resources/assets/js/';
+const jsPaths = [
+        `${basePath}particles.js`,
+        `${basePath}jquery.js`,
+        `${basePath}bootstrap_bundle.js`,
+        `${basePath}bootstrap.js`,
+        `${basePath}smoothScroll.js`,
+        `${basePath}main.js`
+    ];
+
 gulp.task('scss', function () {
    return gulp.src('resources/assets/sass/style.scss')
             .pipe(sass())
@@ -34,7 +44,7 @@ gulp.task('convert', ['concat'], function () {
 });
 
 gulp.task('concat', function () {
-   return gulp.src('resources/assets/js/*.js')
+   return gulp.src(jsPaths)
        .pipe(concat('all.js'))
        .pipe(gulp.dest('resources/assets/js/linked'));
 });

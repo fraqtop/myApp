@@ -10,7 +10,7 @@
             <h1>{{$post->title}}</h1>
         </div>
         <div class="post-content">
-            <p>{{$post->content}}</p>
+            <p>{!! $post->content !!}</p>
         </div>
         <div class="post-date">
             Posted {{ date('d M Y H:i', strtotime($post->updated_at)) }}

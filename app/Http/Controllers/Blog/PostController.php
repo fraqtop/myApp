@@ -43,7 +43,7 @@ class PostController extends Controller
             }
             return view('blog.createPost', ['categories' => Category::all()]);
         }
-        return view('errors.403');
+        abort(403);
     }
 
     function getPost(int $postId)

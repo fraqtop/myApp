@@ -1,0 +1,27 @@
+.admin-container
+{
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  background: $mainColor;
+  .panel
+  {
+    position: fixed;
+    width: 12.5%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    background: darkslategray;
+    a
+    {
+      color: $brightFont;
+      margin: 5%;
+      text-align: center;
+      background: $particlesBack;
+      &:hover{
+        background: $darkFont;
+      }
+    }
+  }
+}

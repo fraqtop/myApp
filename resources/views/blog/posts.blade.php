@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="posts-all">
-    <?php $current = url()->current() ?>
     @foreach($posts as $post)
-        <a href="{{$current.'/'.$post->id}}">
+        <a href="/posts/{{$post->id}}">
             <div class="card post">
                 <img class="card card-img-top" src="{{$post->getPicture()}}">
                 <div class="card-body">
@@ -13,8 +12,8 @@
                 <div class="post-overflow">
                     @can('handle', $post)
                         {{date('d M Y H:i', strtotime($post->updated_at))}}
-                        <a href="{{$current.'/'.$post->id}}/edit">edit</a>
-                        <form action="{{$current.'/'.$post->id}}" method="post">
+                        <a href="posts/{{$post->id}}/edit">edit</a>
+                        <form action="posts/{{$post->id}}" method="post">
                             {{csrf_field()}}
                             {{method_field('delete')}}
                             <a href='#'><input type="submit" value="delete"></a>

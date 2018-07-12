@@ -42,3 +42,7 @@ Route::post('/posts/{post_id}/comment', 'blog\CommentController@storeComment')
 
 Route::get('/profile', 'HomeController@profile')
     ->middleware('auth');
+
+//----------------Admin
+
+Route::get('/admin', 'AdminController@index');

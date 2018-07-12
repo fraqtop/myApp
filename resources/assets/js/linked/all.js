@@ -22131,12 +22131,12 @@ $(document).ready(function () {
             }
             if(timingSection.offset().top - window.pageYOffset < checkPoint)
             {
-                timingSection.addClass("animated fadeInUp");
+                timingSection.addClass("animated zoomIn");
                 timingSection.css("visibility", "visible");
             }
             if(postsSection.offset().top - window.pageYOffset < checkPoint)
             {
-                postsSection.addClass("animated fadeInUp");
+                postsSection.addClass("animated zoomIn");
                 postsSection.css("visibility", "visible");
             }
         }
@@ -22155,4 +22155,8 @@ if (document.getElementById('contactForm'))
     contactArea.oninput = function () {
         contactCounter.value = parseInt(contactCounter.value) + 1;
     };
+}
+if (document.getElementById('editable'))
+{
+    ClassicEditor.create(editable);
 }

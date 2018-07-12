@@ -6461,6 +6461,27 @@ nav.min-dark-nav {
   .dashboard-container table a:hover {
     color: #6d6d6d; }
 
+.admin-container {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  background: #e3e3e3; }
+  .admin-container .panel {
+    position: fixed;
+    width: 12.5%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    background: darkslategray; }
+    .admin-container .panel a {
+      color: #babdc2;
+      margin: 5%;
+      text-align: center;
+      background: #212529; }
+      .admin-container .panel a:hover {
+        background: #434343; }
+
 .viewport-pic {
   position: fixed;
   display: flex;

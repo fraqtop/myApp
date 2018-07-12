@@ -30,8 +30,12 @@ class HomeController extends Controller
         return view('index', ['posts' => $lastPosts]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
+        if ($request->user()->id == 1)
+        {
+            return redirect('/admin');
+        }
         return view('home');
     }
 
