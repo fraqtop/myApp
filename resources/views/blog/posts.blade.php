@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="posts-all">
+        @can('create', \App\Post::class)
+            <a href="/posts/create/"><div class="btn btn-dark" style="width: 100%">add new</div></a>
+        @endcan
     @foreach($posts as $post)
         <a href="/posts/{{$post->id}}">
             <div class="card post">

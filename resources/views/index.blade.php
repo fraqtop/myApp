@@ -18,9 +18,13 @@
                 <h4>Web Developer</h4>
             </div>
             <nav class="index-nav">
-                <a href="/">Home</a>
                 <a href="/posts">Blog</a>
                 <a href="/contact">Contact</a>
+                @if(Auth::check())
+                    <a href="/profile">Profile</a>
+                @else
+                    <a href="/login">Login</a>
+                @endif
             </nav>
         </header>
     </div>

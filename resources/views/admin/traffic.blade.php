@@ -1,4 +1,4 @@
 @extends('layouts.admin')
 @section('content')
-    @include('blog.posts')
+    <h1>Hi admin, this is traffic page</h1>
 @endsection

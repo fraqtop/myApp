@@ -18,31 +18,32 @@ Route::auth();
 
 //----------------Blog
 
-Route::get('/posts', 'blog\PostController@getAllPosts');
+Route::get('/posts', 'Blog\PostController@getAllPosts');
 
-Route::get('/posts/{post_id}', 'blog\PostController@getPost')
+Route::get('/posts/{post_id}', 'Blog\PostController@getPost')
     ->where('post_id', '[0-9]+');
 
-Route::match(['get', 'patch'],'posts/{post_id}/edit', 'blog\PostController@editPost')
+Route::match(['get', 'patch'],'posts/{post_id}/edit', 'Blog\PostController@editPost')
     ->where('post_id', '[0-9]+');
 
-Route::delete('/posts/{post_id}', 'blog\PostController@deletePost')
+Route::delete('/posts/{post_id}', 'Blog\PostController@deletePost')
     ->where('post_id', '[0-9]+');
 
-Route::match(['get', 'post'], '/posts/create', 'blog\PostController@createPost')
-    ->middleware('auth');
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::match(['get', 'post'], '/posts/create', 'Blog\PostController@createPost');
+    Route::post('/posts/{post_id}/comment', 'Blog\CommentController@storeComment');
 
-Route::match(['get', 'post'], '/category/create', 'blog\CategoryController@createCategory')
-    ->middleware('auth');
-
-Route::post('/posts/{post_id}/comment', 'blog\CommentController@storeComment')
-    ->middleware('auth');
-
-//----------------Profile
-
-Route::get('/profile', 'HomeController@profile')
-    ->middleware('auth');
+    Route::get('/profile', 'HomeController@profile');
+});
 
 //----------------Admin
 
-Route::get('/admin', 'AdminController@index');
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function()
+{
+   Route::get('/admin', 'TrafficController@showTraffic');
+
+   Route::get('/admin/categories', 'CategoryController@getCategories');
+   Route::post('/admin/categories', 'CategoryController@createCategory');
+   Route::patch('/admin/categories/{category_id}', 'CategoryController@editCategory');
+});

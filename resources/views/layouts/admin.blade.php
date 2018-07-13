@@ -10,13 +10,15 @@
 <div class="admin-container">
     <div></div>
     <div class="panel">
-        <a href="/admin">posts</a>
+        <a href="/">go home</a>
+        <a href="/admin">traffic</a>
         <a href="/admin/categories">categories</a>
-        <a href="/admin/traffic">traffic</a>
         <a href="/admin/matches">matches</a>
         <a href="/admin/tasks">tasks</a>
     </div>
-    @yield('content')
+    <div class="admin-frame">
+        @yield('content')
+    </div>
 </div>
 <script src="{{ asset('js/all.js') }}?{{File::lastModified('js/all.js')}}"></script>
 </body>

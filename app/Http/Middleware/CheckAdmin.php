@@ -15,7 +15,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user() or $request->user()->id != 1)
+        if ($request->user()->id != 1)
         {
             abort(403);
         }

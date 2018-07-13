@@ -6464,7 +6464,8 @@ nav.min-dark-nav {
 .admin-container {
   display: grid;
   grid-template-columns: 1fr 7fr;
-  background: #e3e3e3; }
+  background: #e3e3e3;
+  min-height: 100vh; }
   .admin-container .panel {
     position: fixed;
     width: 12.5%;
@@ -6481,6 +6482,10 @@ nav.min-dark-nav {
       background: #212529; }
       .admin-container .panel a:hover {
         background: #434343; }
+  .admin-container .admin-frame {
+    display: grid;
+    align-items: center;
+    justify-items: center; }
 
 .viewport-pic {
   position: fixed;

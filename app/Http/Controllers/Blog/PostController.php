@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\blog;
+namespace App\Http\Controllers\Blog;
 
 use App\Comment;
 use Illuminate\Http\Request;
