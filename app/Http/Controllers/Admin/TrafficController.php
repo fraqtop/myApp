@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class TrafficController extends Controller
 {
-    public function showTraffic()
+    public function getTraffic()
     {
         return view('admin.traffic');
     }

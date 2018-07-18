@@ -10,6 +10,11 @@
             </div>
             <input name="categoryPicture" type="file" value="your file">
             <input class="btn btn-dark" type="submit" value="edit">
+            <form method="post" action="/admin/categories/{{ $category->id }}">
+                {{ csrf_field() }}
+                {{ method_field('delete') }}
+                <input class="btn btn-danger" type="submit" value="delete">
+            </form>
         </form>
     @endforeach
     <form method="post" class="admin-form" action="" enctype="multipart/form-data">

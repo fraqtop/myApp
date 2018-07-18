@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::get('/', 'HomeController@index');
 
 Route::match(['get', 'post'],'/contact', 'HomeController@contact');
@@ -41,9 +31,14 @@ Route::group(['middleware' => 'auth'], function ()
 
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function()
 {
-   Route::get('/admin', 'TrafficController@showTraffic');
+   Route::get('/admin', 'TrafficController@getTraffic');
 
-   Route::get('/admin/categories', 'CategoryController@getCategories');
-   Route::post('/admin/categories', 'CategoryController@createCategory');
-   Route::patch('/admin/categories/{category_id}', 'CategoryController@editCategory');
+   Route::get('/admin/categories', 'CategoryController@get');
+   Route::post('/admin/categories', 'CategoryController@create');
+   Route::patch('/admin/categories/{category_id}', 'CategoryController@update');
+   Route::delete('/admin/categories/{category_id}', 'CategoryController@delete');
+
+   Route::get('/admin/tasks', 'TaskController@get');
+   Route::post('/admin/tasks/create', 'TaskController@create');
+   Route::delete('/admin/tasks/{task_id}', 'TaskController@delete');
 });

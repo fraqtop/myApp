@@ -10,12 +10,12 @@ use Illuminate\Http\File;
 
 class CategoryController extends Controller
 {
-    public function getCategories()
+    public function get()
     {
         return view('admin.categories', ['categories' => Category::all()]);
     }
 
-    public function createCategory(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
             'categoryTitle' => 'required',
@@ -30,7 +30,7 @@ class CategoryController extends Controller
         return redirect()->back();
     }
 
-    public function editCategory(Request $request, $categoryId)
+    public function update(Request $request, $categoryId)
     {
         $this->validate($request, [
             'categoryTitle' => 'required'
@@ -45,5 +45,12 @@ class CategoryController extends Controller
         }
         $category->save();
         return view('admin.traffic');
+    }
+
+    public function delete($categoryId)
+    {
+        $category = Category::find($categoryId);
+        $category->delete();
+        return redirect()->back();
     }
 }
