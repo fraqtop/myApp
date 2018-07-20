@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function get()
     {
-        return view('admin.tasks', ['tasks' => Task::all()]);
+        return view('admin.tasks', ['tasks' => Task::orderBy('deadline')->get()]);
     }
 
     public function create(Request $request)

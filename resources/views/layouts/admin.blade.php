@@ -10,7 +10,7 @@
 <div class="admin-container">
     <div></div>
     <div class="panel">
-        <a href="/">go home</a>
+        <a href="/">home</a>
         <a href="/admin">traffic</a>
         <a href="/admin/categories">categories</a>
         <a href="/admin/matches">matches</a>

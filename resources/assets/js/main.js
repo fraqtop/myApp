@@ -48,3 +48,17 @@ if (document.getElementById('editable'))
 {
     ClassicEditor.create(editable);
 }
+
+function countdown(id, deadline) {
+    let now = (new Date()).getTime();
+    deadline = (new Date(`${deadline}`)).getTime();
+    let distance = deadline - now;
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById(`days${id}`).innerHTML = `${days}`;
+    document.getElementById(`hours${id}`).innerHTML = `${hours}`;
+    document.getElementById(`minutes${id}`).innerHTML = `${minutes}`;
+    document.getElementById(`seconds${id}`).innerHTML = `${seconds}`;
+}

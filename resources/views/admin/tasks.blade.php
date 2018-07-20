@@ -1,19 +1,46 @@
 @extends('layouts.admin')
 @section('content')
+    <script>
+        let countsArray = [];
+    </script>
     @foreach($tasks as $task)
-        <div class="task">
+        <div class="task-container">
             <h2>{{ $task->title }}</h2>
-            <h3>
-                {{
-                    (new DateTime('now', new DateTimeZone('Europe/Moscow')))
-                    ->diff(new Datetime($task->deadline))->format('%a : %H : %i : %s')
-                }}
-            </h3>
-            <form method="post" action="/admin/tasks/{{$task->id}}">
-                {{ csrf_field() }}
-                {{ method_field('delete') }}
-                <input type="submit" class="form-control btn btn-danger" value="delete">
-            </form>
+            <div class="countdown-container">
+                <div class="dial">
+                    <span>days</span>
+                    <p id="days{{$task->id}}"></p>
+                </div>
+                <div class="dial">
+                    <span>hours</span>
+                    <p id="hours{{$task->id}}"></p>
+                </div>
+                <div class="dial">
+                    <span>minutes</span>
+                    <p id="minutes{{$task->id}}"></p>
+                </div>
+                <div class="dial">
+                    <span>seconds</span>
+                    <p id="seconds{{$task->id}}"></p>
+                </div>
+            </div>
+                <script>
+                    let timer{{$task->id}} = setInterval(function () {
+                        countdown({{ $task->id }}, "{{ $task->deadline }}");
+                    }, 1000);
+                    countsArray.push(timer);
+                </script>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 5px">
+                <form method="post" action="/admin/tasks/{{$task->id}}">
+                    {{ csrf_field() }}
+                    <input type="submit" class="form-control btn btn-dark" value="done">
+                </form>
+                <form method="post" action="/admin/tasks/{{$task->id}}">
+                    {{ csrf_field() }}
+                    {{ method_field('delete') }}
+                    <input type="submit" class="form-control btn btn-danger" value="delete">
+                </form>
+            </div>
         </div>
     @endforeach
     <form class="admin-form" method="post" action="/admin/tasks/create">
