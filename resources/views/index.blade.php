@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
     <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/me_lmao.jpg')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}?{{ File::lastModified('css/style.css') }}">
     <title>fraqtop</title>
 </head>
@@ -30,9 +30,9 @@
     </div>
     <div class="grid-container">
         <section class="info">
-            <img src="{{asset('img/example_space.jpg')}}">
+            <img src="{{asset('img/me_lmao.jpg')}}">
             <article>
-                Hi, my name is Roman, nice to meet you here. I'm full stack web
+                Hi, my name is Roman, nice to meet you here. I'm web
                 developer based in Ukhta city. I like creating awesome and helpful things
                 using new technologies. Coding is one of my hobbies, which helps me
                 be happy even waking up at 6:00 on Monday.

@@ -2,7 +2,8 @@ header{
   position: fixed;
   z-index: -5;
   display: flex;
-  background: url("/img/back.jpg") fixed;
+  background: url("/img/space.jpg") fixed;
+  background-size: 100%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;

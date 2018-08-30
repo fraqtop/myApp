@@ -6316,7 +6316,8 @@ header {
   position: fixed;
   z-index: -5;
   display: flex;
-  background: url("/img/back.jpg") fixed;
+  background: url("/img/space.jpg") fixed;
+  background-size: 100%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -6618,9 +6619,10 @@ nav.min-dark-nav {
   justify-content: space-between;
   align-items: center; }
   .legend h3 {
-    font-size: 4vmin; }
+    font-size: 4vmin;
+    text-align: center; }
   .legend * {
-    flex: 1; }
+    flex: 0; }
 
 #php {
   width: 80%;

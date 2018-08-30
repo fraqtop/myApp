@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class TaskController extends Controller
 {
@@ -22,9 +23,19 @@ class TaskController extends Controller
         ]);
         return redirect()->back();
     }
-    public function delete($taskId)
+
+    public function delete(Request $request, $taskId)
     {
         $task = Task::find($taskId);
+        if ($request->post('is_done'))
+        {
+            Auth::user()->karma += $task->priority;
+        }
+        else
+        {
+            Auth::user()->karma -= $task->priority;
+        }
+        Auth::user()->save();
         $task->delete();
         return redirect()->back();
     }

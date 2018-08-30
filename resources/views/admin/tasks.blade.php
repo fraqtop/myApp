@@ -30,17 +30,13 @@
                     }, 1000);
                     countsArray.push(timer);
                 </script>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 5px">
-                <form method="post" action="/admin/tasks/{{$task->id}}">
-                    {{ csrf_field() }}
-                    <input type="submit" class="form-control btn btn-dark" value="done">
-                </form>
                 <form method="post" action="/admin/tasks/{{$task->id}}">
                     {{ csrf_field() }}
                     {{ method_field('delete') }}
-                    <input type="submit" class="form-control btn btn-danger" value="delete">
+                    <input type="checkbox" value="done" name="is_done">
+                    <label style="margin-right: 15px">done</label>
+                    <input type="submit" class="btn btn-danger" value="delete">
                 </form>
-            </div>
         </div>
     @endforeach
     <form class="admin-form" method="post" action="/admin/tasks/create">
