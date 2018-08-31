@@ -13,11 +13,11 @@
     <div class="pillow">
         <header>
             <div id="particles-js"></div>
-            <div class="hello-alert">
+            <div class="hello-alert animated fadeIn">
                 <h1>Roman Bukhantsov</h1>
                 <h4>Web Developer</h4>
             </div>
-            <nav class="index-nav">
+            <nav class="index-nav animated fadeInDown">
                 <a href="/posts">Blog</a>
                 <a href="/contact">Contact</a>
                 @if(Auth::check())

@@ -6316,8 +6316,8 @@ header {
   position: fixed;
   z-index: -5;
   display: flex;
-  background: url("/img/space.jpg") fixed;
-  background-size: 100%;
+  background: url("/img/milky-way.jpg") no-repeat black fixed center;
+  background-size: cover;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -6332,23 +6332,31 @@ header {
 
 #particles-js {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  z-index: -1; }
+  z-index: -4; }
 
 .hello-alert {
+  opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
-  color: #babdc2; }
+  color: #babdc2;
+  animation-delay: 1000ms;
+  animation-duration: 2000ms;
+  animation-fill-mode: forwards; }
   .hello-alert h1 {
     font-size: 7vmin; }
   .hello-alert h4 {
     font-size: 4vmin; }
 
 nav.index-nav {
+  opacity: 0;
+  animation-delay: 1000ms;
+  animation-duration: 2000ms;
+  animation-fill-mode: forwards;
   width: 50%;
   position: relative;
   z-index: 0;
@@ -6505,14 +6513,14 @@ nav.min-dark-nav {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    background: darkslategray; }
+    background: #212529; }
     .admin-container .panel a {
       color: #babdc2;
       margin: 5%;
       text-align: center;
-      background: #212529; }
+      background: #4D4D8F; }
       .admin-container .panel a:hover {
-        background: #434343; }
+        opacity: 0.8; }
   .admin-container .admin-frame {
     display: grid;
     align-items: center;
@@ -6525,23 +6533,23 @@ nav.min-dark-nav {
   padding: 5px;
   margin: 5px;
   grid-template-columns: repeat(4, 1fr);
-  background: darkslategrey;
+  background: #212529;
   justify-items: center;
   align-items: stretch;
   border-radius: 2px;
-  box-shadow: 0 0 1px 1px darkslategrey; }
+  box-shadow: 0 0 1px 1px #212529; }
   .countdown-container .dial {
     display: grid;
     grid-template-rows: 30% 70%;
     justify-items: center;
     align-items: center;
-    background: #212529;
     color: #e3e3e3;
     padding: 5px;
     border-radius: 2px;
     width: 50%;
     font-weight: 600;
-    box-shadow: 0 0 1px 1px #212529;
+    background: #4D4D8F;
+    box-shadow: 0 0 2px 2px #4D4D8F;
     opacity: 0.9; }
 
 .task-container {

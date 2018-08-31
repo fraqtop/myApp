@@ -5,24 +5,24 @@
   padding: 5px;
   margin: 5px;
   grid-template-columns: repeat(4, 1fr);
-  background: darkslategrey;
+  background: $particlesBack;
   justify-items: center;
   align-items: stretch;
   border-radius: 2px;
-  box-shadow: 0 0 1px 1px darkslategrey;
+  box-shadow: 0 0 1px 1px $particlesBack;
   .dial
   {
     display: grid;
     grid-template-rows: 30% 70%;
     justify-items: center;
     align-items: center;
-    background: $particlesBack;
     color: $mainColor;
     padding: 5px;
     border-radius: 2px;
     width: 50%;
     font-weight: 600;
-    box-shadow:  0 0 1px 1px $particlesBack;
+    background: $secondColor;
+    box-shadow:  0 0 2px 2px $secondColor;
     opacity: 0.9;
   }
 }

@@ -27,14 +27,11 @@ class TaskController extends Controller
     public function delete(Request $request, $taskId)
     {
         $task = Task::find($taskId);
-        if ($request->post('is_done'))
+        if (!$request->post('is_done'))
         {
-            Auth::user()->karma += $task->priority;
+            $task->priority *= -1;
         }
-        else
-        {
-            Auth::user()->karma -= $task->priority;
-        }
+        Auth::user()->karma += $task->priority;
         Auth::user()->save();
         $task->delete();
         return redirect()->back();

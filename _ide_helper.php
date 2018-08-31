@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.39 on 2018-03-29 08:46:23.
+ * Generated for Laravel 5.5.42 on 2018-08-31 16:27:24.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7877,7 +7877,7 @@ namespace Illuminate\Support\Facades {
          * Gets the mime type associated with the format.
          *
          * @param string $format The format
-         * @return string The associated mime type (null if not found)
+         * @return string|null The associated mime type (null if not found)
          * @static 
          */ 
         public static function getMimeType($format)
@@ -12278,6 +12278,159 @@ namespace Illuminate\Support\Facades {
  
 }
 
+namespace Grambas\FootballData\Facades { 
+
+    class FootballDataFacade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function run($uri, $type = 'GET')
+        {
+            return \Grambas\FootballData\FootballData::run($uri, $type);
+        }
+        
+        /**
+         * List all available competitions.
+         *
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getLeagues($filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getLeagues($filter);
+        }
+        
+        /**
+         * List one particular competition.
+         *
+         * @param integer $leagueID
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getLeague($leagueID, $filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getLeague($leagueID, $filter);
+        }
+        
+        /**
+         * List all teams for a particular competition.
+         *
+         * @param integer $leagueID
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getLeagueTeams($leagueID, $filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getLeagueTeams($leagueID, $filter);
+        }
+        
+        /**
+         * Show Standings for a particular competition
+         *
+         * @param integer $leagueID
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getLeagueStandings($leagueID)
+        {
+            return \Grambas\FootballData\FootballData::getLeagueStandings($leagueID);
+        }
+        
+        /**
+         * List all matches for a particular competition.
+         *
+         * @param integer $leagueID
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getLeagueMatches($leagueID, $filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getLeagueMatches($leagueID, $filter);
+        }
+        
+        /**
+         * List matches across (a set of) competitions.
+         *
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getMatches($filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getMatches($filter);
+        }
+        
+        /**
+         * Show one particular match.
+         *
+         * @param integer $matchID
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getMatche($matchID)
+        {
+            return \Grambas\FootballData\FootballData::getMatche($matchID);
+        }
+        
+        /**
+         * Show one particular team.
+         *
+         * @param integer $teamID
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getTeam($teamID)
+        {
+            return \Grambas\FootballData\FootballData::getTeam($teamID);
+        }
+        
+        /**
+         * Show all matches for a particular team.
+         *
+         * @param integer $teamID
+         * @param array $filter
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getMatchesForTeam($teamID, $filter = array())
+        {
+            return \Grambas\FootballData\FootballData::getMatchesForTeam($teamID, $filter);
+        }
+        
+        /**
+         * List all available areas.
+         *
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getAreas()
+        {
+            return \Grambas\FootballData\FootballData::getAreas();
+        }
+        
+        /**
+         * List one particular area.
+         *
+         * @param integer $areaID
+         * @return \Grambas\FootballData\Collection 
+         * @static 
+         */ 
+        public static function getArea($areaID)
+        {
+            return \Grambas\FootballData\FootballData::getArea($areaID);
+        }
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     class Facade {
@@ -14964,6 +15117,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class Football extends \Grambas\FootballData\Facades\FootballDataFacade {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
  

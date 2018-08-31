@@ -13,15 +13,15 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    background: darkslategray;
+    background: $particlesBack;
     a
     {
       color: $brightFont;
       margin: 5%;
       text-align: center;
-      background: $particlesBack;
+      background: $secondColor;
       &:hover{
-        background: $darkFont;
+        opacity: 0.8;
       }
     }
   }

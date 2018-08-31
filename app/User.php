@@ -29,6 +29,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $is_verified
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsAdmin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsVerified($value)
+ * @property int $karma
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereKarma($value)
  */
 class User extends Authenticatable
 {
