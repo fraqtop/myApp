@@ -28,9 +28,7 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::get('/profile', 'HomeController@profile');
 
-    Route::get('/leagues', function (){
-        print_r(Football::getLeague(2003));
-    });
+    Route::get('/leagues', 'Football\LeagueController@get');
 });
 
 //----------------Admin
