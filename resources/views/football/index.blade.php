@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
     @foreach($leagues as $league)
-        <h1>{{$league->name}}</h1>
+        <a href="/football/{{$league->id}}">{{$league->name}}</a>
     @endforeach
 @endsection

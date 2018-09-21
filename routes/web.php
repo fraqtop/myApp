@@ -28,7 +28,8 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::get('/profile', 'HomeController@profile');
 
-    Route::get('/leagues', 'Football\LeagueController@get');
+    Route::get('/football', 'Football\LeagueController@get');
+    Route::get('/football/{league_id}', 'Football\LeagueController@getStandings');
 });
 
 //----------------Admin

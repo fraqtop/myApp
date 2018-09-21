@@ -13,10 +13,14 @@ class CreateLeaguesTable extends Migration
     public function up()
     {
         Schema::create('leagues', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('id')->unsigned();
             $table->string('name', 50);
-            $table->integer('lastSeasonId');
+            $table->string('areaName', 20);
+            $table->dateTime('startDate');
+            $table->dateTime('endDate');
             $table->dateTime('lastUpdated');
+            $table->smallInteger('matchday');
+            $table->primary('id');
         });
     }
 

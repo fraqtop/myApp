@@ -13,7 +13,7 @@
         <a href="/">home</a>
         <a href="/admin">traffic</a>
         <a href="/admin/categories">categories</a>
-        <a href="/admin/matches">matches</a>
+        <a href="/football">football</a>
         <a href="/admin/tasks">tasks</a>
     </div>
     <div class="admin-frame">
