@@ -13,7 +13,7 @@
             <p>{!! $post->content !!}</p>
         </div>
         <div class="post-date">
-            Posted {{ date('d M Y H:i', strtotime($post->updated_at)) }}
+            Posted {{ $post->updated_at }}
         </div>
         @if(Auth::check())
             <form action="comment/" method="post">

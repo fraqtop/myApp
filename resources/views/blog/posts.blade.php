@@ -14,7 +14,7 @@
                 </div>
                 <div class="post-overflow">
                     @can('handle', $post)
-                        {{date('d M Y H:i', strtotime($post->updated_at))}}
+                        {{$post->updated_at}}
                         <a href="posts/{{$post->id}}/edit">edit</a>
                         <form action="posts/{{$post->id}}" method="post">
                             {{csrf_field()}}

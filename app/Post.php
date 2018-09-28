@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -48,5 +49,10 @@ class Post extends Model
         if ($this->picture)
             return $this->picture;
         return $this->category->picture;
+    }
+    function getUpdatedAtAttribute($value)
+    {
+        $value = Carbon::createFromTimeString($value)->setTimezone('Europe/Moscow');
+        return $value->format('d M Y H:i');
     }
 }
