@@ -16,7 +16,7 @@
             Posted {{ $post->updated_at }}
         </div>
         @if(Auth::check())
-            <form action="comment/" method="post">
+            <form action="{{URL::current()}}/comment/" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <textarea name="commContent" class="form-control" placeholder="what do you think about it?"></textarea>

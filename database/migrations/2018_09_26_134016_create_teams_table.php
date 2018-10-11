@@ -19,7 +19,7 @@ class CreateTeamsTable extends Migration
             $table->string('logoURL');
             $table->char('tla', 3);
             $table->string('site',50);
-            $table->smallInteger('founded')->unsigned();
+            $table->char('founded', 4);
             $table->string('colors', 30);
             $table->string('stadium',30);
             $table->dateTime('lastUpdated');

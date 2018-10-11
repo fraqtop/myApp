@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Football;
 
-use App\Team;
+use App\Models\Football\Team;
 use Carbon\Carbon;
 use Football;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class TeamController extends Controller
             $lastUpdate = Carbon::createFromTimeString($teamAPI->get('lastUpdated'));
             if ($lastUpdate > $team->lastUpdated)
             {
-                $team = $this->updateTeam($team, $teamAPI);
+                $team = $this->update($team, $teamAPI);
             }
         }
         return view('football.team', ['team' => $team]);
@@ -44,7 +44,7 @@ class TeamController extends Controller
             ]);
     }
 
-    function updateTeam(Team $teamDB, $teamAPI)
+    function update(Team $teamDB, $teamAPI)
     {
         $teamDB->name = $teamAPI->get('name');
         $teamDB->shortName = $teamAPI->get('shortName');

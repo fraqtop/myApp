@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Comment;
+use App\Models\Blog\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Post;
+use App\Models\Blog\Post;
 use Storage;
 use Illuminate\Http\File;
-use App\Category;
+use App\Models\Blog\Category;
 
 class PostController extends Controller
 {

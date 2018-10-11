@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage;
-use App\Category;
+use App\Models\Blog\Category;
 use Illuminate\Http\File;
 
 class CategoryController extends Controller

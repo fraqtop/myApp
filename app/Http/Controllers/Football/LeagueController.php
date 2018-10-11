@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Football;
 
-use App\League;
-use App\Standings;
+use App\Models\Football\League;
+use App\Models\Football\Standings;
 use Carbon\Carbon;
 use Faker\Provider\zh_TW\DateTime;
 use Illuminate\Database\Eloquent\Collection;
