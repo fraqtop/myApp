@@ -15,13 +15,12 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('name', 50);
-            $table->string('shortName', 20);
-            $table->string('logoURL');
-            $table->char('tla', 3);
-            $table->string('site',50);
-            $table->char('founded', 4);
-            $table->string('colors', 30);
-            $table->string('stadium',30);
+            $table->string('logoURL')->nullable();
+            $table->char('tla', 3)->nullable();
+            $table->string('site',50)->nullable();
+            $table->char('founded', 4)->nullable();
+            $table->string('colors', 30)->nullable();
+            $table->string('stadium',30)->nullable();
             $table->dateTime('lastUpdated');
             $table->primary('id');
         });

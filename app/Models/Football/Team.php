@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team whereStadium($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team whereTla($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Football\Standings[] $standings
  */
 class Team extends Model
 {
@@ -48,6 +49,11 @@ class Team extends Model
     public function players()
     {
         return $this->hasMany(Player::class, 'teamId');
+    }
+
+    public function standings()
+    {
+        return $this->belongsToMany(Standings::class);
     }
 
     public function updateSquad($newSquad)

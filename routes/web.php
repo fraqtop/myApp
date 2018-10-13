@@ -30,8 +30,10 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::group(['namespace' => 'Football'], function(){
         Route::get('/football', 'LeagueController@get');
-        Route::get('/football/{league_id}', 'LeagueController@getStandings');
+        Route::get('/football/{league_id}', 'LeagueController@getStandings')
+            ->where('league_id', '[0-9]+');
         Route::get('/football/team/{team_id}', 'TeamController@get');
+        Route::get('/football/refresh', 'LeagueController@refreshLeagues');
     });
 
     //----------------Admin

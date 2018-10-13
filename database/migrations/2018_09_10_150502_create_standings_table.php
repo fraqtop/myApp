@@ -17,7 +17,6 @@ class CreateStandingsTable extends Migration
             $table->string('stage', 20);
             $table->string('type', 20);
             $table->string('group', 20)->nullable();
-            $table->text('stats');
             $table->integer('league_id')->unsigned();
             $table->unique(['stage', 'type', 'group', 'league_id']);
             $table->foreign('league_id')
