@@ -42,11 +42,11 @@
     <form class="admin-form" method="post" action="/admin/tasks/create">
         {{csrf_field()}}
         <div class="form-group">
-            <input class="form-control" placeholder="Task name" name="taskTitle">
+            <input class="form-control" placeholder="Task name" name="taskTitle" required>
         </div>
         <div class="form-group">
             <label>Task deadline</label>
-            <input class="form-control" type="datetime-local" name="taskDeadline">
+            <input class="form-control" type="datetime-local" name="taskDeadline" required>
         </div>
         <div class="form-group">
             <label>Task priority</label>

@@ -28,6 +28,6 @@ class Standings extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)->orderBy('name');
     }
 }

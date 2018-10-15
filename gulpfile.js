@@ -6,7 +6,7 @@ const uglify = require('gulp-uglify-es').default;
 const concat = require ('gulp-concat');
 const imagemin = require('gulp-imagemin');
 
-const basePath = 'resources/assets/js/';
+const basePath = 'resources/js/';
 const jsPaths = [
         `${basePath}particles.js`,
         `${basePath}jquery.js`,
@@ -17,13 +17,13 @@ const jsPaths = [
     ];
 
 function scss () {
-   return gulp.src('resources/assets/sass/style.scss')
+   return gulp.src('resources/sass/style.scss')
             .pipe(sass())
-            .pipe(gulp.dest('resources/assets/css'));
+            .pipe(gulp.dest('resources/css'));
 }
 
 function cssMinify () {
-   return gulp.src('resources/assets/css/style.css')
+   return gulp.src('resources/css/style.css')
             .pipe(csso())
             .pipe(gulp.dest('public/css'));
 }
@@ -42,7 +42,7 @@ function syncReload(done)
 }
 
 function jsMinify () {
-   return gulp.src('resources/assets/js/linked/all.js')
+   return gulp.src('resources/js/linked/all.js')
        .pipe(uglify())
        .pipe(gulp.dest('public/js'));
 }
@@ -50,17 +50,17 @@ function jsMinify () {
 function jsLink () {
    return gulp.src(jsPaths)
        .pipe(concat('all.js'))
-       .pipe(gulp.dest('resources/assets/js/linked'));
+       .pipe(gulp.dest('resources/js/linked'));
 }
 
 gulp.task('imgCompress', function (){
-   return gulp.src('resources/assets/img/*')
+   return gulp.src('resources/img/*')
        .pipe(imagemin())
        .pipe(gulp.dest('public/img'));
 });
 
 function watch () {
-    gulp.watch('resources/assets/sass/**/*.*', gulp.series(scss, cssMinify));
+    gulp.watch('resources/sass/**/*.*', gulp.series(scss, cssMinify));
     gulp.watch([
         'public/js/**/*.*',
         'public/css/**/*.*',

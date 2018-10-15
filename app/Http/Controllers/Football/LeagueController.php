@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
+use Psy;
 
 class LeagueController extends Controller
 {
@@ -56,7 +57,13 @@ class LeagueController extends Controller
                 'group' => $standingAPI->group,
                 'league_id' => $leagueId
             ];
-            $standingsDB = Standings::firstOrCreate($standingData);
+            $isNewStandings = false;
+            if(!$standingsDB = Standings::where($standingData))
+            {
+                dd($standingsDB);
+                $standingsDB = Standings::create($standingData);
+                $isNewStandings = true;
+            }
             foreach ($standingAPI->table as $row) {
                 $stats = [
                     'position' => $row->position,
@@ -67,15 +74,14 @@ class LeagueController extends Controller
                     'goalsFor' => $row->goalsFor,
                     'goalsAgainst' => $row->goalsAgainst
                 ];
-                if(!$team = Team::find($row->team->id)) {
-                    Team::create([
+                if ($isNewStandings) {
+                    Team::firstOrCreate([
                         'id' => $row->team->id,
                         'name' => $row->team->name,
                         'logoURL' => $row->team->crestUrl
                     ]);
                     $standingsDB->teams()->attach($row->team->id, $stats);
-                }
-                else {
+                } else {
                     $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);
                 }
             }
