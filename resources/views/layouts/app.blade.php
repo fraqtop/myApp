@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
     <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
+    @yield('external_meta')
     <title>fraqtop</title>
     <link href="{{ asset('css/style.css') }}?{{File::lastModified('css/style.css')}}" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon.png')}}">
@@ -31,5 +32,6 @@
         @include('footer')
     </div>
     <script src="{{ asset('js/all.js') }}?{{File::lastModified('js/all.js')}}"></script>
+    @yield('script')
 </body>
 </html>

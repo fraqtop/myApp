@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Football;
 use App\Models\Football\League;
 use App\Models\Football\Standings;
 use App\Models\Football\Team;
-use Carbon\Carbon;
-use Faker\Provider\zh_TW\DateTime;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
-use Psy;
 
 class LeagueController extends Controller
 {
@@ -20,13 +16,16 @@ class LeagueController extends Controller
         return view('football.index', ['leagues' => League::all()]);
     }
 
-    public function getStandings($leagueId)
+    public function getStandings(Request $request, $leagueId)
     {
+        if ($request->method() == 'PATCH')
+        {
+            return $this->updateStandings($leagueId);
+        }
         $league = League::find($leagueId);
         $leagueAPI = Football::getLeague($leagueId);
-        $lastUpdatedAPI = Carbon::createFromTimeString($leagueAPI->get('lastUpdated'));
-        if ($lastUpdatedAPI > $league->lastUpdated) {
-            $standings = $this->updateStandings($leagueId);
+        $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
+        if ($league->isOutdated($lastUpdatedAPI)) {
             $league->update([
                 'name' => $leagueAPI->get('name'),
                 'areaName' => $leagueAPI->get('area')->name,
@@ -35,21 +34,16 @@ class LeagueController extends Controller
                 'matchday' => $leagueAPI->get('currentSeason')->currentMatchday
             ]);
             $league->save();
+            $standings = Football::getLeagueStandings($leagueId);
+            session()->put('standings', $standings);
+            return view('football.standingsAPI', ['standings' => $standings]);
         }
-        else {
-            $standings = $league->getStandings();
-        }
-        $standings = collect($standings);
-        return view('football.overview', [
-            'league' => $league,
-            'standings' => $standings
-        ]);
+        return view('football.standingsDB', ['standings' => $league->getStandings()]);
     }
 
     private function updateStandings($leagueId)
     {
-        $updatedStandings = [];
-        $standings = Football::getLeagueStandings($leagueId);
+        $standings = session('standings');
         $standings->each(function ($standingAPI) use($leagueId, &$updatedStandings){
             $standingData = [
                 'stage' => $standingAPI->stage,
@@ -58,9 +52,8 @@ class LeagueController extends Controller
                 'league_id' => $leagueId
             ];
             $isNewStandings = false;
-            if(!$standingsDB = Standings::where($standingData))
+            if(!$standingsDB = Standings::where($standingData)->first())
             {
-                dd($standingsDB);
                 $standingsDB = Standings::create($standingData);
                 $isNewStandings = true;
             }
@@ -85,13 +78,14 @@ class LeagueController extends Controller
                     $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);
                 }
             }
-            $updatedStandings[] = $standingsDB;
         });
-        return collect($updatedStandings);
+        session()->remove('standings');
+        return "standings have been updated";
     }
 
     public function refreshLeagues()
     {
+        League::truncate();
         $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
         $leaguesAPIArray = [];
         $leaguesAPI->each(function ($league) use(&$leaguesAPIArray){

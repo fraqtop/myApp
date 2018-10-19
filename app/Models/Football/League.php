@@ -2,6 +2,7 @@
 
 namespace App\Models\Football;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -37,6 +38,15 @@ class League extends Model
     public function getStandings()
     {
         return $this->hasMany(Standings::class)->get();
+    }
+
+    public function isOutdated(string $lastUpdate)
+    {
+        $lastUpdate = Carbon::createFromTimeString($lastUpdate);
+        if ($lastUpdate > $this->lastUpdated) {
+            return true;
+        }
+        return false;
     }
 
     public static function boot()

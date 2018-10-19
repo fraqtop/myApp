@@ -8,10 +8,10 @@ const imagemin = require('gulp-imagemin');
 
 const basePath = 'resources/js/';
 const jsPaths = [
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
         `${basePath}particles.js`,
-        `${basePath}jquery.js`,
-        `${basePath}bootstrap_bundle.js`,
-        `${basePath}bootstrap.js`,
         `${basePath}smoothScroll.js`,
         `${basePath}main.js`
     ];

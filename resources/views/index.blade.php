@@ -86,4 +86,32 @@
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 <script src="{{asset('js/all.js')}}?{{ File::lastModified('js/all.js') }}"></script>
+<script>
+    particlesJS.load('particles-js', 'js/particles.json', function() {
+    });
+    let infoSection = $(".info");
+    let timingSection = $(".timing");
+    let postsSection = $(".posts");
+    infoSection.css("visibility", "hidden");
+    timingSection.css("visibility", "hidden");
+    postsSection.css("visibility", "hidden");
+    let checkPoint = 350;
+    window.onscroll = function () {
+        if(infoSection.offset().top - window.pageYOffset < checkPoint)
+        {
+            infoSection.addClass("animated fadeInUp");
+            infoSection.css("visibility", "visible");
+        }
+        if(timingSection.offset().top - window.pageYOffset < checkPoint)
+        {
+            timingSection.addClass("animated zoomIn");
+            timingSection.css("visibility", "visible");
+        }
+        if(postsSection.offset().top - window.pageYOffset < checkPoint)
+        {
+            postsSection.addClass("animated zoomIn");
+            postsSection.css("visibility", "visible");
+        }
+    }
+</script>
 </html>

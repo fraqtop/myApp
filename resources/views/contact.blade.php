@@ -23,3 +23,19 @@
         </form>
     </div>
 @endsection
+@section('script')
+    <script>
+        if (document.getElementById('contactForm'))
+        {
+            let counter = document.createElement('input');
+            counter.name = "contactCounter";
+            counter.id = "contactCounter";
+            counter.value = 0;
+            counter.type = "hidden";
+            contactForm.appendChild(counter);
+            contactArea.oninput = function () {
+                contactCounter.value = parseInt(contactCounter.value) + 1;
+            };
+        }
+    </script>
+@endsection
