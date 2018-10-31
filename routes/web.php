@@ -22,9 +22,6 @@ Route::group(['middleware' => 'auth'], function ()
             ->where('post_id', '[0-9]+');
         Route::match(['get', 'post'], '/posts/create', 'PostController@createPost');
         Route::post('/posts/{post_id}/comment', 'CommentController@storeComment');
-        Route::get('test/',function(){
-           return 'test passed';
-        });
     });
 
     Route::get('/profile', 'HomeController@profile');
@@ -37,6 +34,7 @@ Route::group(['middleware' => 'auth'], function ()
             ->where('league_id', '[0-9]+');
         Route::get('/football/team/{team_id}', 'TeamController@get');
         Route::get('/football/refresh', 'LeagueController@refreshLeagues');
+        Route::get('/football/matches/{date?}', 'MatchController@get');
     });
 
     //----------------Admin

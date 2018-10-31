@@ -35,9 +35,9 @@ class League extends Model
         'endDate',
         'lastUpdated'
     ];
-    public function getStandings()
+    public function standings()
     {
-        return $this->hasMany(Standings::class)->get();
+        return $this->hasMany(Standings::class);
     }
 
     public function isOutdated(string $lastUpdate)

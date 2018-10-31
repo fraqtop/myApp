@@ -8,6 +8,7 @@ use App\Models\Football\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
+use DB;
 
 class LeagueController extends Controller
 {
@@ -26,19 +27,12 @@ class LeagueController extends Controller
         $leagueAPI = Football::getLeague($leagueId);
         $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
         if ($league->isOutdated($lastUpdatedAPI)) {
-            $league->update([
-                'name' => $leagueAPI->get('name'),
-                'areaName' => $leagueAPI->get('area')->name,
-                'startDate' => $leagueAPI->get('currentSeason')->startDate,
-                'endDate' => $leagueAPI->get('currentSeason')->endDate,
-                'matchday' => $leagueAPI->get('currentSeason')->currentMatchday
-            ]);
-            $league->save();
             $standings = Football::getLeagueStandings($leagueId);
+            session()->put('leagueAPI', $leagueAPI);
             session()->put('standings', $standings);
             return view('football.standingsAPI', ['standings' => $standings]);
         }
-        return view('football.standingsDB', ['standings' => $league->getStandings()]);
+        return view('football.standingsDB', ['standings' => $league->standings()]);
     }
 
     private function updateStandings($leagueId)
@@ -78,14 +72,27 @@ class LeagueController extends Controller
                     $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);
                 }
             }
+            $leagueAPI = session()->get('leagueAPI');
+            $league = League::find($leagueId);
+            $league->update([
+                'name' => $leagueAPI->get('name'),
+                'areaName' => $leagueAPI->get('area')->name,
+                'startDate' => $leagueAPI->get('currentSeason')->startDate,
+                'endDate' => $leagueAPI->get('currentSeason')->endDate,
+                'matchday' => $leagueAPI->get('currentSeason')->currentMatchday
+            ]);
+            $league->save();
         });
         session()->remove('standings');
+        session()->remove('leagueAPI');
         return "standings have been updated";
     }
 
     public function refreshLeagues()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         League::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
         $leaguesAPIArray = [];
         $leaguesAPI->each(function ($league) use(&$leaguesAPIArray){

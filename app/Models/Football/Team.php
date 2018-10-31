@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model
 {
+    public $incrementing = false;
     public $timestamps = false;
     protected $dates = ['lastUpdated'];
     protected $guarded = [];
