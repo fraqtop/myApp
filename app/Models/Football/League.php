@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 
+
 /**
  * App\Models\Football\League
  *
@@ -16,10 +17,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $endDate
  * @property \Illuminate\Support\Carbon $lastUpdated
  * @property int $matchday
+ * @property string|null $logo
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Football\Standings[] $standings
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereAreaName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereEndDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereLastUpdated($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereMatchday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereStartDate($value)

@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match whereReferee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match whereStartAt($value)
  * @mixin \Eloquent
+ * @property int|null $thrillRating
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\Football\Result[] $results
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match whereThrillRating($value)
  */
 class Match extends Model
 {

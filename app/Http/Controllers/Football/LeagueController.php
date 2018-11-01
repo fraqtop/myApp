@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
 use DB;
+use Storage;
+use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
@@ -86,6 +88,20 @@ class LeagueController extends Controller
         session()->remove('standings');
         session()->remove('leagueAPI');
         return "standings have been updated";
+    }
+
+    public function setLogo(Request $request, $leagueId)
+    {
+        $league = League::find($leagueId, ['name', 'areaName', 'logo']);
+        if($request->method() == 'GET')
+        {
+            return view('football.logo', ['league' => $league]);
+        }
+        $file = new File($request->file('newLogo'));
+        $path = Storage::disk('public')->putFile('leagueLogos', $file);
+        $league->logo = Storage::url($path);
+        $league->save();
+        return redirect('/football');
     }
 
     public function refreshLeagues()

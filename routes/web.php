@@ -32,8 +32,9 @@ Route::group(['middleware' => 'auth'], function ()
         Route::get('/football', 'LeagueController@get');
         Route::match(['get', 'patch'],'/football/{league_id}', 'LeagueController@getStandings')
             ->where('league_id', '[0-9]+');
+        Route::match(['get', 'patch'], '/football/{league_id}/logo', 'LeagueController@setLogo')
+            ->where('league_id', '[0-9]+')->middleware('admin');
         Route::get('/football/team/{team_id}', 'TeamController@get');
-        Route::get('/football/refresh', 'LeagueController@refreshLeagues');
         Route::get('/football/matches/{date?}', 'MatchController@get');
     });
 
