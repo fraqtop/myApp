@@ -26,13 +26,16 @@ class CreateMatchesTable extends Migration
             $table->primary('id');
             $table->foreign('homeId')
                 ->references('id')
-                ->on('teams');
+                ->on('teams')
+                ->onDelete('cascade');
             $table->foreign('awayId')
                 ->references('id')
-                ->on('teams');
+                ->on('teams')
+                ->onDelete('cascade');
             $table->foreign('leagueId')
                 ->references('id')
-                ->on('leagues');
+                ->on('leagues')
+                ->onDelete('cascade');
         });
     }
 

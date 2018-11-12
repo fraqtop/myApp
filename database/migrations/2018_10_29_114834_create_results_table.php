@@ -20,7 +20,8 @@ class CreateResultsTable extends Migration
             $table->integer('matchId')->unsigned();
             $table->foreign('matchId')
                 ->references('id')
-                ->on('matches');
+                ->on('matches')
+                ->onDelete('cascade');
         });
     }
 

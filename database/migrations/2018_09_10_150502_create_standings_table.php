@@ -21,7 +21,8 @@ class CreateStandingsTable extends Migration
             $table->unique(['stage', 'type', 'group', 'league_id']);
             $table->foreign('league_id')
                 ->references('id')
-                ->on('leagues');
+                ->on('leagues')
+                ->onDelete('cascade');
         });
     }
 

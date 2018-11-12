@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    {{ print_r($standings) }}
+    @foreach($standings as $standing)
+        {{$standing->stage}}
+    @endforeach
 @endsection

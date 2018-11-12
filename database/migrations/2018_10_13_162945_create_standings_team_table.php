@@ -25,10 +25,12 @@ class CreateStandingsTeamTable extends Migration
             $table->tinyInteger('goalsAgainst')->unsigned();
             $table->foreign('standings_id')
                 ->references('id')
-                ->on('standings');
+                ->on('standings')
+                ->onDelete('cascade');
             $table->foreign('team_id')
                 ->references('id')
-                ->on('teams');
+                ->on('teams')
+                ->onDelete('cascade');
         });
     }
 

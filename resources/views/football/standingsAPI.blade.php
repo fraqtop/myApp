@@ -3,7 +3,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('content')
-    {{ print_r($standings) }}
+    @foreach($standings as $standing)
+        {{$standing->stage}}
+    @endforeach
 @endsection
 @section('script')
     <script>

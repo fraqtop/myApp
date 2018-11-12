@@ -14,9 +14,12 @@ use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
+    private const LEAGUES_COUNT = 10;
+
     public function get()
     {
-        return view('football.index', ['leagues' => League::all()]);
+        $leagues = League::count() < self::LEAGUES_COUNT ? $this->loadLeagues(): League::all();
+        return view('football.index', ['leagues' => $leagues]);
     }
 
     public function getStandings(Request $request, $leagueId)
@@ -34,12 +37,13 @@ class LeagueController extends Controller
             session()->put('standings', $standings);
             return view('football.standingsAPI', ['standings' => $standings]);
         }
-        return view('football.standingsDB', ['standings' => $league->standings()]);
+        return view('football.standingsDB', ['standings' => $league->standings]);
     }
 
     private function updateStandings($leagueId)
     {
         $standings = session('standings');
+        DB::beginTransaction();
         $standings->each(function ($standingAPI) use($leagueId, &$updatedStandings){
             $standingData = [
                 'stage' => $standingAPI->stage,
@@ -85,6 +89,7 @@ class LeagueController extends Controller
             ]);
             $league->save();
         });
+        DB::commit();
         session()->remove('standings');
         session()->remove('leagueAPI');
         return "standings have been updated";
@@ -104,45 +109,21 @@ class LeagueController extends Controller
         return redirect('/football');
     }
 
-    public function refreshLeagues()
+    public function loadLeagues()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        League::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
-        $leaguesAPIArray = [];
-        $leaguesAPI->each(function ($league) use(&$leaguesAPIArray){
-            $leaguesAPIArray[$league->id] = [
-                $league->name,
-                $league->area->name,
-                new \DateTime($league->currentSeason->startDate),
-                new \DateTime($league->currentSeason->endDate),
-                $league->currentSeason->currentMatchday
-            ];
-        });
-        $leaguesDB = League::all();
-        $leaguesDB->each(function (League $league) use(&$leaguesAPIArray){
-            if ($leagueData = @$leaguesAPIArray[$league->id])
-            {
-                unset($leaguesAPIArray[$league->id]);
-            }
-            else
-            {
-                $league->delete();
-            }
-        });
-        foreach ($leaguesAPIArray as $id => $fields)
-        {
+        $leagues = [];
+        $leaguesAPI->each(function ($league) use(&$leagues){
             $newLeague = League::create([
-                'id' =>  $id,
-                'name' => $fields[0],
-                'areaName' => $fields[1],
-                'startDate' => $fields[2],
-                'endDate' => $fields[3],
-                'matchday' => $fields[4]
+                'id' =>  $league->id,
+                'name' => $league->name,
+                'areaName' => $league->area->name,
+                'startDate' => new \DateTime($league->currentSeason->startDate),
+                'endDate' => new \DateTime($league->currentSeason->endDate),
+                'matchday' => $league->currentSeason->currentMatchday
             ]);
-            $leaguesDB->add($newLeague);
-        }
-        return redirect('/football');
+            $leagues[] = $newLeague;
+        });
+        return collect($leagues);
     }
 }

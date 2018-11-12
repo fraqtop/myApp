@@ -24,7 +24,8 @@ class CreatePlayersTable extends Migration
             $table->primary('id');
             $table->foreign('teamId')
                 ->references('id')
-                ->on('teams');
+                ->on('teams')
+                ->onDelete('cascade');
         });
     }
 
