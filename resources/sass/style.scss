@@ -1,5 +1,5 @@
-@import 'node_modules/bootstrap/scss/bootstrap';
 @import "var";
+@import 'node_modules/bootstrap/scss/bootstrap';
 @import "navs/navs";
 @import "forms/forms";
 @import "containers/containers";
@@ -43,9 +43,9 @@ footer{
   align-items: center;
   background: url("/img/footer_lodyas.png");
   color: $brightFont;
-  min-height: 10vh;
+  min-height: 7vh;
   padding: 0 5px;
-  font-size: 2.5vmin;
+  font-size: 2vmin;
   font-weight: 500;
   box-shadow: 0 0 2px 2px grey;
   .copyright{
@@ -53,8 +53,8 @@ footer{
     padding-right: 15px;
   }
   a{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     padding: 5px;
     &:hover
     {

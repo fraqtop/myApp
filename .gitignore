@@ -3,6 +3,7 @@ vendor
 .env
 node_modules/
 public/storage
+resources/css
 public/PHP_errors.log
 cgi-bin./public/storage
 ./vendor/bin/doctrine-dbal

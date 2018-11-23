@@ -19,7 +19,11 @@ class LeagueController extends Controller
     public function get()
     {
         $leagues = League::count() < self::LEAGUES_COUNT ? $this->loadLeagues(): League::all();
-        return view('football.index', ['leagues' => $leagues]);
+        $topLeagues = $leagues->reject(function (League $element){
+           return !$element->isFavorite();
+        });
+        $leagues = $leagues->diff($topLeagues);
+        return view('football.index', ['leagues' => $leagues, 'topLeagues' => $topLeagues]);
     }
 
     public function getStandings(Request $request, $leagueId)
@@ -35,9 +39,10 @@ class LeagueController extends Controller
             $standings = Football::getLeagueStandings($leagueId);
             session()->put('leagueAPI', $leagueAPI);
             session()->put('standings', $standings);
-            return view('football.standingsAPI', ['standings' => $standings]);
+            return view('football.standingsAPI', ['standings' => $standings->where('type', '=', 'TOTAL')]);
         }
-        return view('football.standingsDB', ['standings' => $league->standings]);
+        $standings = $league->standings->where('type', '=', 'TOTAL');
+        return view('football.standingsDB', ['standings' => $standings]);
     }
 
     private function updateStandings($leagueId)
@@ -97,15 +102,15 @@ class LeagueController extends Controller
 
     public function setLogo(Request $request, $leagueId)
     {
-        $league = League::find($leagueId, ['name', 'areaName', 'logo']);
+        $league = League::find($leagueId);
         if($request->method() == 'GET')
         {
             return view('football.logo', ['league' => $league]);
         }
         $file = new File($request->file('newLogo'));
         $path = Storage::disk('public')->putFile('leagueLogos', $file);
-        $league->logo = Storage::url($path);
-        $league->save();
+        $path = Storage::url($path);
+        $league->update(['logo' => $path]);
         return redirect('/football');
     }
 

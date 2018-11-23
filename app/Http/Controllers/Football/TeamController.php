@@ -16,7 +16,7 @@ class TeamController extends Controller
         $teamAPI = Football::getTeam($teamId);
         if ( !$team = Team::find($teamId))
         {
-             $team = $this->create($teamAPI);
+            $team = $this->create($teamAPI);
         }
         else
         {

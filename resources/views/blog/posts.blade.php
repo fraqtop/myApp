@@ -6,9 +6,9 @@
         @endcan
     @foreach($posts as $post)
         <a href="/posts/{{$post->id}}">
-            <div class="card post">
+            <div class="card post" style="padding: 0">
                 <img class="card card-img-top" src="{{$post->getPicture()}}">
-                <div class="card-body">
+                <div style="padding: 5px 15px" class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">{{$post->content}}</p>
                 </div>
