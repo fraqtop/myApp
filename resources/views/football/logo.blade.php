@@ -9,7 +9,12 @@
     <form action="" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
         {{method_field('PATCH')}}
-        <input type="file" name="newLogo" required>
+        <div class="form-group">
+            <input type="file" name="newLogoLocal">
+        </div>
+        <div class="form-group">
+            <input placeholder="path to remote" class="form-control" name="newLogoRemote">
+        </div>
         <input class="btn btn-dark" type="submit" value="save logo">
     </form>
 @endsection

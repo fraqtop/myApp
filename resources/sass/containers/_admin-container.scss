@@ -1,14 +1,15 @@
 .admin-container
 {
   display: grid;
-  grid-template-columns: 1fr 7fr;
+  grid-template-columns: minmax(100px, 1fr) 7fr;
   background: $mainColor;
   min-height: 100vh;
   .panel
   {
     position: fixed;
-    width: 12.5%;
     height: 100vh;
+    width: 12.5%;
+    min-width: 100px;
     display: flex;
     flex-direction: column;
     align-items: stretch;

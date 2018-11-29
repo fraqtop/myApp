@@ -107,9 +107,14 @@ class LeagueController extends Controller
         {
             return view('football.logo', ['league' => $league]);
         }
-        $file = new File($request->file('newLogo'));
-        $path = Storage::disk('public')->putFile('leagueLogos', $file);
-        $path = Storage::url($path);
+        if ($request->file('newLogoLocal')) {
+            $file = new File($request->file('newLogoLocal'));
+            $path = Storage::disk('public')->putFile('leagueLogos', $file);
+            $path = Storage::url($path);
+        }
+        else{
+            $path = $request->post('newLogoRemote') ?? "/img/code.jpg";
+        }
         $league->update(['logo' => $path]);
         return redirect('/football');
     }
