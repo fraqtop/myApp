@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Result whereMatchId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Result whereStage($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Result newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Result newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Result query()
  */
 class Result extends Model
 {

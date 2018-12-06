@@ -19,7 +19,8 @@ class MatchController extends Controller
         else{
             $matchDay = Carbon::today();
         }
-        $matches = Match::whereBetween('startAt', [$matchDay, $matchDay->copy()->addDay()])->get();
+        $matches = Match::with(['homeTeam', 'awayTeam', 'league', 'results'])
+            ->whereBetween('startAt', [$matchDay, $matchDay->copy()->addDay()])->get();
         return view('football.matchesDB', ['matches' => $matches]);
     }
 }

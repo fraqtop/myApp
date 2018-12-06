@@ -31,6 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team whereTla($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Football\Standings[] $standings
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Team query()
  */
 class Team extends Model
 {

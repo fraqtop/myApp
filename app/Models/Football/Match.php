@@ -25,6 +25,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $thrillRating
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\Football\Result[] $results
  * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match whereThrillRating($value)
+ * @property-read \App\Models\Football\Team $awayTeam
+ * @property-read \App\Models\Football\Team $homeTeam
+ * @property-read \App\Models\Football\League $league
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\models\Football\Match query()
  */
 class Match extends Model
 {
@@ -38,6 +44,21 @@ class Match extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $dates = ['lastUpdated', 'startAt'];
+
+    public function homeTeam()
+    {
+        return $this->belongsTo(Team::class, 'homeId');
+    }
+
+    public function awayTeam()
+    {
+        return $this->belongsTo(Team::class, 'awayId');
+    }
+
+    public function league()
+    {
+        return $this->belongsTo(League::class, 'leagueId');
+    }
 
     public function results()
     {

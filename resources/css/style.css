@@ -6430,6 +6430,7 @@ nav.min-dark-nav {
   justify-items: center;
   align-items: center;
   height: 60vh;
+  min-height: 300px;
   width: 20%;
   min-width: 200px;
   padding: 20px;

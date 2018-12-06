@@ -28,6 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereStartDate($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League query()
  */
 class League extends Model
 {

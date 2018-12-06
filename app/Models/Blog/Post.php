@@ -29,6 +29,9 @@ use App\User;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Post whereUserId($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Post newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Post query()
  */
 class Post extends Model
 {

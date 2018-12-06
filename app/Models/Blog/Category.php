@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Category wherePicture($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Category whereTitle($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Blog\Category query()
  */
 class Category extends Model
 {

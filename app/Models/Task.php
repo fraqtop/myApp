@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Task whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Task whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Task newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Task newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Task query()
  */
 class Task extends Model
 {

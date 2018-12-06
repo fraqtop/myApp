@@ -20,6 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Standings whereStage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Standings whereType($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Standings newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Standings newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Standings query()
  */
 class Standings extends Model
 {
