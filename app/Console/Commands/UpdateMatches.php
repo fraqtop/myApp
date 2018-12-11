@@ -52,13 +52,11 @@ class UpdateMatches extends Command
             'dateTo' => $endDate
         ]);
         $matches->each(function ($matchAPI) use ($yesterday){
-            $isOutdated = false;
             if ($matchDB = Match::find($matchAPI->id)) {
                 $lastUpdateAPI = Carbon::createFromTimeString($matchAPI->lastUpdated);
-                if($matchDB->lastUpdated < $lastUpdateAPI) {
-                    $isOutdated = true;
+                if($isOutdated = $matchDB->isOutdated($lastUpdateAPI)) {
                     $matchDB->update([
-                        'referee' => $matchAPI->referees[0]->name,
+                        'referee' => $matchAPI->referees[0]->name ?? 'Unknown Person',
                         'startAt' => Carbon::createFromTimeString($matchAPI->utcDate),
                         'homeId' => $matchAPI->homeTeam->id,
                         'awayId' => $matchAPI->awayTeam->id

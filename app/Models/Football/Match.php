@@ -2,6 +2,7 @@
 
 namespace App\models\Football;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,8 +36,8 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model
 {
     private const STAGES = [
-        'fullTime',
         'halfTime',
+        'fullTime',
         'extraTime',
         'penalties'
     ];
@@ -67,12 +68,11 @@ class Match extends Model
 
     public function setResults(array $newResults)
     {
-        $results = $this->results();
         foreach (self::STAGES as $stage)
         {
-            if ($newResults[$stage]->homeTeam)
+            if ($newResults[$stage]->homeTeam !== null)
             {
-                $results->updateOrCreate([
+                $this->results()->updateOrCreate([
                     'stage' => $stage
                 ],
                 [
@@ -87,7 +87,26 @@ class Match extends Model
 
     public function updateRating($additionalStats = null)
     {
+        $results = $this->results;
+        $homeScored = 0;
+        $awayScored = 0;
+        $results->each(function (Result $result) use(&$homeScored, &$awayScored){
+            $homeScored += $result->homeScore - $homeScored;
+            $awayScored += $result->awayScore - $awayScored;
+        });
+        $totalGoals = $homeScored + $awayScored;
+        $this->thrillRating = $totalGoals - 3;
+        if(abs($homeScored - $awayScored) < 3 and $totalGoals > 3){
+            $this->thrillRating += 2;
+        }
+        $this->thrillRating = $this->thrillRating < 0 ? 0: $this->thrillRating;
+        $this->save();
+    }
 
+    public function isOutdated(string $lastUpdate)
+    {
+        $lastUpdate = Carbon::createFromTimeString($lastUpdate);
+        return $lastUpdate > $this->lastUpdated;
     }
 
     protected static function boot()
