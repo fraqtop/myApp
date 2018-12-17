@@ -40,17 +40,20 @@ Route::group(['middleware' => 'auth'], function ()
 
     //----------------Admin
 
-    Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function()
-    {
-        Route::get('/admin', 'TrafficController@getTraffic');
+    Route::group(['middleware' => 'admin'], function (){
+        Route::match(['get', 'post'], '/admin/avatar', 'HomeController@avatar');
+        Route::group(['namespace' => 'Admin'], function()
+        {
+            Route::get('/admin', 'TrafficController@getTraffic');
 
-        Route::get('/admin/categories', 'CategoryController@get');
-        Route::post('/admin/categories', 'CategoryController@create');
-        Route::patch('/admin/categories/{category_id}', 'CategoryController@update');
-        Route::delete('/admin/categories/{category_id}', 'CategoryController@delete');
+            Route::get('/admin/categories', 'CategoryController@get');
+            Route::post('/admin/categories', 'CategoryController@create');
+            Route::patch('/admin/categories/{category_id}', 'CategoryController@update');
+            Route::delete('/admin/categories/{category_id}', 'CategoryController@delete');
 
-        Route::get('/admin/tasks', 'TaskController@get');
-        Route::post('/admin/tasks/create', 'TaskController@create');
-        Route::delete('/admin/tasks/{task_id}', 'TaskController@delete');
+            Route::get('/admin/tasks', 'TaskController@get');
+            Route::post('/admin/tasks/create', 'TaskController@create');
+            Route::delete('/admin/tasks/{task_id}', 'TaskController@delete');
+        });
     });
 });

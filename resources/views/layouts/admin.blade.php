@@ -16,6 +16,7 @@
         <a href="/admin/categories">categories</a>
         <a href="/football">football</a>
         <a href="/admin/tasks">tasks</a>
+        <a href="/admin/avatar">avatar</a>
     </div>
     <div class="admin-frame">
         @yield('content')

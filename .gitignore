@@ -1,9 +1,11 @@
 vendor
 .idea
 .env
-node_modules/
+node_modules
+resources/css/
+resources/img/
+resources/js/linked/
 public/storage
-resources/css
 public/PHP_errors.log
 cgi-bin./public/storage
 ./vendor/bin/doctrine-dbal

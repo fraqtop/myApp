@@ -36,6 +36,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @property string|null $avatar
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
  */
 class User extends Authenticatable
 {

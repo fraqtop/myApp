@@ -7,10 +7,10 @@
   display: grid;
   grid-template-columns: 1fr 4fr 2fr 4fr 1fr;
   background: inherit;
+  align-items: center;
   *{
     display: grid;
-    align-items: center;
-    justify-items: center;
+    margin: 0;
   }
   img.home{
     max-height: 100%;

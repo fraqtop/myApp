@@ -6,7 +6,8 @@ use App\Mail\ContactMail;
 use App\Models\Blog\Post;
 use App\User;
 use Mail;
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, File};
+use Storage;
 
 class HomeController extends Controller
 {
@@ -23,11 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $lastPosts = Post::take(3)
+        $lastPosts = Post::with('category')
             ->orderBy('created_at', 'desc')
-            ->with('category')
+            ->limit(3)
             ->get();
-        return view('index', ['posts' => $lastPosts]);
+        $picture = User::find(1)->avatar;
+        return view('index', ['posts' => $lastPosts, 'picture' => $picture]);
     }
 
     public function profile(Request $request)
@@ -84,6 +86,16 @@ class HomeController extends Controller
             }
         }
         return view('contact');
+    }
 
+    public function avatar(Request $request)
+    {
+        if ($request->method() === 'POST'){
+            $newAvatar = Storage::disk('public')
+                ->putFile('profilePics', new File($request->file('newAvatar')));
+            $request->user()->avatar = Storage::url($newAvatar);
+            $request->user()->save();
+        }
+        return view('admin.avatar');
     }
 }

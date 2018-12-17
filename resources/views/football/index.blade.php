@@ -5,7 +5,7 @@
             @foreach($topLeagues as $topLeague)
                 <div class="col">
                     <a href="{{URL::current()}}/{{$topLeague->id}}">
-                        <img class="img-fluid" style="min-width: 100px" src="{{$topLeague->logo}}">
+                        <img class="img-fluid" style="min-width: 100px" src="{{$topLeague->logo ?? '/img/nothing.jpg'}}">
                     </a>
                 </div>
             @endforeach
@@ -15,7 +15,7 @@
             @foreach($chunk as $league)
                 <div class="col">
                     <a href="{{URL::current()}}/{{$league->id}}">
-                        <img class="img-fluid" src="{{$league->logo}}" style="min-width: 100px">
+                        <img class="img-fluid" src="{{$league->logo ?? '/img/nothing.jpg'}}" style="min-width: 100px">
                     </a>
                 </div>
             @endforeach

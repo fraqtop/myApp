@@ -29,7 +29,7 @@
     </div>
     <div class="grid-container">
         <section class="info">
-            <img src="{{asset('img/me.jpg')}}" style="opacity: 0.7">
+            <img src="{{$picture}}" style="opacity: 0.7">
             <article>
                 Hi, my name is Roman, nice to meet you here. I'm web
                 developer based in Ukhta city. I like creating awesome and helpful things
