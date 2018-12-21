@@ -29,13 +29,13 @@ Route::group(['middleware' => 'auth'], function ()
     //---------------Football
 
     Route::group(['namespace' => 'Football'], function(){
-        Route::get('/football', 'LeagueController@get');
+        Route::get('/football', 'MatchController@get');
         Route::match(['get', 'patch'],'/football/{league_id}', 'LeagueController@getStandings')
             ->where('league_id', '[0-9]+');
+        Route::get('/football/{date?}', 'MatchController@get');
         Route::match(['get', 'patch'], '/football/{league_id}/logo', 'LeagueController@setLogo')
             ->where('league_id', '[0-9]+')->middleware('admin');
         Route::get('/football/team/{team_id}', 'TeamController@get');
-        Route::get('/football/matches/{date?}', 'MatchController@get');
     });
 
     //----------------Admin

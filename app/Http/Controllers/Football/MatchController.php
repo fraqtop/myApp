@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Football;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Football\{Match, Result};
+use App\Models\Football\{
+    League, Match, Result
+};
 
 
 class MatchController extends Controller
@@ -23,6 +25,9 @@ class MatchController extends Controller
             ->whereBetween('startAt', [$matchDay, $matchDay->copy()->addDay()])
             ->orderBy('startAt')
             ->get();
-        return view('football.matchesDB', ['matches' => $matches]);
+        return view('football.index', [
+            'matches' => $matches,
+            'leagues' => League::all()
+        ]);
     }
 }
