@@ -151,6 +151,10 @@ return [
          * Package Service Providers...
          */
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Grambas\FootballData\FootballDataServiceProvider::class,
+        \Weidner\Goutte\GoutteServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -159,8 +163,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Grambas\FootballData\FootballDataServiceProvider::class
     ],
 
     /*
@@ -209,7 +211,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Football' => Grambas\FootballData\Facades\FootballDataFacade::class
+        'Football' => Grambas\FootballData\Facades\FootballDataFacade::class,
+        'Goutte' => \Weidner\Goutte\GoutteFacade::class,
 
     ],
 

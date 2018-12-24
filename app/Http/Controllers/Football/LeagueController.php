@@ -29,7 +29,8 @@ class LeagueController extends Controller
             session()->put('standings', $standings);
             return view('football.standingsAPI', ['standings' => $standings->where('type', '=', 'TOTAL')]);
         }
-        $standings = $league->standings->where('type', '=', 'TOTAL');
+        $standings = $league->standings;
+        dd($standings);
         return view('football.standingsDB', ['standings' => $standings]);
     }
 
@@ -61,11 +62,13 @@ class LeagueController extends Controller
                     'goalsAgainst' => $row->goalsAgainst
                 ];
                 if ($isNewStandings) {
-                    Team::firstOrCreate([
+                    $team = Team::firstOrCreate([
                         'id' => $row->team->id,
-                        'name' => $row->team->name,
-                        'logoURL' => $row->team->crestUrl
+                        'name' => $row->team->name
                     ]);
+                    if (!$team->logoURL){
+                        $team->logoURL = $row->team->crestUrl;
+                    }
                     $standingsDB->teams()->attach($row->team->id, $stats);
                 } else {
                     $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);

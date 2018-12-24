@@ -36,6 +36,9 @@ Route::group(['middleware' => 'auth'], function ()
         Route::match(['get', 'patch'], '/football/{league_id}/logo', 'LeagueController@setLogo')
             ->where('league_id', '[0-9]+')->middleware('admin');
         Route::get('/football/team/{team_id}', 'TeamController@get');
+        Route::get('/test', function (){
+           dd(\App\Models\Football\League::find(2019)->standings);
+        });
     });
 
     //----------------Admin

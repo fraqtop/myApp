@@ -44,15 +44,17 @@
 @endsection
 @section('script')
     <script>
-        token = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-            url: '{{ URL::current() }}',
-            type: 'POST',
-            data: {_token: token, _method: 'PATCH'},
-            headers: {'X-CSRF-Token': token},
-            success: function (response) {
-                console.log(response);
-            }
-        });
+        let loadData = async () => {
+            let data = new FormData();
+            data.append('_token', "{{csrf_token()}}");
+            data.append('_method', 'PATCH');
+            let result = await fetch(document.location.href, {
+                credentials: "same-origin",
+                method: 'post',
+                body: data
+            });
+            console.log(await result.text());
+        };
+        loadData();
     </script>
 @endsection

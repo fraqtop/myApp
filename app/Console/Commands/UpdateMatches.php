@@ -14,7 +14,7 @@ class UpdateMatches extends Command
      *
      * @var string
      */
-    protected $signature = 'matches:sync {--days=}';
+    protected $signature = 'sync:matches {--days=}';
 
     /**
      * The console command description.
@@ -22,7 +22,7 @@ class UpdateMatches extends Command
      * @var string
      */
     protected $description = 'Updates matches data for certain date 
-    or for a few days with flag';
+    or for a few days with option "days"';
 
     /**
      * Create a new command instance.
@@ -66,7 +66,7 @@ class UpdateMatches extends Command
             else
             {
                 $isOutdated = true;
-                $this->call('teams:sync', [
+                $this->call('sync:teams', [
                     'teams' => [(array)$matchAPI->homeTeam, (array)$matchAPI->awayTeam]
                 ]);
                 $matchDB = Match::create([

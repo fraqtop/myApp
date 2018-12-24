@@ -42,11 +42,21 @@ class League extends Model
         'endDate',
         'lastUpdated'
     ];
-    private const TOP_LEAGUES = [2001, 2002, 2014, 2021];
 
     public function standings()
     {
         return $this->hasMany(Standings::class);
+    }
+
+    public function teams()
+    {
+        $teams = collect();
+        $standings = $this->standings;
+        dd($standings);
+        $this->standings->each(function (Standings $standing) use(&$teams){
+            $teams->merge($standing->teams);
+        });
+        dd($teams);
     }
 
     public function isOutdated(string $lastUpdate)
@@ -56,11 +66,6 @@ class League extends Model
             return true;
         }
         return false;
-    }
-
-    public function isFavorite()
-    {
-        return in_array($this->id, self::TOP_LEAGUES);
     }
 
     public static function boot()

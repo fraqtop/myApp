@@ -12,7 +12,7 @@ class UpdateTeams extends Command
      *
      * @var string
      */
-    protected $signature = 'teams:sync {teams}';
+    protected $signature = 'sync:teams {teams}';
 
     /**
      * The console command description.
