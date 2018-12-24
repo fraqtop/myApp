@@ -23,8 +23,10 @@
   align-items: center;
   justify-content: space-between;
   a{
-    height: 25px;
-    width: 35px;
+    height: 3vh;
     margin: 5px;
+    &:hover{
+      opacity: 0.6;
+    }
   }
 }

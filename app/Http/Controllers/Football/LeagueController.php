@@ -14,18 +14,6 @@ use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
-    private const LEAGUES_COUNT = 10;
-
-    public function get()
-    {
-        $leagues = League::count() < self::LEAGUES_COUNT ? $this->loadLeagues(): League::all();
-        $topLeagues = $leagues->reject(function (League $element){
-           return !$element->isFavorite();
-        });
-        $leagues = $leagues->diff($topLeagues);
-        return view('football.index', ['leagues' => $leagues, 'topLeagues' => $topLeagues]);
-    }
-
     public function getStandings(Request $request, $leagueId)
     {
         if ($request->method() == 'PATCH')

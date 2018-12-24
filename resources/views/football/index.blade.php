@@ -28,15 +28,22 @@
         <div class="matches">
             <div style="display: grid; margin: 0; align-items: center; justify-items: center">
                 <h4>
-                    <a href="/football/{{$matches[0]->startAt->subDay()->format('Y-m-d')}}" style="margin: 0 15px">
+                    <a href="/football/{{$date->copy()->subDay()->format('Y-m-d')}}" style="margin: 0 15px">
                         yesterday
                     </a>
-                    Matches for {{$matches[0]->startAt->format('F l j')}}
-                    <a href="/football/{{$matches[0]->startAt->addDay()->format('Y-m-d')}}" style="margin: 0 15px">
+                    Matches for {{$date->format('F l j')}}
+                    <a href="/football/{{$date->copy()->addDay()->format('Y-m-d')}}" style="margin: 0 15px">
                         tomorrow
                     </a>
                 </h4>
             </div>
+            @if($matches->count() === 0)
+                <div class="alert-danger">
+                    <h4 style="">
+                        no matches for this day
+                    </h4>
+                </div>
+            @endif
             @foreach($matches as $match)
                 <div class="match" style="background: {{$match->thrillRating < 3 ? '#DEA77C': '#ABE3B1'}}">
                     <img class="img-fluid home" src="{{$match->homeTeam->logoURL}}">
@@ -50,14 +57,19 @@
                                 {{$result->stage}} {{$result->homeScore}}:{{$result->awayScore}}
                                 </span>
                             @endforeach
-                            <button class="btn btn-primary" onclick="showScores(this, {{$match->id}})">show scores</button>
+                            <button class="btn btn-primary" onclick="showScores(this, {{$match->id}})">
+                                {{$match->startAt->setTimeZone('Europe/Moscow')->format('H:i')}}
+                            </button>
+                        @else
+                            <span class="alert-primary">
+                                {{$match->startAt->setTimeZone('Europe/Moscow')->format('H:i')}}
+                            </span>
                         @endif
                     </div>
                     <div style="display: grid; justify-items: end">
                         <h5>{{$match->awayTeam->name}}</h5>
                     </div>
                     <img class="img-fluid away" src="{{$match->awayTeam->logoURL}}">
-                    {{--<span>{{$match->startAt->setTimeZone('Europe/Moscow')->format('H:i')}}</span>--}}
                 </div>
             @endforeach
         </div>
