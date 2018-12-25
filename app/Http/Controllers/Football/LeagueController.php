@@ -30,8 +30,9 @@ class LeagueController extends Controller
             return view('football.standingsAPI', ['standings' => $standings->where('type', '=', 'TOTAL')]);
         }
         $standings = $league->standings;
-        dd($standings);
-        return view('football.standingsDB', ['standings' => $standings]);
+        return view('football.standingsDB', [
+            'standings' => $standings->where('type', '=', 'TOTAL')
+        ]);
     }
 
     private function updateStandings($leagueId)
@@ -53,7 +54,6 @@ class LeagueController extends Controller
             }
             foreach ($standingAPI->table as $row) {
                 $stats = [
-                    'position' => $row->position,
                     'points' => $row->points,
                     'won' => $row->won,
                     'draw' => $row->draw,

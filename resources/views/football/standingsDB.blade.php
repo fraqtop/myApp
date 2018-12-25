@@ -19,7 +19,7 @@
             <tbody>
             @foreach($standing->teams as $team)
                 <tr>
-                    <th scope="row">{{$team->pivot->position}}</th>
+                    <th scope="row">{{$loop->iteration}}</th>
                     <td><img height="30px" width="30px" src="{{$team->logoURL}}"></td>
                     <td>
                         <a href="/football/team/{{$team->id}}">

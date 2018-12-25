@@ -49,7 +49,6 @@ class TeamController extends Controller
         $teamDB->name = $teamAPI->get('name');
         $teamDB->shortName = $teamAPI->get('shortName');
         $teamDB->tla = $teamAPI->get('tla');
-        $teamDB->logoURL = $teamAPI->get('crestUrl');
         $teamDB->site = $teamAPI->get('website');
         $teamDB->founded = $teamAPI->get('founded');
         $teamDB->colors = $teamAPI->get('clubColors');

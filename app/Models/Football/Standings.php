@@ -32,13 +32,12 @@ class Standings extends Model
     public function teams()
     {
         return $this->belongsToMany(Team::class)->withPivot([
-            'position',
             'points',
             'won',
             'draw',
             'lost',
             'goalsFor',
             'goalsAgainst'
-        ]);
+        ])->orderByRaw('`points` desc, `pivot_goalsFor` - `pivot_goalsAgainst` desc, `pivot_goalsFor` desc');
     }
 }

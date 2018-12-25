@@ -51,12 +51,11 @@ class League extends Model
     public function teams()
     {
         $teams = collect();
-        $standings = $this->standings;
-        dd($standings);
         $this->standings->each(function (Standings $standing) use(&$teams){
-            $teams->merge($standing->teams);
+            $teams = $teams->merge($standing->teams);
         });
-        dd($teams);
+        $teams = $teams->unique('id');
+        return $teams;
     }
 
     public function isOutdated(string $lastUpdate)
