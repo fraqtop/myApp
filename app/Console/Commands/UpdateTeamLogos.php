@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Football\League;
 use App\Models\Football\Team;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Goutte;
 
@@ -16,6 +17,8 @@ class UpdateTeamLogos extends Command
      * @var string
      */
     protected $signature = 'sync:logos {--league=}';
+
+    private $hrefs;
 
     /**
      * The console command description.
@@ -32,50 +35,48 @@ class UpdateTeamLogos extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->hrefs = [
+            2019 => 'https://www.eurosport.ru/football/serie-a/standing.shtml',
+            2021 => 'https://www.eurosport.ru/football/premier-league/standing.shtml',
+            2014 => 'https://www.eurosport.ru/football/la-liga/standing.shtml',
+            2016 => 'https://www.eurosport.ru/football/championship/standing.shtml',
+            2002 => 'https://www.eurosport.ru/football/bundesliga/standing.shtml',
+            2015 => 'https://www.eurosport.ru/football/ligue-1/standing.shtml',
+            2017 => 'https://www.eurosport.ru/football/portuguese-superliga/standing.shtml',
+            2013 => 'https://www.eurosport.ru/football/brazilian-serie-a/standing.shtml',
+            2003 => 'https://www.eurosport.ru/football/eredivisie/standing.shtml',
+        ];
     }
 
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
-        $leagueId = $this->option('league');
-        switch ($leagueId){
-            case 2019:
-                $href = 'https://www.eurosport.ru/football/serie-a/standing.shtml';
-                break;
-            case 2021:
-                $href = 'https://www.eurosport.ru/football/premier-league/standing.shtml';
-                break;
-            case 2014:
-                $href = 'https://www.eurosport.ru/football/la-liga/standing.shtml';
-                break;
-            case 2016:
-                $href = 'https://www.eurosport.ru/football/championship/standing.shtml';
-                break;
-            case 2002:
-                $href = 'https://www.eurosport.ru/football/bundesliga/standing.shtml';
-                break;
-            case 2015:
-                $href = 'https://www.eurosport.ru/football/ligue-1/standing.shtml';
-                break;
-            case 2017:
-                $href = 'https://www.eurosport.ru/football/portuguese-superliga/standing.shtml';
-                break;
-            case 2013:
-                $href = 'https://www.eurosport.ru/football/brazilian-serie-a/standing.shtml';
-                break;
-            case 2003:
-                $href = 'https://www.eurosport.ru/football/eredivisie/standing.shtml';
-                break;
-            default:
-                $href = null;
+        if (!$leagueId = $this->option('league')){
+            foreach ($this->hrefs as $key => $value)
+            {
+                $this->updateTeams($key);
+            }
         }
-        if ($href){
-            $teams = League::find($leagueId)->teams();
-            $page = Goutte::request('get', $href);
+        else{
+            if ($this->updateTeams($leagueId)){
+                $this->info('logos were updated');
+            }
+            else{
+                $this->info('there is no league with such id');
+            }
+        }
+    }
+    private function updateTeams(int $leagueId)
+    {
+        if ($league = League::find($leagueId)){
+            $this->call('sync:teams', ['league' => $leagueId]);
+            $teams = $league->teams();
+            $this->info($league->name." teams on the way, count is".$teams->count());
+            $page = Goutte::request('get', $this->hrefs[$leagueId]);
             $page->filter('span.image')->each(function ($node) use(&$teams){
                 $team = $teams->shift();
                 if ($node->children('img')->count() > 0){
@@ -83,7 +84,8 @@ class UpdateTeamLogos extends Command
                     $team->save();
                 }
             });
-            $this->info('logos were updated');
+            return true;
         }
+        return false;
     }
 }

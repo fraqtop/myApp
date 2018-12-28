@@ -1,8 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <div class="row">
+            <select class="form-control" style="margin-left: 80%">
+                <option>Total</option>
+                <option>Home</option>
+                <option>Away</option>
+            </select>
+        </div>
     @foreach($standings as $standing)
-        <table class="table table-striped" style="font-weight: 600">
+        <table class="table table-striped" style="font-weight: 600; display: <?php echo $standing->type === 'TOTAL'? 'block': 'none'?>">
             <thead>
             <tr>
                 <th scope="col">Position</th>

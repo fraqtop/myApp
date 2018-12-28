@@ -109,22 +109,4 @@ class LeagueController extends Controller
         $league->update(['logo' => $path]);
         return redirect('/football');
     }
-
-    public function loadLeagues()
-    {
-        $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
-        $leagues = [];
-        $leaguesAPI->each(function ($league) use(&$leagues){
-            $newLeague = League::create([
-                'id' =>  $league->id,
-                'name' => $league->name,
-                'areaName' => $league->area->name,
-                'startDate' => new \DateTime($league->currentSeason->startDate),
-                'endDate' => new \DateTime($league->currentSeason->endDate),
-                'matchday' => $league->currentSeason->currentMatchday
-            ]);
-            $leagues[] = $newLeague;
-        });
-        return collect($leagues);
-    }
 }

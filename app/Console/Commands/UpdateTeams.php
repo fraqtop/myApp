@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Football\Team;
 use Illuminate\Console\Command;
+use Football;
 
 class UpdateTeams extends Command
 {
@@ -12,7 +13,7 @@ class UpdateTeams extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:teams {teams}';
+    protected $signature = 'sync:teams {league}';
 
     /**
      * The console command description.
@@ -38,13 +39,14 @@ class UpdateTeams extends Command
      */
     public function handle()
     {
-        foreach ($this->argument('teams') as $team) {
-            if(!Team::find($team['id'])) {
-                Team::create([
-                    'id' => $team['id'],
-                    'name' => $team['name']
+        if ($leagueId = $this->argument('league')){
+            $teams = Football::getLeagueTeams($leagueId);
+            $teams->each(function ($team){
+                Team::updateOrCreate([
+                   'id' => $team->id,
+                   'name' => $team->name,
                 ]);
-            }
+            });
         }
     }
 }

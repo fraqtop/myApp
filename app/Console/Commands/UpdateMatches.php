@@ -66,9 +66,7 @@ class UpdateMatches extends Command
             else
             {
                 $isOutdated = true;
-                $this->call('sync:teams', [
-                    'teams' => [(array)$matchAPI->homeTeam, (array)$matchAPI->awayTeam]
-                ]);
+                $this->call('sync:teams', ['league' => $matchAPI->competition->id]);
                 $matchDB = Match::create([
                     'id' => $matchAPI->id,
                     'referee' => $matchAPI->referees[0]->name ?? "Unknown Person",

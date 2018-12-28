@@ -36,7 +36,6 @@ class TeamController extends Controller
                 'name' => $teamAPI->get('name'),
                 'shortName' => $teamAPI->get('shortName'),
                 'tla' => $teamAPI->get('tla'),
-                'logoURL' => $teamAPI->get('crestUrl'),
                 'site' => $teamAPI->get('website'),
                 'founded' => $teamAPI->get('founded'),
                 'colors' => $teamAPI->get('clubColors'),

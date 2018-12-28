@@ -74,7 +74,7 @@ class League extends Model
                 $league->lastUpdated = $league->freshTimestamp();
         });
         static::creating(function (League $league){
-            $league->lastUpdated = (new \DateTime())->setTimestamp(0);
+            $league->lastUpdated = Carbon::create()->setTimestamp(0);
         });
     }
 }

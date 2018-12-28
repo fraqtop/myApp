@@ -2,6 +2,7 @@
 
 namespace App\Models\Football;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -47,6 +48,9 @@ class Team extends Model
         parent::boot();
         static::saving(function (Team $team){
             $team->lastUpdated = $team->freshTimestamp();
+        });
+        static::creating(function (Team $team){
+           $team->lastUpdated = Carbon::create()->setTimestamp(0);
         });
     }
 
