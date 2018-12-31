@@ -42,14 +42,16 @@ class UpdateLeagues extends Command
         $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
         $leagues = [];
         $leaguesAPI->each(function ($league) use(&$leagues){
-            League::updateOrCreate([
-                'id' =>  $league->id,
-                'name' => $league->name,
-                'areaName' => $league->area->name,
-                'startDate' => new \DateTime($league->currentSeason->startDate),
-                'endDate' => new \DateTime($league->currentSeason->endDate),
-                'matchday' => $league->currentSeason->currentMatchday,
-            ]);
+            if (array_search($league->id, [2000, 2018]) === false){
+                League::updateOrCreate([
+                    'id' =>  $league->id,
+                    'name' => $league->name,
+                    'areaName' => $league->area->name,
+                    'startDate' => new \DateTime($league->currentSeason->startDate),
+                    'endDate' => new \DateTime($league->currentSeason->endDate),
+                    'matchday' => $league->currentSeason->currentMatchday,
+                ]);
+            }
         });
     }
 }
