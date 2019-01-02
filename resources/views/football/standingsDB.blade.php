@@ -2,14 +2,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <select class="form-control" style="margin-left: 80%">
-                <option>Total</option>
-                <option>Home</option>
-                <option>Away</option>
+            <select class="form-control" style="margin-left: 80%" onchange="filterStandings(this.value)">
+                <option value="TOTAL">Total</option>
+                <option value="HOME">Home</option>
+                <option value="AWAY">Away</option>
             </select>
         </div>
     @foreach($standings as $standing)
-        <table class="table table-striped" style="font-weight: 600; display: <?php echo $standing->type === 'TOTAL'? 'block': 'none'?>">
+        <table class="table table-striped {{$standing->type}}" style="font-weight: 600; display: <?php echo $standing->type === 'TOTAL'? 'block': 'none'?>">
             <thead>
             <tr>
                 <th scope="col">Position</th>
@@ -45,4 +45,14 @@
         </table>
     @endforeach
     </div>
+@endsection
+
+@section('script')
+    <script>
+        let standings = Array.from(document.getElementsByClassName('table'));
+        function filterStandings(type) {
+            standings.forEach(table => {table.style.display = 'none'});
+            standings.filter(x => x.classList.contains(type)).forEach(table => {table.style.display = 'block'});
+        }
+    </script>
 @endsection

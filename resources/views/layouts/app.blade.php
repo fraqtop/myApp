@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
     <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
     @yield('external_meta')

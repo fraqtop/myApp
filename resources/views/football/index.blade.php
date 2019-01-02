@@ -16,10 +16,10 @@
             <section>
                 <h4>Filter</h4>
                 <div class="ribbon">
-                    <select class="form-control form-group" style="height: 50px">
+                    <select class="form-control form-group" style="height: 50px" onchange="filterMatches(this.value)">
                         <option value="0" selected>no filter for matches</option>
                         @foreach($leagues as $league)
-                            <option value="{{$league->id}}">{{$league->name}}</option>
+                            <option value="{{$league->id}}">{{$league->name}} ({{$league->areaName}})</option>
                         @endforeach
                     </select>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
             @endif
             @foreach($matches as $match)
-                <div class="match" style="background: {{$match->thrillRating < 3 ? '#DEA77C': '#ABE3B1'}}">
+                <div class="match {{$match->leagueId}}" style="background: {{$match->thrillRating < 3 ? '#DEA77C': '#ABE3B1'}}">
                     <img class="img-fluid home" src="{{$match->homeTeam->logoURL}}">
                     <div>
                         <h5>{{$match->homeTeam->name}}</h5>
@@ -77,12 +77,21 @@
 @endsection
 @section('script')
     <script>
+        let matches = Array.from(document.getElementsByClassName('match'));
         function showScores(button, id) {
             button.style.display = 'none';
-            let results = document.getElementsByClassName(`${id}scores`);
-            Array.from(results).forEach(function (result) {
-                result.style.display = 'block';
-            });
+            let results = Array.from(document.getElementsByClassName(`${id}scores`));
+            results.forEach(result => {result.style.display = 'block'});
+        }
+        function filterMatches(league) {
+            if (league == 0){
+                console.log(matches);
+                matches.forEach(match => {match.hidden = false});
+            }
+            else {
+                matches.forEach(match => {match.hidden = true});
+                matches.filter(x => x.classList.contains(league)).forEach(match => {match.hidden = false})
+            }
         }
     </script>
 @endsection

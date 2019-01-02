@@ -14,37 +14,30 @@ use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
-    public function getStandings(Request $request, $leagueId)
+    public function getStandings(int $leagueId)
     {
-        if ($request->method() == 'PATCH')
-        {
-            return $this->updateStandings($leagueId);
-        }
         $league = League::find($leagueId);
         $leagueAPI = Football::getLeague($leagueId);
         $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
         if ($league->isOutdated($lastUpdatedAPI)) {
             $standings = Football::getLeagueStandings($leagueId);
-            session()->put('leagueAPI', $leagueAPI);
-            session()->put('standings', $standings);
-            return view('football.standingsAPI', ['standings' => $standings->where('type', '=', 'TOTAL')]);
+            $this->updateStandings($leagueAPI, $standings);
         }
         $standings = $league->standings;
         return view('football.standingsDB', [
-            'standings' => $standings->where('type', '=', 'TOTAL')
+            'standings' => $standings
         ]);
     }
 
-    private function updateStandings($leagueId)
+    private function updateStandings($league, $standings)
     {
-        $standings = session('standings');
         DB::beginTransaction();
-        $standings->each(function ($standingAPI) use($leagueId, &$updatedStandings){
+        $standings->each(function ($standingAPI) use($league, &$updatedStandings){
             $standingData = [
                 'stage' => $standingAPI->stage,
                 'type' => $standingAPI->type,
                 'group' => $standingAPI->group,
-                'league_id' => $leagueId
+                'league_id' => $league->get('id')
             ];
             $isNewStandings = false;
             if(!$standingsDB = Standings::where($standingData)->first())
@@ -74,21 +67,17 @@ class LeagueController extends Controller
                     $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);
                 }
             }
-            $leagueAPI = session()->get('leagueAPI');
-            $league = League::find($leagueId);
-            $league->update([
-                'name' => $leagueAPI->get('name'),
-                'areaName' => $leagueAPI->get('area')->name,
-                'startDate' => $leagueAPI->get('currentSeason')->startDate,
-                'endDate' => $leagueAPI->get('currentSeason')->endDate,
-                'matchday' => $leagueAPI->get('currentSeason')->currentMatchday
+            $leagueDB = League::find($league->get('id'));
+            $leagueDB->update([
+                'name' => $league->get('name'),
+                'areaName' => $league->get('area')->name,
+                'startDate' => $league->get('currentSeason')->startDate,
+                'endDate' => $league->get('currentSeason')->endDate,
+                'matchday' => $league->get('currentSeason')->currentMatchday
             ]);
-            $league->save();
+            $leagueDB->save();
         });
         DB::commit();
-        session()->remove('standings');
-        session()->remove('leagueAPI');
-        return "standings have been updated";
     }
 
     public function setLogo(Request $request, $leagueId)

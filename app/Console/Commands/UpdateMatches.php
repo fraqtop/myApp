@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
-use App\models\Football\Match;
+use App\Models\Football\Match;
 use Illuminate\Console\Command;
 use Football;
 
