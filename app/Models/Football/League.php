@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League query()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Football\Match[] $matches
  */
 class League extends Model
 {
@@ -58,6 +59,11 @@ class League extends Model
         return $teams;
     }
 
+    public function matches()
+    {
+        return $this->hasMany(Match::class, 'leagueId');
+    }
+
     public function isOutdated(string $lastUpdate)
     {
         $lastUpdate = Carbon::createFromTimeString($lastUpdate);
@@ -65,6 +71,11 @@ class League extends Model
             return true;
         }
         return false;
+    }
+
+    public function isNeverUpdated()
+    {
+        return $this->lastUpdated == Carbon::createFromTimestamp(0);
     }
 
     public static function boot()

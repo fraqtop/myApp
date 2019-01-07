@@ -20,7 +20,7 @@
                 <a href="/posts">Blog</a>
                 <a href="/contact">Contact</a>
                 @if(Auth::check())
-                    <a href="/profile">Profile</a>
+                    <a href="/football">Football</a>
                 @else
                     <a href="/login">Login</a>
                 @endif

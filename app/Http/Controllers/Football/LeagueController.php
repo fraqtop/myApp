@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Football;
 use App\Models\Football\League;
 use App\Models\Football\Standings;
 use App\Models\Football\Team;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
@@ -17,14 +18,19 @@ class LeagueController extends Controller
     public function getStandings(int $leagueId)
     {
         $league = League::find($leagueId);
-        $leagueAPI = Football::getLeague($leagueId);
-        $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
-        if ($league->isOutdated($lastUpdatedAPI)) {
-            $standings = Football::getLeagueStandings($leagueId);
-            $this->updateStandings($leagueAPI, $standings);
+        $matchesCount = $league->matches()
+            ->whereBetween('startAt', [$league->lastUpdated, Carbon::now()])
+            ->count();
+        if ($matchesCount or $league->isNeverUpdated()){
+            $leagueAPI = Football::getLeague($leagueId);
+            $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
+            if ($league->isOutdated($lastUpdatedAPI)) {
+                $standings = Football::getLeagueStandings($leagueId);
+                $this->updateStandings($leagueAPI, $standings);
+            }
         }
         $standings = $league->standings;
-        return view('football.standingsDB', [
+        return view('football.standings', [
             'standings' => $standings
         ]);
     }

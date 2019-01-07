@@ -14,7 +14,7 @@
         <nav class="min-dark-nav">
             <a href="/">home</a>
             <a href="/posts">blog</a>
-            <a href="/contact">contact</a>
+            <a href="/football">football</a>
             <div class="nav-right">
             @guest
                 <a href="/register">register</a>

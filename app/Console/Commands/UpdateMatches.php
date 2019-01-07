@@ -51,15 +51,13 @@ class UpdateMatches extends Command
             'dateFrom' => $yesterday,
             'dateTo' => $endDate
         ]);
-        $matches->each(function ($matchAPI) use ($yesterday){
+        $matches->each(function ($matchAPI) {
             if ($matchDB = Match::find($matchAPI->id)) {
                 $lastUpdateAPI = Carbon::createFromTimeString($matchAPI->lastUpdated);
                 if($isOutdated = $matchDB->isOutdated($lastUpdateAPI)) {
                     $matchDB->update([
                         'referee' => $matchAPI->referees[0]->name ?? 'Unknown Person',
                         'startAt' => Carbon::createFromTimeString($matchAPI->utcDate),
-                        'homeId' => $matchAPI->homeTeam->id,
-                        'awayId' => $matchAPI->awayTeam->id
                     ]);
                 }
             }
@@ -77,7 +75,7 @@ class UpdateMatches extends Command
                     'leagueId' => $matchAPI->competition->id
                 ]);
             }
-            if ($matchDB->startAt < Carbon::now() and $isOutdated)
+            if ($matchAPI->status === 'FINISHED' and $isOutdated)
             {
                 $matchDB->setResults((array)$matchAPI->score);
             }

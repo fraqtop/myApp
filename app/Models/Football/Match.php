@@ -87,17 +87,11 @@ class Match extends Model
 
     public function updateRating($additionalStats = null)
     {
-        $results = $this->results;
-        $homeScored = 0;
-        $awayScored = 0;
-        $results->each(function (Result $result) use(&$homeScored, &$awayScored){
-            $homeScored += $result->homeScore - $homeScored;
-            $awayScored += $result->awayScore - $awayScored;
-        });
-        $totalGoals = $homeScored + $awayScored;
-        $this->thrillRating = $totalGoals - 3;
-        if(abs($homeScored - $awayScored) < 3 and $totalGoals > 3){
-            $this->thrillRating += 2;
+        $result = $this->results->firstWhere('stage', '=', self::STAGES[1]);
+        $totalGoals = $result->homeScore + $result->awayScore;
+        $this->thrillRating = $totalGoals - 2;
+        if(abs($result->homeScore - $result->awayScore) < 3){
+            $this->thrillRating += 1;
         }
         $this->thrillRating = $this->thrillRating < 0 ? 0: $this->thrillRating;
         $this->save();

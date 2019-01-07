@@ -39,7 +39,7 @@
             </div>
             @if($matches->count() === 0)
                 <div class="alert-danger">
-                    <h4 style="">
+                    <h4>
                         no matches for this day
                     </h4>
                 </div>
@@ -61,7 +61,7 @@
                                 {{$match->startAt->setTimeZone('Europe/Moscow')->format('H:i')}}
                             </button>
                         @else
-                            <span class="alert-primary">
+                            <span class="{{$match->startAt < \Carbon\Carbon::now() ? 'alert-success': 'alert-primary'}}">
                                 {{$match->startAt->setTimeZone('Europe/Moscow')->format('H:i')}}
                             </span>
                         @endif
