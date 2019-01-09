@@ -27,7 +27,7 @@ class MatchController extends Controller
             ->get();
         return view('football.index', [
             'matches' => $matches,
-            'leagues' => League::all(),
+            'leagues' => League::with('location')->get(),
             'date' => $matchDay
         ]);
     }

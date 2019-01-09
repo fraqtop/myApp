@@ -28,8 +28,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player query()
+ * @property int|null $roleId
+ * @property int|null $nationalityId
+ * @property int|null $birthCountryId
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereBirthCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereNationalityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereRoleId($value)
  */
 class Player extends Model
 {
-    //
+    protected $guarded = [];
 }

@@ -8,7 +8,7 @@
                 <div class="ribbon">
                 @foreach($leagues as $league)
                     <a href="/football/{{$league->id}}">
-                        <img class="img-fluid" src="{{$league->logo ?? '/img/nothing.jpg'}}">
+                        <img class="img-fluid" src="{{$league->location->flagURL ?? '/img/nothing.jpg'}}">
                     </a>
                 @endforeach
                 </div>

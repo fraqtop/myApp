@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League query()
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Football\Match[] $matches
+ * @property int|null $locationId
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\League whereLocationId($value)
+ * @property-read \App\Models\Football\Location|null $location
  */
 class League extends Model
 {
@@ -76,6 +79,11 @@ class League extends Model
     public function isNeverUpdated()
     {
         return $this->lastUpdated == Carbon::createFromTimestamp(0);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'locationId');
     }
 
     public static function boot()
