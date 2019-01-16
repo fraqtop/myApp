@@ -34,8 +34,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereBirthCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereNationalityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player whereRoleId($value)
+ * @property int|null $positionId
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Football\Player wherePositionId($value)
  */
 class Player extends Model
 {
+    use UpdatesFromAPI;
+
     protected $guarded = [];
+    public $timestamps = false;
 }

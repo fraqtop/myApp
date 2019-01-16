@@ -38,10 +38,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model
 {
+    use UpdatesFromAPI;
+
     public $incrementing = false;
     public $timestamps = false;
     protected $dates = ['lastUpdated'];
     protected $guarded = [];
+    private $nationalities;
 
     public static function boot()
     {
@@ -64,8 +67,61 @@ class Team extends Model
         return $this->belongsToMany(Standings::class);
     }
 
-    public function updateSquad($newSquad)
+    private function getNationalities()
     {
+        if (!$this->nationalities){
+            $this->nationalities = Location::all();
+        }
+        return $this->nationalities;
+    }
 
+    private function getLocationId($locationName)
+    {
+        if (!$locationName){
+            return null;
+        }
+        $location = $this->getNationalities()->where('name', $locationName)->first();
+        if (!$location){
+            $locationName = str_replace(' Islands', '', $locationName);
+            $locationName = str_replace(' ', '-', $locationName);
+            $location = $this->getNationalities()
+                ->where('name', $locationName)
+                ->first();
+        }
+        if (!$location){
+            $location = Location::create(['name' => $locationName]);
+            $this->nationalities->push($location);
+        }
+        return $location->id;
+    }
+
+    public function updateSquad(array $newSquad)
+    {
+        foreach ($newSquad as $member) {
+            if (!$player = Player::find($member->id)){
+                $this->createMember($member);
+            }
+            else{
+                $player->teamId = $this->id;
+                $player->save();
+            }
+        }
+        unset($this->nationalities);
+    }
+
+    private function createMember($playerData)
+    {
+        $birthDate = $playerData->dateOfBirth === null ? null : Carbon::createFromTimeString($playerData->dateOfBirth);
+        if (!$playerData->position and $playerData->role === 'PLAYER') {
+            $playerData->position = 'Universal';
+        }
+        $this->players()->create([
+            'id' => $playerData->id,
+            'name' => $playerData->name,
+            'birth' => $birthDate,
+            'position' => $playerData->position,
+            'nationalityId' => $this->getLocationId($playerData->nationality),
+            'birthCountryId' => $this->getLocationId($playerData->countryOfBirth)
+        ]);
     }
 }

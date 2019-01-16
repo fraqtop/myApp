@@ -14,13 +14,9 @@ class ModifyPlayersFieldsToDirectories extends Migration
     {
         Schema::table('players', function (Blueprint $table) {
             $table->dropColumn(['birthCountry', 'nationality', 'role']);
-            $table->integer('roleId')->unsigned()->nullable();
+            $table->string('position', 15)->nullable()->change();
             $table->integer('nationalityId')->unsigned()->nullable();
             $table->integer('birthCountryId')->unsigned()->nullable();
-            $table->foreign('roleId')
-                ->references('id')
-                ->on('roles')
-                ->onDelete('set null');
             $table->foreign('nationalityId')
                 ->references('id')
                 ->on('locations')
@@ -40,13 +36,13 @@ class ModifyPlayersFieldsToDirectories extends Migration
     public function down()
     {
         Schema::table('players', function (Blueprint $table) {
-            $table->dropForeign('players_roleid_foreign');
             $table->dropForeign('players_nationalityid_foreign');
             $table->dropForeign('players_birthcountryid_foreign');
-            $table->dropColumn(['roleId', 'nationalityId', 'birthCountryId']);
+            $table->dropColumn(['nationalityId', 'birthCountryId']);
             $table->string('birthCountry', 30);
             $table->string('nationality', 30);
-            $table->string('role', 20);
+            $table->string('role');
+            $table->string('position', 20)->nullable(false)->change();
         });
     }
 }

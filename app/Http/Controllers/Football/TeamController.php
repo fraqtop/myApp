@@ -20,8 +20,7 @@ class TeamController extends Controller
         }
         else
         {
-            $lastUpdate = Carbon::createFromTimeString($teamAPI->get('lastUpdated'));
-            if ($lastUpdate > $team->lastUpdated)
+            if ($team->isOutdated($teamAPI->get('lastUpdated')))
             {
                 $team = $this->update($team, $teamAPI);
             }
@@ -31,7 +30,7 @@ class TeamController extends Controller
 
     function create($teamAPI)
     {
-        return Team::create([
+        $team = Team::create([
                 'id' => $teamAPI->get('id'),
                 'name' => $teamAPI->get('name'),
                 'shortName' => $teamAPI->get('shortName'),
@@ -41,18 +40,20 @@ class TeamController extends Controller
                 'colors' => $teamAPI->get('clubColors'),
                 'stadium' => $teamAPI->get('venue'),
             ]);
+        $team->updateSquad($teamAPI->get('squad'));
+        return $team;
     }
 
     function update(Team $teamDB, $teamAPI)
     {
-        $teamDB->name = $teamAPI->get('name');
-        $teamDB->shortName = $teamAPI->get('shortName');
-        $teamDB->tla = $teamAPI->get('tla');
-        $teamDB->site = $teamAPI->get('website');
-        $teamDB->founded = $teamAPI->get('founded');
-        $teamDB->colors = $teamAPI->get('clubColors');
-        $teamDB->stadium = $teamAPI->get('venue');
-        $teamDB->save();
+        $teamDB->update([
+            'name' => $teamAPI->get('name'),
+            'tla' => $teamAPI->get('tla'),
+            'site' => $teamAPI->get('website'),
+            'founded' => $teamAPI->get('founded'),
+            'colors' => $teamAPI->get('clubColors'),
+            'stadium' => $teamAPI->get('venue')
+        ]);
         $teamDB->updateSquad($teamAPI->get('squad'));
         return $teamDB;
     }

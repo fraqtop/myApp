@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class League extends Model
 {
+    use UpdatesFromAPI;
+
     public $timestamps = false;
     public $incrementing = false;
     protected $guarded = ['lastUpdated'];
@@ -65,20 +67,6 @@ class League extends Model
     public function matches()
     {
         return $this->hasMany(Match::class, 'leagueId');
-    }
-
-    public function isOutdated(string $lastUpdate)
-    {
-        $lastUpdate = Carbon::createFromTimeString($lastUpdate);
-        if ($lastUpdate > $this->lastUpdated) {
-            return true;
-        }
-        return false;
-    }
-
-    public function isNeverUpdated()
-    {
-        return $this->lastUpdated == Carbon::createFromTimestamp(0);
     }
 
     public function location()

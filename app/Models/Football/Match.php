@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Match extends Model
 {
+    use UpdatesFromAPI;
+
     private const STAGES = [
         'halfTime',
         'fullTime',
@@ -95,12 +97,6 @@ class Match extends Model
         }
         $this->thrillRating = $this->thrillRating < 0 ? 0: $this->thrillRating;
         $this->save();
-    }
-
-    public function isOutdated(string $lastUpdate)
-    {
-        $lastUpdate = Carbon::createFromTimeString($lastUpdate);
-        return $lastUpdate > $this->lastUpdated;
     }
 
     protected static function boot()
