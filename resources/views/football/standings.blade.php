@@ -16,29 +16,29 @@
                 <th scope="col"></th>
                 <th scope="col">Team</th>
                 <th scope="col">Points</th>
-                <th scope="col">Won</th>
-                <th scope="col">Draw</th>
-                <th scope="col">Lost</th>
-                <th scope="col">Goals for</th>
-                <th scope="col">Goals against</th>
+                <th scope="col" class="secondary">Won</th>
+                <th scope="col" class="secondary">Draw</th>
+                <th scope="col" class="secondary">Lost</th>
+                <th scope="col" class="secondary">Goals for</th>
+                <th scope="col" class="secondary">Goals against</th>
             </tr>
             </thead>
             <tbody>
             @foreach($standing->teams as $team)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td><img height="30px" width="30px" src="{{$team->logoURL}}"></td>
+                    <td><img height="30px" style="min-width: 30px" src="{{$team->logoURL}}"></td>
                     <td>
                         <a href="/football/team/{{$team->id}}">
                             {{$team->name}}
                         </a>
                     </td>
                     <td>{{$team->pivot->points}}</td>
-                    <td>{{$team->pivot->won}}</td>
-                    <td>{{$team->pivot->draw}}</td>
-                    <td>{{$team->pivot->lost}}</td>
-                    <td class="text-success">{{$team->pivot->goalsFor}}</td>
-                    <td class="text-danger">{{$team->pivot->goalsAgainst}}</td>
+                    <td class="secondary">{{$team->pivot->won}}</td>
+                    <td class="secondary">{{$team->pivot->draw}}</td>
+                    <td class="secondary">{{$team->pivot->lost}}</td>
+                    <td class="text-success secondary">{{$team->pivot->goalsFor}}</td>
+                    <td class="text-danger secondary">{{$team->pivot->goalsAgainst}}</td>
                 </tr>
             @endforeach
             </tbody>

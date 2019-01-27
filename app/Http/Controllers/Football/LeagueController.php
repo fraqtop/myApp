@@ -76,7 +76,6 @@ class LeagueController extends Controller
             $leagueDB = League::find($league->get('id'));
             $leagueDB->update([
                 'name' => $league->get('name'),
-                'areaName' => $league->get('area')->name,
                 'startDate' => $league->get('currentSeason')->startDate,
                 'endDate' => $league->get('currentSeason')->endDate,
                 'matchday' => $league->get('currentSeason')->currentMatchday

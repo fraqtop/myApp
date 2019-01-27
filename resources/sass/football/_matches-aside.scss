@@ -1,33 +1,31 @@
 .matches-aside{
   display: grid;
   position: fixed;
-  grid-template-rows: 3fr 1fr;
   grid-gap: 10px;
   justify-items: center;
   align-items: center;
   height: 86vh;
-  width: 20%;
+  width: 50px;
   background: $particlesBack;
   color: $brightFont;
-  *{
-    height: 100%;
-    display: grid;
-    justify-items: center;
+  section{
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
+    a{
+      height: 3vh;
+      min-width: 35px;
+      margin: 5px;
+      &:hover{
+        opacity: 0.6;
+      }
+    }
   }
 }
 
-.ribbon{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  a{
-    height: 3vh;
-    min-width: 35px;
-    margin: 5px;
-    &:hover{
-      opacity: 0.6;
-    }
-  }
+.aside-pillow{
+  background: $particlesBack;
+  height: 100%;
 }

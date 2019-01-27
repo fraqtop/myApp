@@ -4,51 +4,35 @@
         <div class="aside-pillow"></div>
         <aside class="matches-aside">
             <section>
-                <h4>Standings</h4>
-                <div class="ribbon">
                 @foreach($leagues as $league)
                     <a href="/football/{{$league->id}}">
                         <img class="img-fluid" src="{{$league->location->flagURL ?? '/img/nothing.jpg'}}">
                     </a>
                 @endforeach
-                </div>
-            </section>
-            <section>
-                <h4>Filter</h4>
-                <div class="ribbon">
-                    <select class="form-control form-group" style="height: 50px" onchange="filterMatches(this.value)">
-                        <option value="0" selected>no filter for matches</option>
-                        @foreach($leagues as $league)
-                            <option value="{{$league->id}}">{{$league->name}} ({{$league->areaName}})</option>
-                        @endforeach
-                    </select>
-                </div>
             </section>
         </aside>
         <div class="matches">
-            <div style="display: grid; margin: 0; align-items: center; justify-items: center">
-                <h4>
-                    <a href="/football/{{$date->copy()->subDay()->format('Y-m-d')}}" style="margin: 0 15px">
-                        yesterday
-                    </a>
-                    Matches for {{$date->format('F l j')}}
-                    <a href="/football/{{$date->copy()->addDay()->format('Y-m-d')}}" style="margin: 0 15px">
-                        tomorrow
-                    </a>
-                </h4>
-            </div>
+            <section>
+                <a href="/football/{{$date->copy()->subDay()->format('Y-m-d')}}" style="margin: 0 15px">&#8656</a>
+                <span class="col">{{$date->format('F j')}}</span>
+                <a href="/football/{{$date->copy()->addDay()->format('Y-m-d')}}" style="margin: 0 15px">&#8658</a>
+                <select class="form-control" onchange="filterMatches(this.value)">
+                    <option value="0">no filter</option>
+                    @foreach($leagues as $league)
+                        <option value="{{$league->id}}">{{$league->name}} ({{$league->location->name}})</option>
+                    @endforeach
+                </select>
+            </section>
             @if($matches->count() === 0)
                 <div class="alert-danger">
-                    <h4>
-                        no matches for this day
-                    </h4>
+                    <h4>No matches for this day</h4>
                 </div>
             @endif
             @foreach($matches as $match)
                 <div class="match {{$match->leagueId}}" style="background: {{$match->thrillRating < 3 ? '#DEA77C': '#ABE3B1'}}">
                     <img class="img-fluid home" src="{{$match->homeTeam->logoURL}}">
                     <div>
-                        <h5>{{$match->homeTeam->name}}</h5>
+                        <span class="team-name">{{$match->homeTeam->name}}</span>
                     </div>
                     <div class="scores" id="{{$match->id}}">
                         @if($match->results->count() > 0)
@@ -67,7 +51,7 @@
                         @endif
                     </div>
                     <div style="display: grid; justify-items: end">
-                        <h5>{{$match->awayTeam->name}}</h5>
+                        <span class="team-name">{{$match->awayTeam->name}}</span>
                     </div>
                     <img class="img-fluid away" src="{{$match->awayTeam->logoURL}}">
                 </div>

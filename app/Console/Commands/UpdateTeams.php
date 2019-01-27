@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Football\League;
 use App\Models\Football\Team;
 use Illuminate\Console\Command;
 use Football;
@@ -40,13 +41,15 @@ class UpdateTeams extends Command
     public function handle()
     {
         if ($leagueId = $this->argument('league')){
-            $teams = Football::getLeagueTeams($leagueId);
-            $teams->each(function ($team){
-                Team::updateOrCreate([
-                   'id' => $team->id,
-                   'name' => $team->name,
-                ]);
-            });
+            if (League::find($leagueId)->isNeverUpdated()){
+                $teams = Football::getLeagueTeams($leagueId);
+                $teams->each(function ($team){
+                    Team::updateOrCreate([
+                        'id' => $team->id,
+                        'name' => $team->name,
+                    ]);
+                });
+            }
         }
     }
 }

@@ -2,7 +2,20 @@
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 50px 1fr;
+  section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 3vmin;
+    *{
+      flex: 1;
+      text-align: center;
+    }
+    span{
+      flex: 1;
+    }
+  }
 }
 
 .aside-pillow{

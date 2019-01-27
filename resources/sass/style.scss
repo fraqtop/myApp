@@ -89,6 +89,9 @@ img{
       grid-template-rows: repeat(2, min-content);
     }
   }
+  .secondary{
+    display: none;
+  }
 }
 
 @media all and (max-width: 600px)
