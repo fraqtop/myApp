@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Visitor;
 use Closure;
 
-class CheckAdmin
+class CheckRobot
 {
     /**
      * Handle an incoming request.
@@ -15,7 +16,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->id != 1) {
+        if (!Visitor::find($request->session()->get('visitorId'))->isHuman) {
             abort(403);
         }
         return $next($request);

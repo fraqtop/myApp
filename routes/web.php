@@ -1,17 +1,15 @@
 <?php
 
-Route::get('/', 'HomeController@index');
-
-Route::match(['get', 'post'],'/contact', 'HomeController@contact');
-
-Route::auth();
-
-Route::get('/posts', 'Blog\PostController@getAllPosts');
-Route::get('/posts/{post_id}', 'Blog\PostController@getPost')
-    ->where('post_id', '[0-9]+');
+Route::group(['middleware' => ['identifier', 'robot_filter']], function (){
+    Route::get('/', 'HomeController@index');
+    Route::match(['get', 'post'],'/contact', 'HomeController@contact');
+    Route::auth();
+    Route::get('/posts', 'Blog\PostController@getAllPosts');
+    Route::get('/posts/{post_id}', 'Blog\PostController@getPost')
+        ->where('post_id', '[0-9]+');
+});
 
 //---------------Auth
-
 Route::group(['middleware' => 'auth'], function ()
 {
     //--------------Blog
@@ -27,7 +25,6 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/profile', 'HomeController@profile');
 
     //---------------Football
-
     Route::group(['namespace' => 'Football'], function(){
         Route::get('/football', 'MatchController@get');
         Route::get('/football/{league_id}', 'LeagueController@getStandings')
@@ -39,7 +36,6 @@ Route::group(['middleware' => 'auth'], function ()
     });
 
     //----------------Admin
-
     Route::group(['middleware' => 'admin'], function (){
         Route::match(['get', 'post'], '/admin/avatar', 'HomeController@avatar');
         Route::group(['namespace' => 'Admin'], function()

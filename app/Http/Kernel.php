@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckRobot;
+use App\Http\Middleware\IdentifyVisitor;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -59,5 +61,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => CheckAdmin::class,
+        'identifier' => IdentifyVisitor::class,
+        'robot_filter' => CheckRobot::class
     ];
 }

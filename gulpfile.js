@@ -12,7 +12,6 @@ const jsPaths = [
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
         `${basePath}particles.js`,
-        `${basePath}smoothScroll.js`,
         `${basePath}main.js`
     ];
 
@@ -70,4 +69,4 @@ function watch () {
     gulp.watch(jsPaths, gulp.series(jsLink, jsMinify))
 }
 
-gulp.task('default', gulp.parallel(syncStart, watch));
+gulp.task('default', gulp.parallel(gulp.series(scss, cssMinify), gulp.series(jsLink, jsMinify), watch, syncStart));
