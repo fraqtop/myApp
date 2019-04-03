@@ -26,6 +26,7 @@ class ModifyTeamsStadiumLength extends Migration
      */
     public function down()
     {
+        DB::statement("update teams set stadium='loo large' where length(stadium) > 30");
         Schema::table('teams', function (Blueprint $table) {
             $table->string('stadium', 30)
                 ->nullable()

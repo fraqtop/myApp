@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\Football\Player;
 
 class ModifyPlayersFieldsToDirectories extends Migration
 {
@@ -35,6 +36,8 @@ class ModifyPlayersFieldsToDirectories extends Migration
      */
     public function down()
     {
+        Player::whereNull('position')->delete();
+        DB::statement("update teams set lastUpdated='2017-01-01 00:00:00'");
         Schema::table('players', function (Blueprint $table) {
             $table->dropForeign('players_nationalityid_foreign');
             $table->dropForeign('players_birthcountryid_foreign');
