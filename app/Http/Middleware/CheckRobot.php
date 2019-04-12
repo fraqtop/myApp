@@ -16,9 +16,12 @@ class CheckRobot
      */
     public function handle($request, Closure $next)
     {
-        if (!Visitor::find($request->session()->get('visitorId'))->isHuman) {
-            abort(403);
+        if ($request->session()->has('visitorId')) {
+            if (@!Visitor::find($request->session()->get('visitorId'))->isHuman) {
+                abort(403);
+            }
+            return $next($request);
         }
-        return $next($request);
+        abort(403);
     }
 }

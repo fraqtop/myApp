@@ -1,0 +1,54 @@
+.horizontal_graphic{
+  display: grid;
+  height: 70vh;
+  width: 90%;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: 85% 15%;
+  grid-template-areas: "y-axis values"
+                        "nothing  x-axis";
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  span{
+    font-weight: bold;
+  }
+}
+
+.y-axis{
+  grid-area: y-axis;
+  display: grid;
+  height: 100%;
+  *{
+    display: flex;
+  }
+}
+
+.x-axis{
+  grid-area: x-axis;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  *{
+    flex: 1;
+    margin: 0 5px;
+  }
+}
+
+.graphic-values{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  grid-area: values;
+  align-items: flex-end;
+  justify-content: space-around;
+  border-left: 2px solid $mediumFont;
+  border-bottom: 1px solid $mediumFont;
+  div{
+    flex: 1;
+    background: $secondColor;
+    margin: 0 1px;
+    color: $brightFont;
+  }
+}

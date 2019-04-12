@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
 use App\Models\Blog\Post;
+use App\Models\Visitor;
 use App\User;
 use Mail;
 use Illuminate\Http\{Request, File};
@@ -41,15 +42,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    private function isSpam(Request $request)
+    private function isSpam($input)
     {
-        $fakeField = $request->post('contactAdvanced');
-        $postingPeriod = (new \DateTime())->getTimestamp() - $request->post('contactTime');
-        $keyPressDiff = (int)$request->post('contactCounter') - strlen($request->post('contactMessage'));
-        if($fakeField != null || $postingPeriod < 5 || $keyPressDiff < 0)
+        $fakeField = $input['contactAdvanced'] ?? null;
+        $postingPeriod = (new \DateTime())->getTimestamp() - $input['contactTime'];
+        $keyPressDiff = (int)$input['contactCounter'] - strlen($input['contactMessage']);
+        if($fakeField != null || $postingPeriod < 5 || $keyPressDiff < -20)
         {
             $traps = [$fakeField, $postingPeriod, $keyPressDiff];
-            $this->registerSpamMessage($request->post('contactAuthor'), $traps);
+            $this->registerSpamMessage($input['contactAuthor'], $traps);
             return true;
         }
         return false;
@@ -74,8 +75,9 @@ class HomeController extends Controller
     {
         if ($request->isMethod('post'))
         {
-            if($this->isSpam($request))
+            if($this->isSpam($request->input()))
             {
+                Visitor::find($request->session()->get('visitorId'))->update(['isHuman' => 0]);
                 return view('reports.spam');
             }
             else

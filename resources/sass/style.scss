@@ -4,9 +4,9 @@
 @import "forms/forms";
 @import "containers/containers";
 @import "pictures/pictures";
-@import "index/index";
 @import "blog/blog";
 @import "football/football";
+@import "graphics/graphics";
 
 html, body{
   position: relative;
@@ -33,6 +33,28 @@ a, a:hover, a:active, a:visited, a:focus{
   section{
     border-top: 2px solid $brightFont;
     padding: 0 10px;
+  }
+}
+
+.info{
+  height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  grid-template-columns: 1fr 2fr;
+  article{
+    margin: 7vmin;
+    font-size: 4vmin;
+    text-align: justify;
+  }
+  img{
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 0 3px 3px $brightFont;
+    margin: 3vmin;
+    border-radius: 100%;
   }
 }
 

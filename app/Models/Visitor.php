@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Visitor whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Visitor whereUuid($value)
  * @mixin \Eloquent
+ * @property string $id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Visit[] $visits
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Visitor whereId($value)
  */
 class Visitor extends Model
 {

@@ -1,5 +1,5 @@
 <footer>
-    <div class="copyright">Copyright &copy; 2018, designed and made by fraqtop</div>
+    <div class="copyright">Copyright &copy; {{\Carbon\Carbon::now()->year}}, designed and made by fraqtop</div>
     @if (Auth::check())
         <div class="auth">Hello, <a href="/profile">{{Auth::user()->name}}</a></div>
     @else

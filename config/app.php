@@ -151,7 +151,6 @@ return [
          * Package Service Providers...
          */
 
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Grambas\FootballData\FootballDataServiceProvider::class,
         \Weidner\Goutte\GoutteServiceProvider::class,
 

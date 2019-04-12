@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function ()
         Route::match(['get', 'post'], '/admin/avatar', 'HomeController@avatar');
         Route::group(['namespace' => 'Admin'], function()
         {
-            Route::get('/admin', 'TrafficController@getTraffic');
+            Route::get('/admin', 'TrafficController@get');
 
             Route::get('/admin/categories', 'CategoryController@get');
             Route::post('/admin/categories', 'CategoryController@create');
