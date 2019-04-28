@@ -34,11 +34,9 @@ class TrafficController extends Controller
         }
         $visits = $visits->sortBy('date');
         $xAxisLegend = $this->getXAxis($visits);
-        $yAxisLegend = $this->getYAxis($visits->max(function ($element){return $element->visitsCount;}));
         return view('admin.traffic', [
-            'visits' => $visits,
-            'yAxisLegend' => $yAxisLegend,
-            'xAxisLegend' => $xAxisLegend
+            'visits' => $visits->map(function ($day){return $day->visitsCount;})->values()->toJson(),
+            'xAxisLegend' => json_encode(array_values($xAxisLegend))
         ]);
     }
 

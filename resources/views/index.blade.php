@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official site of fraqtop, also known as Roman Bukhantsov">
-    <meta name="keywords" content="fraqtop, Roman Bukhantsov, Роман Буханцов, personal, web development, programming">
     <link rel="stylesheet" href="{{asset('css/style.css')}}?{{ File::lastModified('css/style.css') }}">
     <title>fraqtop</title>
 </head>
@@ -82,35 +80,35 @@
     </div>
     @include('footer')
 </body>
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 <script src="{{asset('js/all.js')}}?{{ File::lastModified('js/all.js') }}"></script>
 <script>
-    particlesJS.load('particles-js', 'js/particles.json', function() {
+    $(document).ready(function () {
+        particlesJS.load('particles-js', 'js/particles.json', function() {});
+        let infoSection = $(".info");
+        let timingSection = $(".timing");
+        let postsSection = $(".posts");
+        infoSection.css("visibility", "hidden");
+        timingSection.css("visibility", "hidden");
+        postsSection.css("visibility", "hidden");
+        let checkPoint = 350;
+        window.onscroll = function () {
+            if(infoSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                infoSection.addClass("animated fadeInUp");
+                infoSection.css("visibility", "visible");
+            }
+            if(timingSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                timingSection.addClass("animated zoomIn");
+                timingSection.css("visibility", "visible");
+            }
+            if(postsSection.offset().top - window.pageYOffset < checkPoint)
+            {
+                postsSection.addClass("animated zoomIn");
+                postsSection.css("visibility", "visible");
+            }
+        };
     });
-    let infoSection = $(".info");
-    let timingSection = $(".timing");
-    let postsSection = $(".posts");
-    infoSection.css("visibility", "hidden");
-    timingSection.css("visibility", "hidden");
-    postsSection.css("visibility", "hidden");
-    let checkPoint = 350;
-    window.onscroll = function () {
-        if(infoSection.offset().top - window.pageYOffset < checkPoint)
-        {
-            infoSection.addClass("animated fadeInUp");
-            infoSection.css("visibility", "visible");
-        }
-        if(timingSection.offset().top - window.pageYOffset < checkPoint)
-        {
-            timingSection.addClass("animated zoomIn");
-            timingSection.css("visibility", "visible");
-        }
-        if(postsSection.offset().top - window.pageYOffset < checkPoint)
-        {
-            postsSection.addClass("animated zoomIn");
-            postsSection.css("visibility", "visible");
-        }
-    }
 </script>
 </html>

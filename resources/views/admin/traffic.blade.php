@@ -4,21 +4,24 @@
         <input name="dateFrom" type="datetime-local">
         <input type="submit" value="send">
     </form>
-    <div class="horizontal_graphic">
-        <div class="y-axis">
-            @foreach($yAxisLegend as $yValue)
-                <span>{{$yValue}}</span>
-            @endforeach
-        </div>
-        <div class="x-axis">
-            @foreach($xAxisLegend as $xValue)
-                <span>{{$xValue}}</span>
-            @endforeach
-        </div>
-        <div class="graphic-values">
-            @foreach($visits as $visit)
-                <div style="height: {{100 / $yAxisLegend[0] * $visit->visitsCount}}%" data-toggle="tooltip" data-placement="top" title="{{$visit->date}}"></div>
-            @endforeach
-        </div>
-    </div>
+    <canvas style="max-width: 100%;" id="traffic-graphic">
+
+    </canvas>
+@endsection
+@section('script')
+    <script>
+        let graphic = document.getElementById('traffic-graphic').getContext('2d');
+        let chart = new Chart(graphic, {
+           type: 'bar',
+           data: {
+               labels: {!! $xAxisLegend !!},
+               datasets: [{
+                   label: 'Visits per day',
+                   data: {!! $visits !!},
+                   backgroundColor: '#4D4D8F',
+                   borderWidth: 1
+               }]
+           }
+        });
+    </script>
 @endsection
