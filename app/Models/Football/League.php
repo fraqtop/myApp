@@ -51,13 +51,15 @@ class League extends Model
 
     public function standings()
     {
-        return $this->hasMany(Standings::class);
+        return $this->hasMany(Standings::class)
+            ->where('seasonStart', '=', $this->startDate);
     }
 
     public function teams()
     {
         $teams = collect();
-        $this->standings->each(function (Standings $standing) use(&$teams){
+        $allStandings = $this->hasMany(Standings::class);
+        $allStandings->each(function (Standings $standing) use(&$teams){
             $teams = $teams->merge($standing->teams);
         });
         $teams = $teams->unique('id');

@@ -41,15 +41,15 @@ class UpdateTeams extends Command
     public function handle()
     {
         if ($leagueId = $this->argument('league')){
-            if (League::find($leagueId)->isNeverUpdated()){
-                $teams = Football::getLeagueTeams($leagueId);
-                $teams->each(function ($team){
-                    Team::updateOrCreate([
+            $teams = Football::getLeagueTeams($leagueId);
+            $teams->each(function ($team){
+                if (!Team::find($team->id)) {
+                    Team::create([
                         'id' => $team->id,
-                        'name' => $team->name,
+                        'name' => $team->name
                     ]);
-                });
-            }
+                }
+            });
         }
     }
 }

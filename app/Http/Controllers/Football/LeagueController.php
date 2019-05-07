@@ -25,31 +25,40 @@ class LeagueController extends Controller
             $leagueAPI = Football::getLeague($leagueId);
             $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
             if ($league->isOutdated($lastUpdatedAPI)) {
-                $standings = Football::getLeagueStandings($leagueId);
-                $this->updateStandings($leagueAPI, $standings);
+                $league->update([
+                    'name' => $leagueAPI->get('name'),
+                    'startDate' => $leagueAPI['currentSeason']->startDate,
+                    'endDate' => $leagueAPI['currentSeason']->endDate,
+                    'matchday' => $leagueAPI['currentSeason']->currentMatchday
+                ]);
+                $standings = $this->updateStandings($league);
             }
+        } else {
+            $standings = $league->standings;
         }
-        $standings = $league->standings;
         return view('football.standings', [
             'standings' => $standings
         ]);
     }
 
-    private function updateStandings($league, $standings)
+    private function updateStandings(League $league)
     {
+        $standingsAPI = Football::getLeagueStandings($league->id);
+        $standingsDB = [];
+        $teams = $league->teams();
         DB::beginTransaction();
-        $standings->each(function ($standingAPI) use($league, &$updatedStandings){
+        $standingsAPI->each(function ($standingAPI) use($league, &$standingsDB, $teams){
             $standingData = [
                 'stage' => $standingAPI->stage,
                 'type' => $standingAPI->type,
-                'group' => $standingAPI->group,
-                'league_id' => $league->get('id')
+                'group' => $standingAPI->group
             ];
-            $isNewStandings = false;
-            if(!$standingsDB = Standings::where($standingData)->first())
+            $standingDB = $league->standings()->firstOrNew($standingData);
+            if($isNewStandings = !$standingDB->id)
             {
-                $standingsDB = Standings::create($standingData);
-                $isNewStandings = true;
+                $standingDB->league_id = $league->id;
+                $standingDB->seasonStart = $league->startDate;
+                $standingDB->save();
             }
             foreach ($standingAPI->table as $row) {
                 $stats = [
@@ -61,28 +70,28 @@ class LeagueController extends Controller
                     'goalsAgainst' => $row->goalsAgainst
                 ];
                 if ($isNewStandings) {
-                    $team = Team::firstOrCreate([
-                        'id' => $row->team->id,
-                        'name' => $row->team->name
-                    ]);
+                    $team = $teams->where('id', $row->team->id)->first();
+                    if (!$team) {
+                        $team = Team::updateOrCreate([
+                            'id' => $row->team->id
+                        ],
+                        [
+                            'name' => $row->team->name
+                        ]);
+                    }
                     if (!$team->logoURL){
                         $team->logoURL = $row->team->crestUrl;
                     }
-                    $standingsDB->teams()->attach($row->team->id, $stats);
+                    $team->save();
+                    $standingDB->teams()->attach($row->team->id, $stats);
                 } else {
-                    $standingsDB->teams()->updateExistingPivot($row->team->id, $stats);
+                    $standingDB->teams()->updateExistingPivot($row->team->id, $stats);
                 }
             }
-            $leagueDB = League::find($league->get('id'));
-            $leagueDB->update([
-                'name' => $league->get('name'),
-                'startDate' => $league->get('currentSeason')->startDate,
-                'endDate' => $league->get('currentSeason')->endDate,
-                'matchday' => $league->get('currentSeason')->currentMatchday
-            ]);
-            $leagueDB->save();
+            $standingsDB[] = $standingDB;
         });
         DB::commit();
+        return collect($standingsDB);
     }
 
     public function setLogo(Request $request, $leagueId)
