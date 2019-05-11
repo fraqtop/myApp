@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <form method="get" action="">
-        <input name="dateFrom" type="datetime-local">
+        <input name="dateFrom" class="dateTimePicker">
         <input type="submit" value="send">
     </form>
     <canvas style="max-width: 100%;" id="traffic-graphic">
