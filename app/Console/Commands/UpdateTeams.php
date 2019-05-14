@@ -41,9 +41,11 @@ class UpdateTeams extends Command
     public function handle()
     {
         if ($leagueId = $this->argument('league')){
+            $this->comment("searching for new teams for $leagueId");
             $teams = Football::getLeagueTeams($leagueId);
             $teams->each(function ($team){
                 if (!Team::find($team->id)) {
+                    $this->comment("new team - $team->name");
                     Team::create([
                         'id' => $team->id,
                         'name' => $team->name

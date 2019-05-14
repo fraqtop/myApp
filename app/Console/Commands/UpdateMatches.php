@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use App\Models\Football\Match;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Football;
 
 class UpdateMatches extends Command
@@ -64,8 +65,8 @@ class UpdateMatches extends Command
             else
             {
                 $isOutdated = true;
-                $this->call('sync:teams', ['league' => $matchAPI->competition->id]);
-                $matchDB = Match::create([
+                $this->comment("updating match between ".$matchAPI->homeTeam->name." and ".$matchAPI->awayTeam->name);
+                $matchData = [
                     'id' => $matchAPI->id,
                     'referee' => $matchAPI->referees[0]->name ?? "Unknown Person",
                     'startAt' => Carbon::createFromTimeString($matchAPI->utcDate),
@@ -73,7 +74,13 @@ class UpdateMatches extends Command
                     'homeId' => $matchAPI->homeTeam->id,
                     'awayId' => $matchAPI->awayTeam->id,
                     'leagueId' => $matchAPI->competition->id
-                ]);
+                ];
+                try{
+                    $matchDB = Match::create($matchData);
+                } catch (QueryException $e) {
+                    $this->call('sync:teams', ['league' => $matchAPI->competition->id]);
+                    $matchDB = Match::create($matchData);
+                }
             }
             if ($matchAPI->status === 'FINISHED' and $isOutdated)
             {

@@ -2,8 +2,14 @@
 
 namespace App\Exceptions;
 
+use App;
+use App\Mail\ErrorReportMail;
+use App\User;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +19,13 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Validation\ValidationException::class,
+        UnauthorizedHttpException::class,
+        UnauthorizedException::class,
+        NotFoundHttpException::class,
     ];
 
     /**
@@ -36,6 +48,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (App::environment('production')){
+            if ($this->shouldReport($exception)) {
+                \Mail::to(User::find(1))
+                    ->send(new ErrorReportMail($exception->getMessage(), $exception->getTrace()));
+            }
+        }
         parent::report($exception);
     }
 
