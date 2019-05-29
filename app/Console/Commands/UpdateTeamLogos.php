@@ -73,7 +73,6 @@ class UpdateTeamLogos extends Command
     private function updateTeams(int $leagueId)
     {
         if ($league = League::find($leagueId)){
-            $this->call('sync:teams', ['league' => $leagueId]);
             $teams = $league->teams();
             $this->info($league->name." teams on the way, count is".$teams->count());
             $page = Goutte::request('get', $this->hrefs[$leagueId]);

@@ -12,17 +12,17 @@ class ErrorReportMail extends Mailable
     use Queueable, SerializesModels;
 
     public $errorMessage;
-    public $errorTrace;
+    public $errorFile;
     /**
      * Create a new message instance.
      * @param string newErrorContent
-     * @param array $newErrorTrace
+     * @param string $newErrorFile
      * @return void
      */
-    public function __construct(string $newErrorMessage, array $newErrorTrace)
+    public function __construct(string $newErrorMessage, string $newErrorFile)
     {
         $this->errorMessage = $newErrorMessage;
-        $this->errorTrace = $newErrorTrace;
+        $this->errorFile = $newErrorFile;
     }
 
     /**

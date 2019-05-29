@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App;
 use App\Models\Visitor;
 use Carbon\Carbon;
 use Closure;
@@ -17,6 +18,9 @@ class IdentifyVisitor
      */
     public function handle($request, Closure $next)
     {
+        if (App::environment('testing')) {
+            return $next($request);
+        }
         if (!\Auth::check() && !$request->session()->has('visitorId')) {
             $userAgent = $request->header('User-Agent');
             $hash = sha1($userAgent.$request->ip());

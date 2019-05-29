@@ -16,6 +16,9 @@ class CheckRobot
      */
     public function handle($request, Closure $next)
     {
+        if (\App::environment('testing')) {
+            return $next($request);
+        }
         if ($request->session()->has('visitorId')) {
             if (@!Visitor::find($request->session()->get('visitorId'))->isHuman) {
                 abort(403);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}?{{ File::lastModified('css/style.css') }}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}?{{ sha1(file_get_contents(asset('css/style.css'))) }}">
     <title>fraqtop</title>
 </head>
 <body>
@@ -81,7 +81,7 @@
     @include('footer')
 </body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<script src="{{asset('js/all.js')}}?{{ File::lastModified('js/all.js') }}"></script>
+<script src="{{asset('js/all.js')}}?{{ sha1(file_get_contents(asset('js/all.js'))) }}"></script>
 <script>
     $(document).ready(function () {
         particlesJS.load('particles-js', 'js/particles.json', function() {});

@@ -57,7 +57,11 @@
                 <option value="4">Necessary</option>
             </select>
         </div>
+        <div class="form-group">
+            <span class="alert-danger">{{$errors->first()}}</span>
+        </div>
         <input type="submit" class="btn btn-dark" value="add">
+
     </form>
 @endsection
 @section('script')

@@ -50,8 +50,9 @@ class Handler extends ExceptionHandler
     {
         if (App::environment('production')){
             if ($this->shouldReport($exception)) {
+                dd($exception);
                 \Mail::to(User::find(1))
-                    ->send(new ErrorReportMail($exception->getMessage(), $exception->getTrace()));
+                    ->send(new ErrorReportMail($exception->getMessage(), $exception->getFile()));
             }
         }
         parent::report($exception);

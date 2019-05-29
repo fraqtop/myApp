@@ -3,9 +3,5 @@
     <br>
         {{$errorMessage}}
     <br>
-    @foreach($errorTrace as $row)
-        <br>
-            {{$row['file']}} -> {{$row['line']}}
-        <br>
-    @endforeach
+        {{$errorFile}}
 </div>
