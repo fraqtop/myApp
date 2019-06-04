@@ -8,15 +8,11 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\{DatabaseTransactions, WithoutMiddleware};
 
-class TaskTest extends TestCase
+class TaskCreatingTest extends TestCase
 {
     use DatabaseTransactions, WithoutMiddleware;
     private $defaultTitle = 'test title';
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function testCreatingValid()
     {
         $this->post('/admin/tasks/create', [

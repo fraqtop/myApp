@@ -33,7 +33,7 @@
                 <form method="post" action="/admin/tasks/{{$task->id}}">
                     {{ csrf_field() }}
                     {{ method_field('delete') }}
-                    <input type="checkbox" value="done" name="is_done">
+                    <input type="checkbox" name="is_done">
                     <label style="margin-right: 15px">done</label>
                     <input type="submit" class="btn btn-danger" value="delete">
                 </form>
