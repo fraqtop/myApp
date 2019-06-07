@@ -4,6 +4,7 @@ namespace App\Models\Football;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Mixins\UpdatesFromAPI;
 
 /**
  * App\models\Football\Match
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $referee
  * @property string $startAt
- * @property string $lastUpdated
+ * @property Carbon $lastUpdated
  * @property int $homeId
  * @property int $awayId
  * @property int $leagueId
@@ -98,6 +99,12 @@ class Match extends Model
         $this->thrillRating = $this->thrillRating < 0 ? 0: $this->thrillRating;
         $this->save();
     }
+
+    public function getLastUpdateDate(): \DateTime
+    {
+        return $this->lastUpdated;
+    }
+
 
     protected static function boot()
     {

@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Football\Location;
+use App\Services\LeagueService;
 use Illuminate\Console\Command;
 use Football;
-use App\Models\Football\League;
 
 class UpdateLeagues extends Command
 {
+    private $leagues;
+
     /**
      * The name and signature of the console command.
      *
@@ -26,11 +27,14 @@ class UpdateLeagues extends Command
     /**
      * Create a new command instance.
      *
+     * @param LeagueService $leagueService
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct(LeagueService $leagueService)
     {
         parent::__construct();
+        $this->leagues = $leagueService;
     }
 
     /**
@@ -44,20 +48,7 @@ class UpdateLeagues extends Command
         $leaguesAPI = Football::getLeagues(['plan' => 'TIER_ONE']);
         $leagues = [];
         $leaguesAPI->each(function ($league) use(&$leagues){
-            if (array_search($league->id, [2000, 2018]) === false){
-                League::updateOrCreate(
-                    [
-                        'id' =>  $league->id
-                    ],
-                    [
-                        'name' => $league->name,
-                        'locationId' => Location::where('name', '=', $league->area->name)->first()->id ?? null,
-                        'startDate' => new \DateTime($league->currentSeason->startDate),
-                        'endDate' => new \DateTime($league->currentSeason->endDate),
-                        'matchday' => $league->currentSeason->currentMatchday,
-                    ]
-                );
-            }
+            $this->leagues->refresh($league);
         });
         $this->info('leagues were updated');
     }

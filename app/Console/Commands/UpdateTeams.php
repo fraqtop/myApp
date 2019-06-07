@@ -4,11 +4,13 @@ namespace App\Console\Commands;
 
 use App\Models\Football\League;
 use App\Models\Football\Team;
+use App\Services\TeamService;
 use Illuminate\Console\Command;
 use Football;
 
 class UpdateTeams extends Command
 {
+    private $teams;
     /**
      * The name and signature of the console command.
      *
@@ -28,9 +30,10 @@ class UpdateTeams extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(TeamService $teamService)
     {
         parent::__construct();
+        $this->teams = $teamService;
     }
 
     /**
@@ -44,13 +47,7 @@ class UpdateTeams extends Command
             $this->comment("searching for new teams for $leagueId");
             $teams = Football::getLeagueTeams($leagueId);
             $teams->each(function ($team){
-                if (!Team::find($team->id)) {
-                    $this->comment("new team - $team->name");
-                    Team::create([
-                        'id' => $team->id,
-                        'name' => $team->name
-                    ]);
-                }
+                $this->teams->refresh($team);
             });
         }
     }

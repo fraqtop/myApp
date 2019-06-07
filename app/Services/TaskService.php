@@ -4,15 +4,14 @@
 namespace App\Services;
 
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use App\Models\Task;
 
-class TaskService implements Service
+class TaskService
 {
-    public function create(Request $request): Model
+    public function create(Request $request): Task
     {
         $request->validate([
             'taskTitle' => 'required|max:250',
@@ -36,7 +35,7 @@ class TaskService implements Service
         return $task;
     }
 
-    public function get(int $id): Model
+    public function get(int $id): Task
     {
         return Task::find($id);
     }

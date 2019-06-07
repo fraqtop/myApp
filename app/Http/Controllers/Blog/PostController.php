@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Models\Blog\Comment;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog\Post;
@@ -12,33 +13,21 @@ use App\Models\Blog\Category;
 
 class PostController extends Controller
 {
-    function getAllPosts()
+    private $posts;
+    private $request;
+
+    function getAll()
     {
-        $posts = Post::with('category')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('blog.posts', ['posts' => $posts]);
+        return view('blog.posts', ['posts' => $this->posts->getMany()]);
     }
 
-    function createPost(Request $request)
+    function create()
     {
         if ($this->authorize('create', Post::class))
         {
-            if ($request->isMethod('post'))
+            if ($this->request->isMethod('post'))
             {
-                $path = null;
-                if($request->hasFile('postPicture'))
-                {
-                    $path = Storage::disk('public')
-                        ->putFile('postPics', new File($request->file('postPicture')));
-                    $path = Storage::url($path);
-                }
-                $request->user()->posts()->create([
-                    'title' => $request->post('postTitle'),
-                    'content' => $request->post('postContent'),
-                    'category_id' => $request->post('postCategory'),
-                    'picture' => $path
-                ]);
+                $this->posts->create($this->request);
                 return redirect('/posts');
             }
             return view('blog.createPost', ['categories' => Category::all()]);
@@ -46,44 +35,36 @@ class PostController extends Controller
         abort(403);
     }
 
-    function getPost(int $postId)
+    function get(int $postId)
     {
-        $post = Post::find($postId);
-        $comments = Comment::with('user')
-            ->where('post_id', '=', $postId)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $post = $this->posts->get($postId);
+        $comments = $post->comments;
         return view('blog.post', ['post' => $post, 'comments' => $comments]);
     }
 
-    function editPost(Request $request, $postId)
+    function edit($postId)
     {
-        if($request->isMethod('patch'))
+        if($this->request->isMethod('patch'))
         {
-            $post = Post::find($postId);
-            $post->title = $request->post('postTitle');
-            $post->content = $request->post('postContent');
-            $post->category_id = $request->post('postCategory');
-            if($request->hasFile('postPicture'))
-            {
-                $path = Storage::disk('public')
-                    ->putFile('postPics', new File($request->file('postPicture')));
-                $post->picture = Storage::url($path);
-            }
-            $post->save();
-            $comments = Comment::with('user')
-                ->where('post_id', '=', $postId)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $post = $this->posts->update($this->request);
+            $comments = $post->comments;
             return view('blog.post', ['post' => $post, 'comments' => $comments]);
         }
-        return view('blog.createPost', ['post' => Post::find($postId), 'categories' => Category::all()]);
+        return view('blog.createPost', [
+            'post' => $this->posts->get($postId),
+            'categories' => Category::all()
+        ]);
     }
 
-    function deletePost(int $postId)
+    function delete(int $postId)
     {
-       $post = Post::find($postId);
-       $post->delete();
+       $this->posts->delete($postId);
        return redirect('/posts');
+    }
+
+    public function __construct(PostService $postService, Request $request)
+    {
+        $this->posts = $postService;
+        $this->request = $request;
     }
 }

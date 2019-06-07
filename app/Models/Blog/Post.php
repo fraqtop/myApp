@@ -42,7 +42,9 @@ class Post extends Model
     }
     function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)
+            ->with('user')
+            ->orderBy('created_at', 'desc');
     }
     function category()
     {

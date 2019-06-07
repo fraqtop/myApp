@@ -4,6 +4,7 @@ namespace App\Models\Football;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Mixins\UpdatesFromAPI;
 
 
 /**
@@ -124,4 +125,11 @@ class Team extends Model
             'birthCountryId' => $this->getLocationId($playerData->countryOfBirth)
         ]);
     }
+
+    public function getLastUpdateDate(): \DateTime
+    {
+        return $this->lastUpdated;
+    }
+
+
 }

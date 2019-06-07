@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Football\League;
 use App\Models\Football\Team;
+use App\Services\LeagueService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Goutte;
@@ -11,6 +12,8 @@ use Goutte;
 
 class UpdateTeamLogos extends Command
 {
+    private $hrefs;
+    private $leagues;
     /**
      * The name and signature of the console command.
      *
@@ -18,7 +21,6 @@ class UpdateTeamLogos extends Command
      */
     protected $signature = 'sync:logos {--league=}';
 
-    private $hrefs;
 
     /**
      * The console command description.
@@ -30,9 +32,11 @@ class UpdateTeamLogos extends Command
     /**
      * Create a new command instance.
      *
+     * @param LeagueService $leagueService
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct(LeagueService $leagueService)
     {
         parent::__construct();
         $this->hrefs = [
@@ -46,6 +50,7 @@ class UpdateTeamLogos extends Command
             2013 => 'https://www.eurosport.ru/football/brazilian-serie-a/standing.shtml',
             2003 => 'https://www.eurosport.ru/football/eredivisie/standing.shtml',
         ];
+        $this->leagues = $leagueService;
     }
 
     /**
@@ -72,7 +77,7 @@ class UpdateTeamLogos extends Command
     }
     private function updateTeams(int $leagueId)
     {
-        if ($league = League::find($leagueId)){
+        if ($league = $this->leagues->get($leagueId)){
             $teams = $league->teams();
             $this->info($league->name." teams on the way, count is".$teams->count());
             $page = Goutte::request('get', $this->hrefs[$leagueId]);

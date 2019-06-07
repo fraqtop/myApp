@@ -4,8 +4,8 @@ Route::group(['middleware' => ['identifier', 'robot_filter']], function (){
     Route::get('/', 'HomeController@index');
     Route::match(['get', 'post'],'/contact', 'HomeController@contact');
     Route::auth();
-    Route::get('/posts', 'Blog\PostController@getAllPosts');
-    Route::get('/posts/{post_id}', 'Blog\PostController@getPost')
+    Route::get('/posts', 'Blog\PostController@getAll');
+    Route::get('/posts/{post_id}', 'Blog\PostController@get')
         ->where('post_id', '[0-9]+');
 });
 
@@ -14,12 +14,12 @@ Route::group(['middleware' => 'auth'], function ()
 {
     //--------------Blog
     Route::group(['namespace' => 'Blog'], function (){
-        Route::match(['get', 'patch'],'posts/{post_id}/edit', 'PostController@editPost')
+        Route::match(['get', 'patch'],'posts/{post_id}/edit', 'PostController@edit')
             ->where('post_id', '[0-9]+');
-        Route::delete('/posts/{post_id}', 'PostController@deletePost')
+        Route::delete('/posts/{post_id}', 'PostController@delete')
             ->where('post_id', '[0-9]+');
-        Route::match(['get', 'post'], '/posts/create', 'PostController@createPost');
-        Route::post('/posts/{post_id}/comment', 'CommentController@storeComment');
+        Route::match(['get', 'post'], '/posts/create', 'PostController@create');
+        Route::post('/posts/{post_id}/comment', 'CommentController@store');
     });
 
     Route::get('/profile', 'HomeController@profile');

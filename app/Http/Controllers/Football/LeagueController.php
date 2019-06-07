@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Football;
 
-use App\Models\Football\League;
+use App\Services\LeagueService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
@@ -11,45 +11,45 @@ use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
+    private $leagues;
+    private $request;
+
     public function getStandings(int $leagueId)
     {
-        $league = League::find($leagueId);
-        if ($league->hasOutdatedMatches() or $league->isNeverUpdated()){
-            $leagueAPI = Football::getLeague($leagueId);
-            $lastUpdatedAPI = $leagueAPI->get('lastUpdated');
-            if ($league->isOutdated($lastUpdatedAPI)) {
-                $league->update([
-                    'name' => $leagueAPI->get('name'),
-                    'startDate' => $leagueAPI['currentSeason']->startDate,
-                    'endDate' => $leagueAPI['currentSeason']->endDate,
-                    'matchday' => $leagueAPI['currentSeason']->currentMatchday
-                ]);
-                $standings = $league->getUpdatedStandings();
-            }
+        $this->leagues->set($leagueId);
+        if ($this->leagues->needsToUpdate()) {
+            $this->leagues->refresh(Football::getLeague($leagueId));
+            $standings = $this->leagues->getStandings(Football::getLeagueStandings($leagueId));
         } else {
-            $standings = $league->standings;
+            $standings = $this->leagues->getStandings();
         }
         return view('football.standings', [
             'standings' => $standings
         ]);
     }
 
-    public function setLogo(Request $request, $leagueId)
+    public function setLogo($leagueId)
     {
-        $league = League::find($leagueId);
-        if($request->method() == 'GET')
+        $league = $this->leagues->get($leagueId);
+        if($this->request->method() == 'GET')
         {
             return view('football.logo', ['league' => $league]);
         }
-        if ($request->file('newLogoLocal')) {
-            $file = new File($request->file('newLogoLocal'));
+        if ($this->request->file('newLogoLocal')) {
+            $file = new File($this->request->file('newLogoLocal'));
             $path = Storage::disk('public')->putFile('leagueLogos', $file);
             $path = Storage::url($path);
         }
         else{
-            $path = $request->post('newLogoRemote') ?? "/img/code.jpg";
+            $path = $this->request->post('newLogoRemote') ?? "/img/code.jpg";
         }
         $league->update(['logo' => $path]);
         return redirect('/football');
+    }
+
+    public function __construct(LeagueService $leagueService, Request $request)
+    {
+        $this->leagues = $leagueService;
+        $this->request = $request;
     }
 }

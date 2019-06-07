@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Football;
 
+use App\Services\LeagueService;
+use App\Services\MatchService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Football\{
-    League, Match
-};
 
 
 class MatchController extends Controller
 {
-    public function get(Request $request, $date = null)
+    private $matches;
+    private $leagues;
+    private $request;
+
+    public function get($date = null)
     {
         if ($date) {
             $matchDay = Carbon::createFromFormat('Y-m-d', $date);
@@ -21,14 +24,18 @@ class MatchController extends Controller
         else{
             $matchDay = Carbon::today();
         }
-        $matches = Match::with(['homeTeam', 'awayTeam', 'league', 'results'])
-            ->whereBetween('startAt', [$matchDay, $matchDay->copy()->addDay()])
-            ->orderBy('startAt')
-            ->get();
+        $matches = $this->matches->getByDate($matchDay, $matchDay->copy()->addDay());
         return view('football.index', [
             'matches' => $matches,
-            'leagues' => League::with('location')->get(),
+            'leagues' => $this->leagues->getAll(),
             'date' => $matchDay
         ]);
+    }
+
+    public function __construct(MatchService $matchService, LeagueService $leagueService, Request $request)
+    {
+        $this->matches = $matchService;
+        $this->leagues = $leagueService;
+        $this->request = $request;
     }
 }

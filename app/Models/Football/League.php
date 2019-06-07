@@ -2,6 +2,7 @@
 
 namespace App\Models\Football;
 
+use App\Mixins\UpdatesFromAPI;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Football;
@@ -89,58 +90,11 @@ class League extends Model
         });
     }
 
-    public function getUpdatedStandings(): Collection
+    public function getLastUpdateDate(): \DateTime
     {
-        $standingsAPI = Football::getLeagueStandings($this->id);
-        $standingsDB = [];
-        $teams = $this->teams();
-        DB::beginTransaction();
-        $standingsAPI->each(function ($standingAPI) use(&$standingsDB, $teams){
-            $standingData = [
-                'stage' => $standingAPI->stage,
-                'type' => $standingAPI->type,
-                'group' => $standingAPI->group
-            ];
-            $standingDB = $this->standings()->firstOrNew($standingData);
-            if($isNewStandings = !$standingDB->id)
-            {
-                $standingDB->league_id = $this->id;
-                $standingDB->seasonStart = $this->startDate;
-                $standingDB->save();
-            }
-            foreach ($standingAPI->table as $row) {
-                $stats = [
-                    'points' => $row->points,
-                    'won' => $row->won,
-                    'draw' => $row->draw,
-                    'lost' => $row->lost,
-                    'goalsFor' => $row->goalsFor,
-                    'goalsAgainst' => $row->goalsAgainst
-                ];
-                if ($isNewStandings) {
-                    $team = $teams->where('id', $row->team->id)->first();
-                    if (!$team) {
-                        $team = Team::updateOrCreate([
-                            'id' => $row->team->id
-                        ],
-                            [
-                                'name' => $row->team->name
-                            ]);
-                    }
-                    if (!$team->logoURL){
-                        $team->logoURL = $row->team->crestUrl;
-                    }
-                    $team->save();
-                    $standingDB->teams()->attach($row->team->id, $stats);
-                } else {
-                    $standingDB->teams()->updateExistingPivot($row->team->id, $stats);
-                }
-            }
-            $standingsDB[] = $standingDB;
-        });
-        DB::commit();
-        return collect($standingsDB);
+        return $this->lastUpdated;
     }
+
 
     public function hasOutdatedMatches(): bool
     {

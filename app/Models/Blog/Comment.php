@@ -30,7 +30,7 @@ use App\User;
  */
 class Comment extends Model
 {
-    protected $fillable = ['content', 'user_id'];
+    protected $fillable = ['content', 'user_id', 'post_id'];
 
     function user()
     {

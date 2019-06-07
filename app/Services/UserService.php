@@ -5,13 +5,12 @@ namespace App\Services;
 
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-class UserService implements Service
+class UserService
 {
-    public function create(Request $request): Model
+    public function create(Request $request): User
     {
         $request->validate([
             'name' => 'required|unique:users',
@@ -27,7 +26,7 @@ class UserService implements Service
         return $user;
     }
 
-    public function get(int $id): Model
+    public function get(int $id): User
     {
         return User::find($id);
     }

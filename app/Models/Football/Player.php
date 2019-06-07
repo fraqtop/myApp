@@ -39,8 +39,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Player extends Model
 {
-    use UpdatesFromAPI;
-
     protected $guarded = [];
     public $timestamps = false;
 }
