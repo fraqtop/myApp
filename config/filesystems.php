@@ -42,19 +42,30 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
         ],
-
-        'public' => [
+        'categories' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+            'root' => storage_path('app/public/categoryPics'),
         ],
-
+        'leagues' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/leagueLogos'),
+        ],
+        'locations' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/locations'),
+        ],
+        'posts' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/postPics'),
+        ],
+        'profiles' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profilePics'),
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

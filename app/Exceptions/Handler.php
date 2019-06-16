@@ -6,6 +6,7 @@ use App;
 use App\Mail\ErrorReportMail;
 use App\User;
 use Exception;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
+    private $mails;
     /**
      * A list of the exception types that are not reported.
      *
@@ -50,9 +52,10 @@ class Handler extends ExceptionHandler
     {
         if (App::environment('production')){
             if ($this->shouldReport($exception)) {
-                dd($exception);
-                \Mail::to(User::find(1))
-                    ->send(new ErrorReportMail($exception->getMessage(), $exception->getFile()));
+                $this->mails->send([
+                    'message' => $exception->getMessage(),
+                    'file' => $exception->getFile()
+                ]);
             }
         }
         parent::report($exception);
@@ -68,5 +71,11 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    public function __construct(Container $container, App\Services\MailService $mailService)
+    {
+        parent::__construct($container);
+        $this->mails = $mailService;
     }
 }

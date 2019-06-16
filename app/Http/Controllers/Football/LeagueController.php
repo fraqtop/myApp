@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Football;
 
+use App\Services\FileService;
 use App\Services\LeagueService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Football;
-use Storage;
-use Illuminate\Http\File;
 
 class LeagueController extends Controller
 {
     private $leagues;
+    private $files;
     private $request;
 
     public function getStandings(int $leagueId)
@@ -35,21 +35,20 @@ class LeagueController extends Controller
         {
             return view('football.logo', ['league' => $league]);
         }
-        if ($this->request->file('newLogoLocal')) {
-            $file = new File($this->request->file('newLogoLocal'));
-            $path = Storage::disk('public')->putFile('leagueLogos', $file);
-            $path = Storage::url($path);
+        if ($this->request->hasFile('newLogoLocal')) {
+            $path = $this->files->save($this->request->file('newLogoLocal'));
         }
         else{
-            $path = $this->request->post('newLogoRemote') ?? "/img/code.jpg";
+            $path = $this->request->post('newLogoRemote') ?? $this->files->getDefaultLink();
         }
         $league->update(['logo' => $path]);
         return redirect('/football');
     }
 
-    public function __construct(LeagueService $leagueService, Request $request)
+    public function __construct(LeagueService $leagueService, FileService $fileService, Request $request)
     {
         $this->leagues = $leagueService;
+        $this->files = $fileService;
         $this->request = $request;
     }
 }

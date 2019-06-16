@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Visitor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -26,7 +27,7 @@ class UserService
         return $user;
     }
 
-    public function get(int $id): User
+    public function get(int $id = 1): User
     {
         return User::find($id);
     }
@@ -46,6 +47,11 @@ class UserService
     {
         $user->karma += $value;
         $user->save();
+    }
+
+    public function markRobot(int $id)
+    {
+        Visitor::find($id)->update(['isHuman' => 0]);
     }
 
     public function delete(Request $request)

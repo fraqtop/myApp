@@ -12,6 +12,8 @@ use Illuminate\Http\File;
 
 class PostService
 {
+    private $files;
+
     public function getMany($limit = 10): Collection
     {
         return Post::with(['category', 'comments'])
@@ -35,9 +37,7 @@ class PostService
         $path = null;
         if($request->hasFile('postPicture'))
         {
-            $path = Storage::disk('public')
-                ->putFile('postPics', new File($request->file('postPicture')));
-            $path = Storage::url($path);
+            $path = $this->files->save($request->file('postPicture'), 'posts');
         }
         $newPost = $request->user()->posts()->create([
             'title' => $request->post('postTitle'),
@@ -56,9 +56,8 @@ class PostService
         $post->category_id = $request->post('postCategory');
         if($request->hasFile('postPicture'))
         {
-            $path = Storage::disk('public')
-                ->putFile('postPics', new File($request->file('postPicture')));
-            $post->picture = Storage::url($path);
+            $path = $this->files->save($request->file('postPicture'), 'posts');
+            $post->picture = $path;
         }
         $post->save();
         return $post;
@@ -66,6 +65,15 @@ class PostService
 
     public function delete($id)
     {
-        Post::find($id)->delete();
+        $post = Post::find($id);
+        if ($post->picture) {
+            $this->files->remove($post->picture);
+        }
+        $post->delete();
+    }
+
+    public function __construct(FileService $fileService)
+    {
+        $this->files = $fileService;
     }
 }

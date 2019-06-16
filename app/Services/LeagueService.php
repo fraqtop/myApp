@@ -118,10 +118,10 @@ class LeagueService
         return collect($standingsDB);
     }
 
-    public function __construct()
+    public function __construct(TeamService $teamService)
     {
         $this->unusedTournaments = [2000, 2018];
         $this->noUpdateDaysLimit = 14;
-        $this->teams = new TeamService();
+        $this->teams = $teamService;
     }
 }

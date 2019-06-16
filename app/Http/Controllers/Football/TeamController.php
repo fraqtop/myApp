@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Football;
 
 use App\Models\Football\Team;
-use Carbon\Carbon;
 use Football;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Collection;
 
 class TeamController extends Controller
 {

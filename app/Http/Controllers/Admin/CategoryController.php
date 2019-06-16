@@ -2,46 +2,46 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\FileService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Storage;
 use App\Models\Blog\Category;
-use Illuminate\Http\File;
 
 class CategoryController extends Controller
 {
+    private $files;
+    private $request;
+
     public function get()
     {
         return view('admin.categories', ['categories' => Category::all()]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        $this->validate($request, [
+        $this->validate($this->request, [
             'categoryTitle' => 'required',
             'categoryPicture' => 'required'
         ]);
-        $path = Storage::disk('public')
-            ->putFile('categoryPics', new File($request->file('categoryPicture')));
+        $path = $this->files->save($this->request->file('categoryPicture'), 'categories');
         Category::create([
-            'title' => $request->post('categoryTitle'),
-            'picture' => Storage::url($path)
+            'title' => $this->request->post('categoryTitle'),
+            'picture' => $path
         ]);
         return redirect()->back();
     }
 
-    public function update(Request $request, $categoryId)
+    public function update($categoryId)
     {
-        $this->validate($request, [
+        $this->validate($this->request, [
             'categoryTitle' => 'required'
         ]);
         $category = Category::find($categoryId);
-        $category->title = $request->post('categoryTitle');
-        if ($request->hasFile('categoryPicture'))
+        $category->title = $this->request->post('categoryTitle');
+        if ($this->request->hasFile('categoryPicture'))
         {
-            $path = Storage::disk('public')
-                ->putFile('categoryPics', new File($request->file('categoryPicture')));
-            $category->picture = Storage::url($path);
+            $path = $this->files->save($this->request->file('categoryPicture'), 'categories');
+            $category->picture = $path;
         }
         $category->save();
         return view('admin.traffic');
@@ -50,7 +50,14 @@ class CategoryController extends Controller
     public function delete($categoryId)
     {
         $category = Category::find($categoryId);
+        $this->files->remove($category->picture);
         $category->delete();
         return redirect()->back();
+    }
+
+    public function __construct(FileService $fileService, Request $request)
+    {
+        $this->files = $fileService;
+        $this->request = $request;
     }
 }
