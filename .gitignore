@@ -12,3 +12,4 @@ cgi-bin./public/storage
 ./vendor/bin/php-parse
 ./vendor/bin/psysh
 public/*.txt
+phpunit
