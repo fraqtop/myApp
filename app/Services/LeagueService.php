@@ -19,19 +19,19 @@ class LeagueService
      */
     private $league;
 
-    public function refresh($data): ?League
+    public function refresh(Collection $data): ?League
     {
-        if (!in_array($data->id, $this->unusedTournaments)) {
+        if (!in_array($data->get('id'), $this->unusedTournaments)) {
             return League::updateOrCreate(
                 [
-                    'id' =>  $data->id
+                    'id' =>  $data->get('id')
                 ],
                 [
-                    'name' => $data->name,
-                    'locationId' => Location::where('name', '=', $data->area->name)->first()->id ?? null,
-                    'startDate' => new \DateTime($data->currentSeason->startDate),
-                    'endDate' => new \DateTime($data->currentSeason->endDate),
-                    'matchday' => $data->currentSeason->currentMatchday,
+                    'name' => $data->get('name'),
+                    'locationId' => Location::where('name', '=', $data->get('area')->name)->first()->id ?? null,
+                    'startDate' => new \DateTime($data->get('currentSeason')->startDate),
+                    'endDate' => new \DateTime($data->get('currentSeason')->endDate),
+                    'matchday' => $data->get('currentSeason')->currentMatchday ?? 0,
                 ]
             );
         }
@@ -70,8 +70,11 @@ class LeagueService
         return false;
     }
 
-    public function getStandings(Collection $data = null): Collection
+    public function getStandings(Collection $data = null, int $year = null): Collection
     {
+        if ($year) {
+            return $this->league->getHistoryStandings($year);
+        }
         return $data === null ? $this->league->standings: $this->updateStandings($data);
     }
 

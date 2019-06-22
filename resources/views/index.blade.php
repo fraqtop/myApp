@@ -17,11 +17,7 @@
             <nav class="index-nav animated fadeInDown">
                 <a href="/posts">Blog</a>
                 <a href="/contact">Contact</a>
-                @if(Auth::check())
-                    <a href="/football">Football</a>
-                @else
-                    <a href="/login">Login</a>
-                @endif
+                <a href="/football">Football</a>
             </nav>
         </header>
     </div>

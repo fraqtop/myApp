@@ -58,6 +58,13 @@ class League extends Model
             ->where('seasonStart', '=', $this->startDate);
     }
 
+    public function getHistoryStandings($seasonFinishYear)
+    {
+        return $this->hasMany(Standings::class, 'league_id', 'id')
+            ->whereRaw("year(seasonStart) = ?", [$seasonFinishYear])
+            ->get();
+    }
+
     public function teams()
     {
         $teams = collect();

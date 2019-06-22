@@ -7,6 +7,17 @@ Route::group(['middleware' => ['identifier', 'robot_filter']], function (){
     Route::get('/posts', 'Blog\PostController@getAll');
     Route::get('/posts/{post_id}', 'Blog\PostController@get')
         ->where('post_id', '[0-9]+');
+
+    //---------------Football
+    Route::group(['namespace' => 'Football'], function(){
+        Route::get('/football', 'MatchController@get');
+        Route::get('/football/{league_id}', 'LeagueController@getStandings')
+            ->where('league_id', '[0-9]+');
+        Route::get('/football/{date?}', 'MatchController@get');
+        Route::match(['get', 'patch'], '/football/{league_id}/logo', 'LeagueController@setLogo')
+            ->where('league_id', '[0-9]+')->middleware('admin');
+        Route::get('/football/team/{team_id}', 'TeamController@get');
+    });
 });
 
 //---------------Auth
@@ -23,17 +34,6 @@ Route::group(['middleware' => 'auth'], function ()
     });
 
     Route::get('/profile', 'HomeController@profile');
-
-    //---------------Football
-    Route::group(['namespace' => 'Football'], function(){
-        Route::get('/football', 'MatchController@get');
-        Route::get('/football/{league_id}', 'LeagueController@getStandings')
-            ->where('league_id', '[0-9]+');
-        Route::get('/football/{date?}', 'MatchController@get');
-        Route::match(['get', 'patch'], '/football/{league_id}/logo', 'LeagueController@setLogo')
-            ->where('league_id', '[0-9]+')->middleware('admin');
-        Route::get('/football/team/{team_id}', 'TeamController@get');
-    });
 
     //----------------Admin
     Route::group(['middleware' => 'admin'], function (){

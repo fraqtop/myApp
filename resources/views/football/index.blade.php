@@ -25,7 +25,7 @@
             </section>
             @if($matches->count() === 0)
                 <div class="alert-danger">
-                    <h4>No matches for this day</h4>
+                    <h4>No matches for this day in available tournaments</h4>
                 </div>
             @endif
             @foreach($matches as $match)

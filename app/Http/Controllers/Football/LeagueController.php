@@ -17,11 +17,23 @@ class LeagueController extends Controller
     public function getStandings(int $leagueId)
     {
         $this->leagues->set($leagueId);
+        if ($this->request->query('season', null)) {
+            $standings = $this->leagues->getStandings(null, $this->request->query('season'));
+            if (!$standings->count()) {
+                return view('reports.empty-season');
+            }
+            return view('football.standings', [
+                'standings' => $standings
+            ]);
+        }
         if ($this->leagues->needsToUpdate()) {
             $this->leagues->refresh(Football::getLeague($leagueId));
             $standings = $this->leagues->getStandings(Football::getLeagueStandings($leagueId));
         } else {
             $standings = $this->leagues->getStandings();
+        }
+        if (!$standings->count()) {
+            return view('reports.empty-season');
         }
         return view('football.standings', [
             'standings' => $standings
