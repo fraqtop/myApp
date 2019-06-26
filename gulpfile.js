@@ -18,7 +18,7 @@ const jsPaths = [
     ];
 
 function css () {
-   return gulp.src('resources/css/style.css')
+   return gulp.src('resources/sass/style.scss')
             .pipe(sass())
             .pipe(csso())
             .pipe(gulp.dest('public/css'));

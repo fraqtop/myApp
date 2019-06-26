@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function ()
         Route::post('/posts/{post_id}/comment', 'CommentController@store');
     });
 
+    Route::resource('nationalities', 'Api\NationalitiesController')
+        ->only(['index', 'show']);
+
     Route::get('/profile', 'HomeController@profile');
 
     //----------------Admin

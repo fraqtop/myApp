@@ -11,13 +11,13 @@
         <header>
             <div id="particles-js"></div>
             <div class="hello-alert animated fadeIn">
-                <h1>Roman Bukhantsov</h1>
-                <h4>Web Developer</h4>
+                <h1>romAn buhAncoV</h1>
+                <h4>web developer</h4>
             </div>
             <nav class="index-nav animated fadeInDown">
-                <a href="/posts">Blog</a>
-                <a href="/contact">Contact</a>
-                <a href="/football">Football</a>
+                <a href="/posts">blog</a>
+                <a href="/contact">contact</a>
+                <a href="/football">football</a>
             </nav>
         </header>
     </div>

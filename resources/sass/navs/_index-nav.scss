@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap');
+
 header{
   position: fixed;
   z-index: -5;
   display: flex;
-  background: url("/img/milky-way.jpg") no-repeat black fixed center;
+  background: url("/img/index-background.jpg") no-repeat black fixed center;
   background-size: cover;
   flex-direction: column;
   justify-content: space-around;
@@ -26,6 +28,7 @@ header{
 }
 
 .hello-alert{
+  font-family: 'Major Mono Display', monospace;
   opacity: 0;
   display:flex;
   flex-direction: column;
@@ -45,6 +48,7 @@ header{
 }
 
 nav.index-nav{
+  font-family: 'Major Mono Display', monospace;
   opacity: 0;
   animation-delay: 1000ms;
   animation-duration: 2000ms;
@@ -60,10 +64,9 @@ nav.index-nav{
     color: $brightFont;
     padding: 0 5%;
     font-size: 5vmin;
-    border-radius: 4px;
+    border-bottom: 2px solid transparent;
     &:hover{
-      color: $particlesBack;
-      background: $secondColor;
+      border-bottom: 2px solid $secondColor;
     }
   }
 }
