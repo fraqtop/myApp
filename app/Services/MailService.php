@@ -3,6 +3,8 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Mail;
 use App\Mail\{ContactMail, ErrorReportMail};
 
@@ -35,15 +37,22 @@ class MailService
         return false;
     }
 
-    public function isSpam($input): bool
+    public function isSpam(Request $request): bool
     {
-        $fakeField = $input['contactAdvanced'] ?? null;
-        $postingPeriod = (new \DateTime())->getTimestamp() - $input['contactTime'];
-        $keyPressDiff = (int)$input['contactCounter'] - strlen($input['contactMessage']);
-        if($fakeField != null || $postingPeriod < 5 || $keyPressDiff < -20)
+        $request->validate([
+            'contactAuthor' => 'required',
+            'contactMessage' => 'required',
+        ]);
+        if ($request->filled('contactAdvanced') || !$request->has('contactTime')) {
+            $this->registerSpamMessage($request->post('contactAuthor'), [$request->post('contactAdvanced')]);
+            return true;
+        }
+        $postingPeriod = Carbon::now()->timestamp - $request->post('contactTime');
+        $keyPressDiff = $request->post('contactCounter') - strlen($request->post('contactMessage'));
+        if($postingPeriod < 5 || $keyPressDiff < -20)
         {
-            $traps = [$fakeField, $postingPeriod, $keyPressDiff];
-            $this->registerSpamMessage($input['contactAuthor'], $traps);
+            $traps = [$postingPeriod, $keyPressDiff];
+            $this->registerSpamMessage($request->post('contactAuthor'), $traps);
             return true;
         }
         return false;
@@ -54,8 +63,6 @@ class MailService
         $log = fopen("spamlog.txt", 'a+');
         $time = new \DateTime();
         fwrite($log, $spamName." - ".$time->format('d M Y H:i'));
-        if (strlen($trapsValues[0])>10)
-            $trapsValues[0] = 'garbage';
         foreach ($trapsValues as $trap)
         {
             fwrite($log, " ".$trap." ");

@@ -17,6 +17,11 @@
             <div class="form-group">
                 <input class="form-control btn" type="submit" value="send message">
             </div>
+            @if($errors->count() > 0)
+                <div class="alert alert-danger">
+                    {{$errors->first()}}
+                </div>
+            @endif
         </form>
     </div>
 @endsection

@@ -20,6 +20,8 @@ Route::group(['middleware' => ['identifier', 'robot_filter']], function (){
     });
 });
 
+Route::get('/caught', function (){ return view('reports.spam'); });
+
 //---------------Auth
 Route::group(['middleware' => 'auth'], function ()
 {

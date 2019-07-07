@@ -21,10 +21,10 @@ class CheckRobot
         }
         if ($request->session()->has('visitorId')) {
             if (@!Visitor::find($request->session()->get('visitorId'))->isHuman) {
-                abort(403);
+                return redirect('/caught');
             }
             return $next($request);
         }
-        abort(403);
+        return redirect('/caught');
     }
 }

@@ -36,7 +36,7 @@ class HomeController extends Controller
     {
         if ($this->request->isMethod('post'))
         {
-            if ($this->mails->isSpam($this->request->input())) {
+            if ($this->mails->isSpam($this->request)) {
                 $this->users->markRobot($this->request->session()->get('visitorId'));
                 return view('reports.spam');
             }

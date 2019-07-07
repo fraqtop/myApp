@@ -49,7 +49,7 @@ class UserService
         $user->save();
     }
 
-    public function markRobot(int $id)
+    public function markRobot(string $id)
     {
         Visitor::find($id)->update(['isHuman' => 0]);
     }
