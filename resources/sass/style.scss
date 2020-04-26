@@ -7,6 +7,8 @@
 @import "blog/blog";
 @import "football/football";
 @import "graphics/graphics";
+@import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
 html, body{
   position: relative;
@@ -15,6 +17,13 @@ html, body{
   width: 100%;
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a, a:hover, a:active, a:visited, a:focus{
@@ -25,37 +34,98 @@ a, a:hover, a:active, a:visited, a:focus{
 .grid-container{
   @extend .basic-container;
   display: grid;
+  grid-template-rows: repeat(3, 100vh);
   height: 1px;
   min-height: 315vh;
-  width: 100%;
   max-width: 100%;
   grid-gap: 5vh;
   section{
-    border-top: 2px solid $brightFont;
-    padding: 0 10px;
+    min-height: 100vh;
   }
 }
 
 .info{
-  height: 100vh;
   display: grid;
   justify-items: center;
   align-items: center;
   width: 100%;
   grid-template-columns: 1fr 2fr;
   article{
+    font-family: 'Maven Pro', sans-serif;
     margin: 7vmin;
-    font-size: 4vmin;
+    font-size: 3vmin;
     text-align: justify;
   }
-  img{
-    width: auto;
+  .profile-image{
+    opacity: 0.7;
+    width: 80%;
     max-width: 100%;
     height: auto;
-    box-shadow: 0 0 3px 3px $brightFont;
     margin: 3vmin;
-    border-radius: 100%;
+    img {
+      border-radius: 100%;
+    }
   }
+}
+
+#knowledge {
+  @extend .centered
+}
+
+.sections-menu {
+  list-style: none;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+  opacity: 0.5;
+  background: black;
+  padding: 0;
+  z-index: 100;
+  top: 30vh;
+  right: 0;
+  height: 40vh;
+  min-width: 100px;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.section-link {
+  @extend .centered;
+  cursor: pointer;
+  flex: 1;
+  font-weight: bold;
+  width: 100%;
+  color: $brightFont;
+  &:hover {
+    background-color: $secondColor;
+  }
+}
+
+.skills-container {
+  display: flex;
+  height: 90%;
+  min-height: 90vh;
+  min-width: 90%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  .skill {
+    margin-bottom: 5px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.line {
+  height: 5px;
+  background-color: #0f6674;
+  width: 30%;
 }
 
 footer{
@@ -109,6 +179,9 @@ img{
       height: auto;
       grid-template-columns: auto;
       grid-template-rows: repeat(2, min-content);
+      .profile-image {
+        width: auto;
+      }
     }
   }
   .secondary{

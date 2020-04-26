@@ -1,77 +1,49 @@
-.timing{
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 5vmin;
-  .img-responsive{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.graphic{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-width: 100%;
-}
-
-.diagram{
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  *{
-    display: grid;
-    align-items: center;
-    flex: 1;
-    padding: 0 5px;
-  }
-}
-
-.legend{
-  display: flex;
-  flex: 0;
-  min-height: 50px;
-  justify-content: space-between;
-  align-items: center;
-  h3{
-    font-size: 4vmin;
-    text-align: center;
-  }
-  *{
-    flex: 0;
-  }
-}
-
 #php{
   width: 90%;
   background: linear-gradient(to right, #6c8ef0 0%, $mainColor 180%);
 }
 
 #scss{
-  width: 60%;
-  background: linear-gradient(to right, #ffba78 0%, $mainColor 180%);
-}
-
-#sharp{
-  width: 30%;
-  background: linear-gradient(to right, #7ec4ff 0%, $mainColor 180%);
+  width: 50%;
+  background: linear-gradient(to right, #FF8585 0%, $mainColor 180%);
 }
 
 #python{
-  width: 40%;
-  background: linear-gradient(to right, #ddff9d 0%, $mainColor 180%);
+  width: 50%;
+  background: linear-gradient(to right, #DBC200 0%, $mainColor 180%);
 }
 
 #js{
-  width: 70%;
-  background: linear-gradient(to right, #fcff58 0%, $mainColor 180%);
+  width: 85%;
+  background: linear-gradient(to right, #DBC200 0%, $mainColor 180%);
 }
 
 #t-sql{
   width: 80%;
-  background: linear-gradient(to right, #ff9799 0%, $mainColor 180%);
+  background: linear-gradient(to right, #6c8ef0 0%, $mainColor 180%);
+}
+
+#bootstrap {
+  width: 70%;
+  background: linear-gradient(to right, #9000AD 0%, $mainColor 180%);
+}
+
+#gulp {
+  width: 40%;
+  background: linear-gradient(to right, #FF473D 0%, $mainColor 180%);
+}
+
+#git {
+  width: 90%;
+  background: linear-gradient(to right, #FF473D 0%, $mainColor 180%);
+}
+
+#vue {
+  width: 75%;
+  background: linear-gradient(to right, #00B344 0%, $mainColor 180%);
+}
+
+#laravel {
+  width: 65%;
+  background: linear-gradient(to right, #FF473D 0%, $mainColor 180%);
 }
